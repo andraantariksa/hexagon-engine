@@ -1,11 +1,12 @@
-﻿# CMakeList.txt : CMake project for Hexagon Engine, include source and define
-# project specific logic here.
-#
-cmake_minimum_required (VERSION 3.8)
-
+﻿cmake_minimum_required (VERSION 3.8)
 set(CMAKE_CXX_STANDARD 17)
+project(HexagonEngine)
 
-# Add source to this project's executable.
-add_executable (CMakeTarget "Hexagon Engine.cpp" "Hexagon Engine.h")
+set(SDL2_DIR Dependencies/SDL2)
+find_package(SDL2 REQUIRED PATH Dependencies/SDL2)
 
-# TODO: Add tests and install targets if needed.
+include_directories(${SDL2_INCLUDE_DIRS})
+
+add_executable(HexagonEngine "Hexagon Engine")
+
+target_link_libraries(HexagonEngine ${SDL2_LIBRARIES})

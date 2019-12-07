@@ -1,48 +1,38 @@
-﻿#include <stddef.h>
-#include <stdio.h>
-#include <algorithm>
-#include <chrono>
-#include <random>
-#include <ratio>
-#include <vector>
-#include <execution>
+﻿#include <cstdio>
 
-using std::chrono::duration;
-using std::chrono::duration_cast;
-using std::chrono::high_resolution_clock;
-using std::milli;
-using std::random_device;
-using std::sort;
-using std::vector;
+#include "Dependencies/SDL2/include/SDL.h"
 
-const size_t testSize = 1'000'000;
-const int iterationCount = 5;
+int main(int argc, char* argv[]) {
+	SDL_Window* window;                    // Declare a pointer
 
-void print_results(const char* const tag, const vector<double>& sorted,
-	high_resolution_clock::time_point startTime,
-	high_resolution_clock::time_point endTime) {
-	printf("%s: Lowest: %g Highest: %g Time: %fms\n", tag, sorted.front(),
-		sorted.back(),
-		duration_cast<duration<double, milli>>(endTime - startTime).count());
-}
+	SDL_Init(SDL_INIT_VIDEO);              // Initialize SDL2
 
-int main() {
-	random_device rd;
+	// Create an application window with the following settings:
+	window = SDL_CreateWindow(
+		"An SDL2 window",                  // window title
+		SDL_WINDOWPOS_UNDEFINED,           // initial x position
+		SDL_WINDOWPOS_UNDEFINED,           // initial y position
+		640,                               // width, in pixels
+		480,                               // height, in pixels
+		SDL_WINDOW_OPENGL                  // flags - see below
+	);
 
-	// generate some random doubles:
-	printf("Testing with %zu doubles...\n", testSize);
-	vector<double> doubles(testSize);
-	for (auto& d : doubles) {
-		d = static_cast<double>(rd());
+	// Check that the window was successfully created
+	if (window == NULL) {
+		// In the case that the window could not be made...
+		printf("Could not create window: %s\n", SDL_GetError());
+		return 1;
 	}
 
-	// time how long it takes to sort them:
-	for (int i = 0; i < iterationCount; ++i)
-	{
-		vector<double> sorted(doubles);
-		const auto startTime = high_resolution_clock::now();
-		sort(std::execution::par_unseq, sorted.begin(), sorted.end());
-		const auto endTime = high_resolution_clock::now();
-		print_results("Serial", sorted, startTime, endTime);
-	}
+	// The window is open: could enter program loop here (see SDL_PollEvent())
+
+	SDL_Delay(3000);  // Pause execution for 3000 milliseconds, for example
+
+	// Close and destroy the window
+	SDL_DestroyWindow(window);
+
+	// Clean up
+	SDL_Quit();
+
+	return 0;
 }
