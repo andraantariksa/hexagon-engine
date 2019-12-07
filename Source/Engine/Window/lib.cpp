@@ -1,4 +1,4 @@
-#ifndef HEXAGON_ENGINE_WINDOW_LIB
+#ifdef HEXAGON_ENGINE_WINDOW_LIB
 #define HEXAGON_ENGINE_WINDOW_LIB
 
 #include <cstdio>
