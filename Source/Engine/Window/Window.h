@@ -1,7 +1,6 @@
 #pragma once
 
 #include <string>
-#include "../Types.h"
 #include "Native/INativeWindow.h"
 
 namespace Hx { namespace Window {
@@ -17,72 +16,72 @@ namespace Hx { namespace Window {
 
 		void SetTitle(const std::string& str)
 		{
-			mNativeWindow->SetTitle(str);
+			NativeWindow->SetTitle(str);
 		}
 
 		void SetTitle(const char* title)
 		{
-			mNativeWindow->SetTitle(std::string(title));
+			NativeWindow->SetTitle(std::string(title));
 		}
 
 		void SetPosition(int32 x, int32 y)
 		{
-			mNativeWindow->SetPosition(x, y);
+			NativeWindow->SetPosition(x, y);
 		}
 
 		void SetSize(int32 width, int32 height)
 		{
-			mNativeWindow->SetSize(width, height);
+			NativeWindow->SetSize(width, height);
 		}
 
 		void SetWidth(int32 width)
 		{
-			mNativeWindow->SetWidth(width);
+			NativeWindow->SetWidth(width);
 		}
 
 		void SetHeight(int32 height)
 		{
-			mNativeWindow->SetHeight(height);
+			NativeWindow->SetHeight(height);
 		}
 
 		const std::string& GetTitle() const
 		{
-			return mNativeWindow->GetTitle();
+			return NativeWindow->GetTitle();
 		}
 
 		int32 GetPositionX()
 		{
-			return mNativeWindow->GetPositionX();
+			return NativeWindow->GetPositionX();
 		}
 
 		int32 GetPositionY()
 		{
-			return mNativeWindow->GetPositionY();
+			return NativeWindow->GetPositionY();
 		}
 
 		int32 GetWidth()
 		{
-			return mNativeWindow->GetWidth();
+			return NativeWindow->GetWidth();
 		}
 
 		int32 GetHeight()
 		{
-			return mNativeWindow->GetHeight();
+			return NativeWindow->GetHeight();
 		}
 
 	private:
-		Native::INativeWindow* mNativeWindow;
+		Native::INativeWindow* NativeWindow;
 	};
 
 	class Window::Builder
 	{
 	public:
 		Builder()
-			: mWidth(640),
-			mHeight(480),
-			mTitle("Hexagon Engine"),
-			mPosX(-1),
-			mPosY(-1)
+			: Width(640),
+			Height(480),
+			Title("Hexagon Engine"),
+			PosX(-1),
+			PosY(-1)
 		{
 		}
 
@@ -92,33 +91,34 @@ namespace Hx { namespace Window {
 
 		Builder& SetTitle(const std::string& title)
 		{
-			mTitle = title;
+			Title = title;
 			return *this;
 		}
 
 		Builder& SetPosition(int32 x, int32 y)
 		{
-			mPosX = x;
-			mPosY = y;
+			PosX = x;
+			PosY = y;
 			return *this;
 		}
 
 		Builder& SetSize(int32 w, int32 h)
 		{
-			mWidth = w;
-			mHeight = h;
+			Width = w;
+			Height = h;
 			return *this;
 		}
 
 		Window Build()
 		{
-			return Window(mWidth, mHeight, mTitle, mPosX, mPosY);
+			return Window(Width, Height, Title, PosX, PosY);
 		}
 
 	private:
-		int32 mWidth, mHeight;
-		int32 mPosX, mPosY;
-		std::string mTitle;
+		int32 Width, Height;
+		int32 PosX, PosY;
+		std::string Title;
 	};
+
 
 } }

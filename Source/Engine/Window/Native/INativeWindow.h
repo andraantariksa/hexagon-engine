@@ -1,7 +1,7 @@
 #pragma once
 
-#include <string>
 #include "../../Types.h"
+#include <string>
 
 namespace Hx { namespace Window { namespace Native {
 
@@ -20,6 +20,7 @@ namespace Hx { namespace Window { namespace Native {
 		virtual int32 GetPositionY() = 0;
 		virtual int32 GetWidth() = 0;
 		virtual int32 GetHeight() = 0;
+
 	};
 
 }}}

@@ -4,7 +4,7 @@
 
 namespace Hx { namespace Renderer { namespace Backend {
 
-	enum class EBackendAPI : Int8
+	enum class EBackendAPI : int8
 	{
 		DX11 = 0,
 		OGL,
@@ -12,7 +12,7 @@ namespace Hx { namespace Renderer { namespace Backend {
 		Count
 	};
 
-	enum class EResourceUsage : Int8
+	enum class EResourceUsage : int8
 	{
 		Default = 0,
 		Constant,
@@ -22,7 +22,7 @@ namespace Hx { namespace Renderer { namespace Backend {
 		Count
 	};
 
-	enum class EResourceFormat : Int16
+	enum class EResourceFormat : int16
 	{
 		Unknown = 0,
 		R32G32B32A32_Typeless,
@@ -42,7 +42,7 @@ namespace Hx { namespace Renderer { namespace Backend {
 		Count // Keep at last
 	};
 
-	enum class EResourceBindFlag : Int8
+	enum class EResourceBindFlag : int8
 	{
 		VertexBuffer,
 		IndexBuffer,
@@ -57,7 +57,7 @@ namespace Hx { namespace Renderer { namespace Backend {
 		Count // Keep at last
 	};
 
-	enum class EResourceAccess
+	enum class EResourceAccess : int8
 	{
 		Write,
 		Read,
@@ -65,7 +65,7 @@ namespace Hx { namespace Renderer { namespace Backend {
 		Count // Keep at last
 	};
 
-	enum class EResourceMisc
+	enum class EResourceMisc : int8
 	{
 		GenerateMipMaps,
 		TextureCube,
@@ -77,33 +77,33 @@ namespace Hx { namespace Renderer { namespace Backend {
 	struct STexture1DResourceData
 	{
 		const void*		DataPtr = nullptr;
-		Uint32			Width = 0;
+		uint32			Width = 0;
 	};
 
 	struct STexture2DResourceData
 	{
 		const void*		DataPtr = nullptr;
-		Uint32			Width = 0;
+		uint32			Width = 0;
 	};
 
 	struct STexture3DResourceData
 	{
 		const void*		DataPtr = nullptr;
-		Uint32			Width = 0;
-		Uint32			TotalWH = 0;
+		uint32			Width = 0;
+		uint32			TotalWH = 0;
 	};
 
 	struct SMultisampleDesc
 	{
-		Uint32			Count;
-		Uint32			Quality;
+		uint32			Count;
+		uint32			Quality;
 	};
 
 	struct STexture1DDesc
 	{
-		Uint32				Length;
-		Uint32				MipMapLevels;
-		Uint32				ArrayLength;
+		uint32				Length;
+		uint32				MipMapLevels;
+		uint32				ArrayLength;
 		EResourceFormat		Format;
 		SMultisampleDesc	MultisampleDesc;
 		EResourceBindFlag	BindFlags;
@@ -113,10 +113,10 @@ namespace Hx { namespace Renderer { namespace Backend {
 
 	struct STexture2DDesc
 	{
-		Uint32				Width;
-		Uint32				Height;
-		Uint32				MipMapLevels;
-		Uint32				ArrayLength;
+		uint32				Width;
+		uint32				Height;
+		uint32				MipMapLevels;
+		uint32				ArrayLength;
 		EResourceFormat		Format;
 		SMultisampleDesc	MultisampleDesc;
 		EResourceUsage		Usage;
@@ -127,10 +127,10 @@ namespace Hx { namespace Renderer { namespace Backend {
 
 	struct STexture3DDesc
 	{
-		Uint32				Width;
-		Uint32				Height;
-		Uint32				Depth;
-		Uint32				MipMapLevels;
+		uint32				Width;
+		uint32				Height;
+		uint32				Depth;
+		uint32				MipMapLevels;
 		EResourceFormat		Format;
 		EResourceUsage		Usage;
 		EResourceBindFlag	BindFlags;

@@ -28,8 +28,8 @@ namespace Hx { namespace Window { namespace Native { namespace SDL2 {
 		void Initialize(int32 w, int32 h, int32 x, int32 y);
 
 	private:
-		std::string mWindowTitle;
-		SDL_Window* mNativeHandle;
+		std::string WindowTitle;
+		SDL_Window* NativeHandle;
 	};
 
 }}}}
