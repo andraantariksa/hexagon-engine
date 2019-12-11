@@ -14,6 +14,16 @@ while (x == y)
 
 - Indent using spaces
 
+- Regular variable using `snake_case`
+
+```
+int foo(bool foo_bar)
+{
+    int baz_bag = (foo_bar)?1:0;
+    ...
+}
+```
+
 - A defined data type should use PascalCase
 
 ```
