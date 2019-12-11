@@ -4,7 +4,7 @@
 
 namespace Hx { namespace Renderer { namespace Backend {
 
-	enum class EBackendAPI : int8
+	enum class BackendAPI : int8
 	{
 		DX11 = 0,
 		OGL,
@@ -12,7 +12,7 @@ namespace Hx { namespace Renderer { namespace Backend {
 		Count
 	};
 
-	enum class EResourceUsage : int8
+	enum class ResourceUsage : int8
 	{
 		Default = 0,
 		Constant,
@@ -22,7 +22,7 @@ namespace Hx { namespace Renderer { namespace Backend {
 		Count
 	};
 
-	enum class EResourceFormat : int16
+	enum class ResourceFormat : int16
 	{
 		Unknown = 0,
 		R32G32B32A32_Typeless,
@@ -42,7 +42,7 @@ namespace Hx { namespace Renderer { namespace Backend {
 		Count // Keep at last
 	};
 
-	enum class EResourceBindFlag : int8
+	enum class ResourceBindFlag : int8
 	{
 		VertexBuffer,
 		IndexBuffer,
@@ -57,7 +57,7 @@ namespace Hx { namespace Renderer { namespace Backend {
 		Count // Keep at last
 	};
 
-	enum class EResourceAccess : int8
+	enum class ResourceAccess : int8
 	{
 		Write,
 		Read,
@@ -65,7 +65,7 @@ namespace Hx { namespace Renderer { namespace Backend {
 		Count // Keep at last
 	};
 
-	enum class EResourceMisc : int8
+	enum class ResourceMisc : int8
 	{
 		GenerateMipMaps,
 		TextureCube,
@@ -74,71 +74,71 @@ namespace Hx { namespace Renderer { namespace Backend {
 		Count
 	};
 
-	struct STexture1DResourceData
+	struct Texture1DResourceData
 	{
 		const void*		DataPtr = nullptr;
 		uint32			Width = 0;
 	};
 
-	struct STexture2DResourceData
+	struct Texture2DResourceData
 	{
 		const void*		DataPtr = nullptr;
 		uint32			Width = 0;
 	};
 
-	struct STexture3DResourceData
+	struct Texture3DResourceData
 	{
 		const void*		DataPtr = nullptr;
 		uint32			Width = 0;
 		uint32			TotalWH = 0;
 	};
 
-	struct SMultisampleDesc
+	struct MultisampleDesc
 	{
 		uint32			Count;
 		uint32			Quality;
 	};
 
-	struct STexture1DDesc
+	struct Texture1DDesc
 	{
 		uint32				Length;
 		uint32				MipMapLevels;
 		uint32				ArrayLength;
-		EResourceFormat		Format;
-		SMultisampleDesc	MultisampleDesc;
-		EResourceBindFlag	BindFlags;
-		EResourceAccess		AccessFlags;
-		EResourceMisc		MiscFlags;
+		ResourceFormat		Format;
+		MultisampleDesc	MultisampleDesc;
+		ResourceBindFlag	BindFlags;
+		ResourceAccess		AccessFlags;
+		ResourceMisc		MiscFlags;
 	};
 
-	struct STexture2DDesc
+	struct Texture2DDesc
 	{
 		uint32				Width;
 		uint32				Height;
 		uint32				MipMapLevels;
 		uint32				ArrayLength;
-		EResourceFormat		Format;
-		SMultisampleDesc	MultisampleDesc;
-		EResourceUsage		Usage;
-		EResourceBindFlag	BindFlags;
-		EResourceAccess		AccessFlags;
-		EResourceMisc		MiscFlags;
+		ResourceFormat		Format;
+		MultisampleDesc	MultisampleDesc;
+		ResourceUsage		Usage;
+		ResourceBindFlag	BindFlags;
+		ResourceAccess		AccessFlags;
+		ResourceMisc		MiscFlags;
 	};
 
-	struct STexture3DDesc
+	struct Texture3DDesc
 	{
 		uint32				Width;
 		uint32				Height;
 		uint32				Depth;
 		uint32				MipMapLevels;
-		EResourceFormat		Format;
-		EResourceUsage		Usage;
-		EResourceBindFlag	BindFlags;
-		EResourceAccess		AccessFlags;
-		EResourceMisc		MiscFlags;
+		ResourceFormat		Format;
+		ResourceUsage		Usage;
+		ResourceBindFlag	BindFlags;
+		ResourceAccess		AccessFlags;
+		ResourceMisc		MiscFlags;
 	};
 
-	struct SVertexElement
+	struct VertexElement
 	{
 		const char*			SemanticName;
 
