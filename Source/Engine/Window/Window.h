@@ -1,7 +1,6 @@
 #pragma once
 
 #include <string>
-#include "../Types.h"
 #include "Native/INativeWindow.h"
 
 namespace Hx { namespace Window {
@@ -12,8 +11,8 @@ namespace Hx { namespace Window {
         class Builder;
 
     public:
-        Window(Int32 width = 640, Int32 height = 480,
-            const std::string& title = "Hexagon Engine", Int32 posX = -1, Int32 posY = -1);
+        Window(int width = 640, int height = 480,
+            const std::string& title = "Hexagon Engine", int posX = -1, int posY = -1);
         
         ~Window();
 
@@ -27,22 +26,22 @@ namespace Hx { namespace Window {
             this->NativeWindow->SetTitle(std::string(title));
         }
 
-        void SetPosition(Int32 x, Int32 y)
+        void SetPosition(int x, int y)
         {
             this->NativeWindow->SetPosition(x, y);
         }
 
-        void SetSize(Int32 width, Int32 height)
+        void SetSize(int width, int height)
         {
             this->NativeWindow->SetSize(width, height);
         }
 
-        void SetWidth(Int32 width)
+        void SetWidth(int width)
         {
             this->NativeWindow->SetWidth(width);
         }
 
-        void SetHeight(Int32 height)
+        void SetHeight(int height)
         {
             this->NativeWindow->SetHeight(height);
         }
@@ -52,22 +51,22 @@ namespace Hx { namespace Window {
             return this->NativeWindow->GetTitle();
         }
 
-        Int32 GetPositionX()
+        int GetPositionX()
         {
             return this->NativeWindow->GetPositionX();
         }
 
-        Int32 GetPositionY()
+        int GetPositionY()
         {
             return this->NativeWindow->GetPositionY();
         }
 
-        Int32 GetWidth()
+        int GetWidth()
         {
             return this->NativeWindow->GetWidth();
         }
 
-        Int32 GetHeight()
+        int GetHeight()
         {
             return this->NativeWindow->GetHeight();
         }
@@ -98,17 +97,17 @@ namespace Hx { namespace Window {
             return *this;
         }
 
-        Builder& SetPosition(Int32 x, Int32 y)
+        Builder& SetPosition(int x, int y)
         {
             this->PosX = x;
             this->PosY = y;
             return *this;
         }
 
-        Builder& SetSize(Int32 w, Int32 h)
+        Builder& SetSize(int width, int height)
         {
-            this->Width = w;
-            this->Height = h;
+            this->Width = width;
+            this->Height = height;
             return *this;
         }
 
@@ -118,8 +117,8 @@ namespace Hx { namespace Window {
         }
 
     private:
-        Int32 Width, Height;
-        Int32 PosX, PosY;
+        int Width, Height;
+        int PosX, PosY;
         std::string Title;
     };
 

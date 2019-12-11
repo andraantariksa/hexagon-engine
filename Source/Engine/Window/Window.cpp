@@ -7,7 +7,7 @@
 
 namespace Hx { namespace Window {
 
-	Window::Window(Int32 width, Int32 height, const std::string& title, Int32 posX, Int32 posY)
+	Window::Window(int width, int height, const std::string& title, int posX, int posY)
 #ifdef HX_PLATFORM_SDL2
 		: NativeWindow(new Native::SDL2::WindowSDL2(width, height, title, posX, posY))
 #else
