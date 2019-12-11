@@ -15,3 +15,7 @@ TODO
 ## License
 
 [MIT](LICENSE)
+
+## Coding Style
+
+See our [Coding Style](Docs/CodingStyle.md)

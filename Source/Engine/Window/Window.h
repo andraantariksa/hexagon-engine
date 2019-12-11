@@ -91,27 +91,27 @@ namespace Hx { namespace Window {
 
 		Builder& SetTitle(const std::string& title)
 		{
-			Title = title;
+			this->Title = title;
 			return *this;
 		}
 
 		Builder& SetPosition(int32 x, int32 y)
 		{
-			PosX = x;
-			PosY = y;
+			this->PosX = x;
+			this->PosY = y;
 			return *this;
 		}
 
 		Builder& SetSize(int32 w, int32 h)
 		{
-			Width = w;
-			Height = h;
+			this->Width = w;
+			this->Height = h;
 			return *this;
 		}
 
 		Window Build()
 		{
-			return Window(Width, Height, Title, PosX, PosY);
+			return Window(this->Width, this->Height, this->Title, this->PosX, this->PosY);
 		}
 
 	private:

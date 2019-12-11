@@ -41,15 +41,15 @@ namespace Hx { namespace Window { namespace Native { namespace SDL2 {
 	void WindowSDL2::SetWidth(int32 width)
 	{
 		int32 h;
-		SDL_GetWindowSize(NativeHandle, nullptr, &h);
-		SDL_SetWindowSize(NativeHandle, width, h);
+		SDL_GetWindowSize(this->NativeHandle, nullptr, &h);
+		SDL_SetWindowSize(this->NativeHandle, width, h);
 	}
 
 	void WindowSDL2::SetHeight(int32 height)
 	{
 		int32 w;
-		SDL_GetWindowSize(NativeHandle, &w, nullptr);
-		SDL_SetWindowSize(NativeHandle, w, height);
+		SDL_GetWindowSize(this->NativeHandle, &w, nullptr);
+		SDL_SetWindowSize(this->NativeHandle, w, height);
 	}
 
 	const std::string& WindowSDL2::GetTitle() const
@@ -60,28 +60,28 @@ namespace Hx { namespace Window { namespace Native { namespace SDL2 {
 	int32 WindowSDL2::GetPositionX()
 	{
 		int32 x;
-		SDL_GetWindowPosition(NativeHandle, &x, nullptr);
+		SDL_GetWindowPosition(this->NativeHandle, &x, nullptr);
 		return x;
 	}
 
 	int32 WindowSDL2::GetPositionY()
 	{
 		int32 y;
-		SDL_GetWindowPosition(NativeHandle, nullptr, &y);
+		SDL_GetWindowPosition(this->NativeHandle, nullptr, &y);
 		return y;
 	}
 
 	int32 WindowSDL2::GetWidth()
 	{
 		int32 w;
-		SDL_GetWindowSize(NativeHandle, &w, nullptr);
+		SDL_GetWindowSize(this->NativeHandle, &w, nullptr);
 		return w;
 	}
 
 	int32 WindowSDL2::GetHeight()
 	{
 		int32 h;
-		SDL_GetWindowSize(NativeHandle, nullptr, &h);
+		SDL_GetWindowSize(this->NativeHandle, nullptr, &h);
 		return h;
 	}
 
