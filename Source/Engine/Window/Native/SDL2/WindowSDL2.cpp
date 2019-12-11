@@ -4,7 +4,7 @@
 
 namespace Hx { namespace Window { namespace Native { namespace SDL2 {
 
-	WindowSDL2::WindowSDL2(Int32 width, Int32 height, const std::string& title, Int32 posX, Int32 posY)
+	WindowSDL2::WindowSDL2(int32 width, int32 height, const std::string& title, int32 posX, int32 posY)
 		: mWindowTitle(title)
 	{
 		Initialize(width, height, posX, posY);
@@ -21,7 +21,7 @@ namespace Hx { namespace Window { namespace Native { namespace SDL2 {
 		SDL_SetWindowTitle(mNativeHandle, mWindowTitle.c_str());
 	}
 
-	void WindowSDL2::SetPosition(Int32 x, Int32 y)
+	void WindowSDL2::SetPosition(int32 x, int32 y)
 	{
 		SDL_SetWindowPosition(
 			mNativeHandle,
@@ -29,7 +29,7 @@ namespace Hx { namespace Window { namespace Native { namespace SDL2 {
 			(y < 0) ? SDL_WINDOWPOS_CENTERED : y);
 	}
 
-	void WindowSDL2::SetSize(Int32 width, Int32 height)
+	void WindowSDL2::SetSize(int32 width, int32 height)
 	{
 		SDL_SetWindowSize(
 			mNativeHandle,
@@ -37,16 +37,16 @@ namespace Hx { namespace Window { namespace Native { namespace SDL2 {
 			height);
 	}
 
-	void WindowSDL2::SetWidth(Int32 width)
+	void WindowSDL2::SetWidth(int32 width)
 	{
-		Int32 h;
+		int32 h;
 		SDL_GetWindowSize(mNativeHandle, nullptr, &h);
 		SDL_SetWindowSize(mNativeHandle, width, h);
 	}
 
-	void WindowSDL2::SetHeight(Int32 height)
+	void WindowSDL2::SetHeight(int32 height)
 	{
-		Int32 w;
+		int32 w;
 		SDL_GetWindowSize(mNativeHandle, &w, nullptr);
 		SDL_SetWindowSize(mNativeHandle, w, height);
 	}
@@ -56,35 +56,35 @@ namespace Hx { namespace Window { namespace Native { namespace SDL2 {
 		return mWindowTitle;
 	}
 
-	Int32 WindowSDL2::GetPositionX()
+	int32 WindowSDL2::GetPositionX()
 	{
-		Int32 x;
+		int32 x;
 		SDL_GetWindowPosition(mNativeHandle, &x, nullptr);
 		return x;
 	}
 
-	Int32 WindowSDL2::GetPositionY()
+	int32 WindowSDL2::GetPositionY()
 	{
-		Int32 y;
+		int32 y;
 		SDL_GetWindowPosition(mNativeHandle, nullptr, &y);
 		return y;
 	}
 
-	Int32 WindowSDL2::GetWidth()
+	int32 WindowSDL2::GetWidth()
 	{
-		Int32 w;
+		int32 w;
 		SDL_GetWindowSize(mNativeHandle, &w, nullptr);
 		return w;
 	}
 
-	Int32 WindowSDL2::GetHeight()
+	int32 WindowSDL2::GetHeight()
 	{
-		Int32 h;
+		int32 h;
 		SDL_GetWindowSize(mNativeHandle, nullptr, &h);
 		return h;
 	}
 
-	void WindowSDL2::Initialize(Int32 w, Int32 h, Int32 x, Int32 y)
+	void WindowSDL2::Initialize(int32 w, int32 h, int32 x, int32 y)
 	{
 		mNativeHandle = SDL_CreateWindow(
 			mWindowTitle.c_str(),

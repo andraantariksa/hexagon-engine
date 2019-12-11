@@ -12,7 +12,7 @@ namespace Hx { namespace Window {
 		class Builder;
 
 	public:
-		Window(Int32 width = 640, Int32 height = 480, const std::string& title = "Hexagon Engine", Int32 posX = -1, Int32 posY = -1);
+		Window(int32 width = 640, int32 height = 480, const std::string& title = "Hexagon Engine", int32 posX = -1, int32 posY = -1);
 		~Window();
 
 		void SetTitle(const std::string& str)
@@ -25,22 +25,22 @@ namespace Hx { namespace Window {
 			mNativeWindow->SetTitle(std::string(title));
 		}
 
-		void SetPosition(Int32 x, Int32 y)
+		void SetPosition(int32 x, int32 y)
 		{
 			mNativeWindow->SetPosition(x, y);
 		}
 
-		void SetSize(Int32 width, Int32 height)
+		void SetSize(int32 width, int32 height)
 		{
 			mNativeWindow->SetSize(width, height);
 		}
 
-		void SetWidth(Int32 width)
+		void SetWidth(int32 width)
 		{
 			mNativeWindow->SetWidth(width);
 		}
 
-		void SetHeight(Int32 height)
+		void SetHeight(int32 height)
 		{
 			mNativeWindow->SetHeight(height);
 		}
@@ -50,22 +50,22 @@ namespace Hx { namespace Window {
 			return mNativeWindow->GetTitle();
 		}
 
-		Int32 GetPositionX()
+		int32 GetPositionX()
 		{
 			return mNativeWindow->GetPositionX();
 		}
 
-		Int32 GetPositionY()
+		int32 GetPositionY()
 		{
 			return mNativeWindow->GetPositionY();
 		}
 
-		Int32 GetWidth()
+		int32 GetWidth()
 		{
 			return mNativeWindow->GetWidth();
 		}
 
-		Int32 GetHeight()
+		int32 GetHeight()
 		{
 			return mNativeWindow->GetHeight();
 		}
@@ -96,14 +96,14 @@ namespace Hx { namespace Window {
 			return *this;
 		}
 
-		Builder& SetPosition(Int32 x, Int32 y)
+		Builder& SetPosition(int32 x, int32 y)
 		{
 			mPosX = x;
 			mPosY = y;
 			return *this;
 		}
 
-		Builder& SetSize(Int32 w, Int32 h)
+		Builder& SetSize(int32 w, int32 h)
 		{
 			mWidth = w;
 			mHeight = h;
@@ -116,8 +116,8 @@ namespace Hx { namespace Window {
 		}
 
 	private:
-		Int32 mWidth, mHeight;
-		Int32 mPosX, mPosY;
+		int32 mWidth, mHeight;
+		int32 mPosX, mPosY;
 		std::string mTitle;
 	};
 
