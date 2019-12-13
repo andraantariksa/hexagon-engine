@@ -6,10 +6,12 @@ namespace Hx { namespace Renderer { namespace Backend {
 
 	struct ITexture2D : public ITextureBase
 	{
-		ITexture2D() = delete;
 		virtual ~ITexture2D() { }
 
 		virtual void GetDesc(Texture2DDesc& info) = 0;
+
+	protected:
+		ITexture2D() { }
 	};
 
 }}}

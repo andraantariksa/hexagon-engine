@@ -7,8 +7,10 @@ namespace Hx { namespace Renderer { namespace Backend {
 
 	struct IIndexBuffer
 	{
-		IIndexBuffer() = delete;
 		virtual ~IIndexBuffer() { }
+
+	protected:
+		IIndexBuffer() { }
 	};
 
 }}}

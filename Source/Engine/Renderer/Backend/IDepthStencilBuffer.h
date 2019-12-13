@@ -4,8 +4,10 @@ namespace Hx { namespace Renderer { namespace Backend {
 
 	struct IDepthStencilBuffer
 	{
-		IDepthStencilBuffer() = delete;
 		virtual ~IDepthStencilBuffer() { }
+
+	protected:
+		IDepthStencilBuffer() { }
 	};
 
 }}}

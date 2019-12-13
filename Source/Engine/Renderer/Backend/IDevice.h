@@ -19,8 +19,7 @@ namespace Hx { namespace Renderer { namespace Backend {
 
 	struct IDevice
 	{
-		IDevice() = delete;
-		virtual IDevice() { }
+		virtual ~IDevice() { }
 
 		virtual bool Create(const Hx::Window::Window& window) = 0;
 		virtual IDeferredContext* CreateDeferredContext() = 0;
@@ -36,6 +35,9 @@ namespace Hx { namespace Renderer { namespace Backend {
 		virtual IUniformBuffer* CreateUniformBuffer() = 0;
 		virtual IContext* GetImmediateContext() = 0;
 		virtual BackendAPI GetBackendAPI() = 0;
+
+	protected:
+		IDevice() { }
 	};
 
 }}}

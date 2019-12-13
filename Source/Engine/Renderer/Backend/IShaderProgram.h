@@ -7,11 +7,13 @@ namespace Hx { namespace Renderer { namespace Backend {
 
 	struct IShaderProgram
 	{
-		IShaderProgram() = delete;
 		virtual ~IShaderProgram() { }
 
 		virtual IVertexShader* GetVertexShader() = 0;
 		virtual IPixelShader* GetPixelShader() = 0;
+
+	protected:
+		IShaderProgram() { }
 	};
 
 }}}

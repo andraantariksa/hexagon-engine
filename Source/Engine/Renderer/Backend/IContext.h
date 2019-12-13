@@ -10,7 +10,6 @@ namespace Hx { namespace Renderer { namespace Backend {
 
 	struct IContext
 	{
-		IContext() = delete;
 		virtual ~IContext() { };
 
 		virtual void ClearFrameBuffer(IFrameBuffer* frameBuffer, const float colorRGBA[4]) = 0;
@@ -41,6 +40,9 @@ namespace Hx { namespace Renderer { namespace Backend {
 		virtual void SetUniformValueUint4(int32 index, uint32 ui[4]) = 0;
 		virtual void SetUniformValueUintArray(int32 index, const uint32* arr, size_t size) = 0;
 		virtual void SetUniformBufferData(IUniformBuffer* uniformBuffer, int32 index, const void* data, size_t size) = 0;
+
+	protected:
+		IContext() { }
 	};
 
 }}}
