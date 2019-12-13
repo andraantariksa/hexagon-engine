@@ -74,6 +74,14 @@ namespace Hx { namespace Renderer { namespace Backend {
 		Count
 	};
 
+	enum class EClearFlag : int8
+	{
+		Depth,
+		Stencil,
+
+		Count
+	};
+
 	struct STexture1DResourceData
 	{
 		const void*		DataPtr = nullptr;

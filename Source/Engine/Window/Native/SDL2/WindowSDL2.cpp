@@ -85,6 +85,11 @@ namespace Hx { namespace Window { namespace Native { namespace SDL2 {
 		return h;
 	}
 
+	const char* WindowSDL2::GetBackendAPI() const
+	{
+		return WindowSDL2::BackendAPI;
+	}
+
 	void WindowSDL2::Initialize(int32 w, int32 h, int32 x, int32 y)
 	{
 		this->NativeHandle = SDL_CreateWindow(
@@ -101,5 +106,7 @@ namespace Hx { namespace Window { namespace Native { namespace SDL2 {
 
 		SDL_ShowWindow(this->NativeHandle);
 	}
+
+	const char* WindowSDL2::BackendAPI = "SDL2";
 
 }}}}

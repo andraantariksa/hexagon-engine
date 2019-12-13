@@ -16,57 +16,62 @@ namespace Hx { namespace Window {
 
 		void SetTitle(const std::string& str)
 		{
-			NativeWindow->SetTitle(str);
+			this->NativeWindow->SetTitle(str);
 		}
 
 		void SetTitle(const char* title)
 		{
-			NativeWindow->SetTitle(std::string(title));
+			this->NativeWindow->SetTitle(std::string(title));
 		}
 
 		void SetPosition(int32 x, int32 y)
 		{
-			NativeWindow->SetPosition(x, y);
+			this->NativeWindow->SetPosition(x, y);
 		}
 
 		void SetSize(int32 width, int32 height)
 		{
-			NativeWindow->SetSize(width, height);
+			this->NativeWindow->SetSize(width, height);
 		}
 
 		void SetWidth(int32 width)
 		{
-			NativeWindow->SetWidth(width);
+			this->NativeWindow->SetWidth(width);
 		}
 
 		void SetHeight(int32 height)
 		{
-			NativeWindow->SetHeight(height);
+			this->NativeWindow->SetHeight(height);
 		}
 
 		const std::string& GetTitle() const
 		{
-			return NativeWindow->GetTitle();
+			return this->NativeWindow->GetTitle();
 		}
 
 		int32 GetPositionX()
 		{
-			return NativeWindow->GetPositionX();
+			return this->NativeWindow->GetPositionX();
 		}
 
 		int32 GetPositionY()
 		{
-			return NativeWindow->GetPositionY();
+			return this->NativeWindow->GetPositionY();
 		}
 
 		int32 GetWidth()
 		{
-			return NativeWindow->GetWidth();
+			return this->NativeWindow->GetWidth();
 		}
 
 		int32 GetHeight()
 		{
-			return NativeWindow->GetHeight();
+			return this->NativeWindow->GetHeight();
+		}
+
+		const char* GetBackendAPI() const
+		{
+			return this->NativeWindow->GetBackendAPI();
 		}
 
 	private:
