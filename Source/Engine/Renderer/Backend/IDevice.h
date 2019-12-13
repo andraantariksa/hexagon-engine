@@ -13,6 +13,7 @@
 #include "IShaderProgram.h"
 #include "IVertexDecl.h"
 #include "IUniformBuffer.h"
+#include "IDeferredContext.h"
 
 namespace Hx { namespace Renderer { namespace Backend {
 
@@ -21,7 +22,8 @@ namespace Hx { namespace Renderer { namespace Backend {
 		IDevice() = delete;
 		virtual IDevice() { }
 
-		virtual void Create(const Hx::Window::Window& window) = 0;
+		virtual bool Create(const Hx::Window::Window& window) = 0;
+		virtual IDeferredContext* CreateDeferredContext() = 0;
 		virtual IVertexBuffer* CreateVertexBuffer(ResourceUsage usage, size_t bufferSize, const void* bufferData) = 0;
 		virtual IIndexBuffer* CreateIndexBuffer(ResourceUsage usage, ResourceFormat indexFormat, size_t bufferSize, const void* bufferData) = 0;
 		virtual ITexture1D* CreateTexture1D(const Texture1DDesc& createDesc, const Texture1DResourceData& initialData) = 0;
@@ -32,6 +34,7 @@ namespace Hx { namespace Renderer { namespace Backend {
 		virtual IShaderProgram* CreateShaderProgram(IVertexShader* vs, IPixelShader* ps) = 0;
 		virtual IVertexDecl* CreateVertexDeclaration(IShaderProgram* program, const VertexElement* vertElems, uint32 numElems) = 0;
 		virtual IUniformBuffer* CreateUniformBuffer() = 0;
+		virtual IContext* GetImmediateContext() = 0;
 		virtual BackendAPI GetBackendAPI() = 0;
 	};
 

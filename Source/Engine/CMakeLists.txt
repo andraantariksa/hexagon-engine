@@ -1,22 +1,11 @@
-file(GLOB ENGINE_SRC_FILES
+file(GLOB_RECURSE ENGINE_SRC_FILES
+	"*.c"
 	"*.cpp"
-	"Window/*.cpp"
-	"Window/Native/*.cpp"
-	"Window/Native/SDL2/*.cpp"
-	"Renderer/Backend/*.cpp"
-	"Renderer/Backend/GL/*.cpp")
-
-file(GLOB ENGINE_HEADER_FILES
+	"*.cxx"
 	"*.h"
-	"Window/*.h"
-	"Window/Native/*.h"
-	"Window/Native/SDL2/*.h"
-	"Renderer/Backend/*.h"
-	"Renderer/Backend/GL/*.h")
+	"*.hpp")
 
-add_library(HexagonEngineCore STATIC ${ENGINE_SRC_FILES} ${ENGINE_HEADER_FILES})
-
-message(${SDL2_INCLUDE_DIRS})
+add_library(HexagonEngineCore STATIC ${ENGINE_SRC_FILES})
 
 target_include_directories(
 	HexagonEngineCore

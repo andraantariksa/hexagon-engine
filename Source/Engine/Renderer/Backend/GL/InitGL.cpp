@@ -1,11 +1,28 @@
 #include "Common.h"
 
+#ifdef HX_PLATFORM_SDL2
+#include <SDL.h>
+#include "../../../Window/Native/SDL2/WindowSDL2.h"
+#endif
+
 #include <cassert>
 
 namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 
 	using Hx::Window::Window;
 	
+#if defined(HX_PLATFORM_SDL2)
+	void InitOpenGL_SDL2(
+		SDL_Window* window,
+		const OpenGLInitDesc& initDesc,
+		OpenGLContext* outContext);
+#elif defined(HX_PLATFORM_WIN32)
+	void InitOpenGL_Win32(
+		HWND hWnd,
+		const OpenGLInitDesc& initDesc,
+		OpenGLContext* outContext);
+#endif
+
 	void InitOpenGL(
 		const Window& window,
 		const OpenGLInitDesc& initDesc,
@@ -19,6 +36,7 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 #endif
 	}
 
+#if defined(HX_PLATFORM_SDL2)
 	void InitOpenGL_SDL2(
 		SDL_Window* window,
 		const OpenGLInitDesc& desc,
@@ -54,5 +72,14 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 
 		*outContext = (OpenGLContext)context;
 	}
+#elif defined(HX_PLATFORM_WIN32)
+	void InitOpenGL_Win32(
+		HWND window,
+		const OpenGLInitDesc& desc,
+		OpenGLContext* outContext)
+	{
+		// TODO: Add Win32 opengl initialization
+	}
+#endif
 
 }}}}
