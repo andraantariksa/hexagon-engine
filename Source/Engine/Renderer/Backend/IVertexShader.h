@@ -6,7 +6,7 @@ namespace Hx { namespace Renderer { namespace Backend {
 	{
 		virtual ~IVertexShader() { }
 
-	private:
+	protected:
 		IVertexShader() { }
 	};
 
