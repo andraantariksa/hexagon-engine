@@ -71,9 +71,27 @@ namespace Hx { namespace Renderer { namespace Backend {
 		TextureCube,
 		SharedResource,
 		
-		Count
+		Count // Keep at last
 	};
 
+	enum class ClearFlag : int8
+	{
+		Depth,
+		Stencil,
+
+		Count // Keep at last
+	};
+
+	struct Viewport
+	{
+		float			TopLeftX;
+		float			TopLeftY;
+		float			Width;
+		float			Height;
+		float			MinDepth;
+		float			MaxDepth;
+	};
+	
 	struct Texture1DResourceData
 	{
 		const void*		DataPtr = nullptr;

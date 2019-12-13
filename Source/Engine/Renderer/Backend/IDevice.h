@@ -11,6 +11,8 @@
 #include "IVertexShader.h"
 #include "IPixelShader.h"
 #include "IShaderProgram.h"
+#include "IVertexDecl.h"
+#include "IUniformBuffer.h"
 
 namespace Hx { namespace Renderer { namespace Backend {
 
@@ -28,7 +30,7 @@ namespace Hx { namespace Renderer { namespace Backend {
 		virtual IVertexShader* CreateVertexShader(uint32 size, const void* compiledShader) = 0;
 		virtual IPixelShader* CreatePixelShader(uint32 size, const void* compiledShader) = 0;
 		virtual IShaderProgram* CreateShaderProgram(IVertexShader* vs, IPixelShader* ps) = 0;
-		virtual IVertexStructure* CreateVertexStructure(IShaderProgram* program, const VertexElement* vertDescs, uint32 numDescs) = 0;
+		virtual IVertexDecl* CreateVertexDeclaration(IShaderProgram* program, const VertexElement* vertElems, uint32 numElems) = 0;
 		virtual IUniformBuffer* CreateUniformBuffer() = 0;
 		virtual BackendAPI GetBackendAPI() = 0;
 	};

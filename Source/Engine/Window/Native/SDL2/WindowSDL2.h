@@ -24,6 +24,7 @@ namespace Hx { namespace Window { namespace Native { namespace SDL2 {
 		int32 GetWidth() override;
 		int32 GetHeight() override;
 		const char* GetBackendAPI() const override;
+		SDL_Window* GetNativeHandle();
 
 	private:
 		void Initialize(int32 w, int32 h, int32 x, int32 y);

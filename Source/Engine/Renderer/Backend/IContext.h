@@ -4,6 +4,7 @@
 #include "IFrameBuffer.h"
 #include "IDepthStencilBuffer.h"
 #include "IShaderProgram.h"
+#include "IVertexDecl.h"
 
 namespace Hx { namespace Renderer { namespace Backend {
 
@@ -13,9 +14,13 @@ namespace Hx { namespace Renderer { namespace Backend {
 		virtual ~IContext() { };
 
 		virtual void ClearFrameBuffer(IFrameBuffer* frameBuffer, const float colorRGBA[4]) = 0;
-		virtual void ClearDepthStencilBuffer(IDepthStencilBuffer* depthBuffer, EClearFlag clearFlags, float depth, uint8 stencil) = 0;
+		virtual void ClearDepthStencilBuffer(IDepthStencilBuffer* depthBuffer, ClearFlag clearFlags, float depth, uint8 stencil) = 0;
 		virtual void SetRenderBuffers(uint32 numSlots, IFrameBuffer* const* frameBuffers, IDepthStencilBuffer* depthBuffer) = 0;
+		virtual void SetViewport(uint32 numViewports, Viewport* viewports) = 0;
 		virtual void SetShaderProgram(IShaderProgram* shaderProgram) = 0;
+		virtual void SetVertexDeclaration(IVertexDecl* vertexDeclaration) = 0;
+		virtual void Draw(uint32 vertexCount, uint32 startIndex) = 0;
+		virtual void DrawIndexed(uint32 indexCount, uint32 startIndex, uint32 baseIndex) = 0;
 
 		// Uniform-related function
 		virtual int32 GetUniformIndex(const char* uniformName, size_t strSize) = 0;

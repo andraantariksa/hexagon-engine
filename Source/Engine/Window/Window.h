@@ -74,6 +74,11 @@ namespace Hx { namespace Window {
 			return this->NativeWindow->GetBackendAPI();
 		}
 
+		Native::INativeWindow* GetNative() const
+		{
+			return this->NativeWindow;
+		}
+
 	private:
 		Native::INativeWindow* NativeWindow;
 	};
