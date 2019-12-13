@@ -24,7 +24,9 @@ include_directories(
 	"${googletest_SOURCE_DIR}/googletest/include/"
 )
 
-target_link_libraries(HexagonEngineTest gtest_main gtest)
+target_include_directories(HexagonEngineTest PRIVATE "../")
+
+target_link_libraries(HexagonEngineTest HexagonEngineCore gtest_main gtest ${SDL2_LIBRARIES})
 
 add_test(
 	NAME    HexagonEngineTest

@@ -1,5 +1,11 @@
-build:
-	mkdir ${TRAVIS_BUILD_DIR}/build/ && cd ${TRAVIS_BUILD_DIR}/build/ && cmake ../ && make
+build: create-build-dir
+	cd build/ && cmake ../ && make
 
 test: build
-	cd ${TRAVIS_BUILD_DIR}/build/Test/ && ./HexagonEngineTest
+	./build/Test/HexagonEngineTest
+
+clean:
+	rm -rf build/ 
+
+create-build-dir:
+	mkdir -p build/

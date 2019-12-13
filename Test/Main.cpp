@@ -1,11 +1,5 @@
-#pragma once
-
 #include <gtest/gtest.h>
-
-TEST(AdditionTest, OnePlusOne)
-{
-    EXPECT_EQ(2, 1 + 1);
-}
+#include "Window.cpp"
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
