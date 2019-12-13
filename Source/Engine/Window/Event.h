@@ -4,26 +4,26 @@
 
 namespace Hx { namespace Window {
 
-	enum EEventType
+	enum EventType
 	{
 		// Keyboard events
-		EventType_KeyDown,
-		EventType_KeyUp,
+		KeyDown,
+		KeyUp,
 
 		// Mouse events
-		EventType_MouseBtnDown,
-		EventType_MouseBtnUp,
-		EventType_MouseWheel,
-		EventType_MouseMove,
-		EventType_MouseHover,
-		EventType_MouseLeave,
+		MouseBtnDown,
+		MouseBtnUp,
+		MouseWheel,
+		MouseMove,
+		MouseHover,
+		MouseLeave,
 
 		// Window events
-		EventType_WindowClose,
-		EventType_WindowResize,
-		EventType_WindowMove,
-		EventType_WindowLostFocus,
-		EventType_WindowGainFocus,
+		WindowClose,
+		WindowResize,
+		WindowMove,
+		WindowLostFocus,
+		WindowGainFocus,
 	};
 
 	class Event

@@ -9,7 +9,7 @@ namespace Hx { namespace Renderer { namespace Backend {
 		ITexture3D() = delete;
 		virtual ~ITexture3D() { }
 
-		virtual void GetDesc(STexture3DDesc& info) = 0;
+		virtual void GetDesc(Texture3DDesc& info) = 0;
 	};
 
 }}}

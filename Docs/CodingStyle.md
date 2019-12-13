@@ -1,15 +1,69 @@
 # Hexagon Engine coding style
 
 ## Rules
+
 - Allman braces style are must!
-- Classes and Variables must use CamelCasing (ex: `MyClass` / `MyVariable`)
-- Structs must begin with 'S' prefix and followed by a name with CamelCasing (ex: `SMyStruct`)
-- Enums must begin with 'E' prefix and followed by a name with CamelCasing (ex: `EMyEnum`)
-- Interfaces/Abstract classes must begin with 'I' prefix and followed by a name with CamelCasing (ex: `IMyInterface`)
-- Use `this->` when using a member function/variable (ex: `this->MyVariable`, `this->MyFunction()`)
-- Use `struct` for declaring an Interface/Abstract class
+
+```
+while (x == y)
+{
+    something();
+    somethingelse();
+}
+```
+
+- Indent using spaces
+
+- Regular variable using `snake_case`
+
+```
+int foo(bool foo_bar)
+{
+    int baz_bag = (foo_bar)?1:0;
+    ...
+}
+```
+
+- A defined data type should use PascalCase
+
+```
+enum Boolean
+{
+    True,
+    False,
+};
+
+class Klass
+{
+    // Props and method
+};
+
+struct Strukt
+{
+    // Data field
+};
+
+```
+
+- Enums type should be defined by using it's namespace
+
+```
+enum Boolean{
+    True,
+    False,
+};
+
+...
+
+Boolean::True;
+
+```
+
+- Interfaces/Abstract classes must begin with 'I' prefix and followed by a name with PascalCasing (ex: `IMyInterface`)
+- Use `this->` when using a class method/property (ex: `this->MyVariable`, `this->MyFunction()`)
 
 ## Basic type aliases for C++ type
+
 | Type alias | original           |
 | ---------- | ------------------ |
 | int8       | char               |
