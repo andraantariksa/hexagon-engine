@@ -4,7 +4,7 @@
 
 TEST(AdditionTest, OnePlusOne)
 {
-    EXPECT_EQ(1, 1 + 2);
+    EXPECT_EQ(2, 1 + 1);
 }
 
 int main(int argc, char **argv) {
