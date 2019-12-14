@@ -1,0 +1,18 @@
+name: Testing Workflow
+on: [push]
+
+jobs:
+  build:
+    name: Build and testing in Linux
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install dependency
+        run: |
+          sudo apt-get update
+          sudo apt-get install libsdl2-dev
+          sudo apt-get install cmake
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Run Test
+        run: |
+          make test
