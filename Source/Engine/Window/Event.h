@@ -29,6 +29,9 @@ namespace Hx { namespace Window {
 	class Event
 	{
 	public:
+		Event();
+		~Event();
+		void Process();
 
 		struct SizeEvent
 		{
@@ -44,7 +47,8 @@ namespace Hx { namespace Window {
 			bool AltKey;
 			bool Toggle;
 		};
-
+	private:
+        // SDL_Event *EventInstance;
 	};
 
 } }
