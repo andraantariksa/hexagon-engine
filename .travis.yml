@@ -8,5 +8,6 @@ addons:
     packages:
     - cmake
     - libsdl2-dev
+    - libsdl2-2.0-0
 script:
 - make test
