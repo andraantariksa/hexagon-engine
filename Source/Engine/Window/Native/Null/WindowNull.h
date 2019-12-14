@@ -11,16 +11,16 @@ namespace Hx { namespace Window { namespace Native { namespace Null {
 		~WindowNull();
 
 		void SetTitle(const std::string& title) override;
-		void SetPosition(Int32 x, Int32 y) override;
-		void SetSize(Int32 width, Int32 height) override;
-		void SetWidth(Int32 width) override;
-		void SetHeight(Int32 height) override;
+		void SetPosition(int32 x, int32 y) override;
+		void SetSize(int32 width, int32 height) override;
+		void SetWidth(int32 width) override;
+		void SetHeight(int32 height) override;
 
 		const std::string& GetTitle() const override;
-		Int32 GetPositionX() override;
-		Int32 GetPositionY() override;
-		Int32 GetWidth() override;
-		Int32 GetHeight() override;
+		int32 GetPositionX() override;
+		int32 GetPositionY() override;
+		int32 GetWidth() override;
+		int32 GetHeight() override;
 	};
 
 } } } }

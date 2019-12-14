@@ -85,8 +85,21 @@ namespace Hx { namespace Window { namespace Native { namespace SDL2 {
 		return h;
 	}
 
+	const char* WindowSDL2::GetBackendAPI() const
+	{
+		return WindowSDL2::BackendAPI;
+	}
+
+	SDL_Window* WindowSDL2::GetNativeHandle()
+	{
+		return this->NativeHandle;
+	}
+
 	void WindowSDL2::Initialize(int32 w, int32 h, int32 x, int32 y)
 	{
+		if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
+			throw std::runtime_error(std::string("ERROR: SDL_Init failed ") + std::string(SDL_GetError()));
+
 		this->NativeHandle = SDL_CreateWindow(
 			this->WindowTitle.c_str(),
 			(x < 0) ? SDL_WINDOWPOS_CENTERED : x,
@@ -101,5 +114,7 @@ namespace Hx { namespace Window { namespace Native { namespace SDL2 {
 
 		SDL_ShowWindow(this->NativeHandle);
 	}
+
+	const char* WindowSDL2::BackendAPI = "SDL2";
 
 }}}}

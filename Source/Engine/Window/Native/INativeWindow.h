@@ -20,7 +20,7 @@ namespace Hx { namespace Window { namespace Native {
 		virtual int32 GetPositionY() = 0;
 		virtual int32 GetWidth() = 0;
 		virtual int32 GetHeight() = 0;
-
+		virtual const char* GetBackendAPI() const = 0;
 	};
 
 }}}

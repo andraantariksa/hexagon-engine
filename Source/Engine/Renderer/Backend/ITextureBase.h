@@ -7,8 +7,10 @@ namespace Hx { namespace Renderer { namespace Backend {
 
 	struct ITextureBase
 	{
-		ITextureBase() = delete;
 		virtual ~ITextureBase() { }
+
+	protected:
+		ITextureBase() { }
 	};
 
 }}}
