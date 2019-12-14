@@ -8,10 +8,9 @@ namespace Hx { namespace Window {
 
 	void Event::Process()
 	{
-		while(SDL_PollEvent(this->EventInstance))
-		{
+		// while(SDL_PollEvent(this->EventInstance))
+		// {
 
-		}
+		// }
 	}
-};
 }}
