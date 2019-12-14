@@ -8,6 +8,7 @@ addons:
     packages:
     - cmake
     - libsdl2-dev
-    - libsdl2-2.0-0
+    - libegl1-mesa-dev
+    - libgles2-mesa-dev
 script:
 - make test
