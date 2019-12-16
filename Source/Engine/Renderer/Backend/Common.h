@@ -4,14 +4,6 @@
 
 namespace Hx { namespace Renderer { namespace Backend {
 
-	enum class BackendAPI : int8
-	{
-		DX11 = 0,
-		OGL,
-
-		Count
-	};
-
 	enum class ResourceUsage : int8
 	{
 		Default = 0,
@@ -117,13 +109,20 @@ namespace Hx { namespace Renderer { namespace Backend {
 		uint32			Quality;
 	};
 
+	struct BufferDesc
+	{
+		uint32			Length;
+		ResourceUsage	ResourceUsage;
+		uint32			
+	};
+
 	struct Texture1DDesc
 	{
 		uint32				Length;
 		uint32				MipMapLevels;
 		uint32				ArrayLength;
 		ResourceFormat		Format;
-		MultisampleDesc	MultisampleDesc;
+		MultisampleDesc		MultisampleDesc;
 		ResourceBindFlag	BindFlags;
 		ResourceAccess		AccessFlags;
 		ResourceMisc		MiscFlags;

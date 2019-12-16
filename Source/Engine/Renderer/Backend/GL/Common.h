@@ -3,11 +3,13 @@
 #include "../../../Types.h"
 #include "../../../../Config.h"
 #include "../../../Window/Window.h"
+#include "../IDevice.h"
+#include "../IContext.h"
 
 
 namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL { 
 	
-	typedef void* OpenGLContext;
+	typedef void* ContextHandle;
 
 	struct OpenGLInitDesc
 	{
@@ -23,9 +25,16 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 		int32 StencilBits = 8;
 	};
 
-	void InitOpenGL(
+	void GLInit(
 		const Hx::Window::Window& window,
 		const OpenGLInitDesc& initDesc,
-		OpenGLContext* outContext);
+		ContextHandle* outContext);
+
+
+	void GLMakeCurrent(
+		const Hx::Window::Window& window,
+		ContextHandle context);
+
+	void GLDestroy(ContextHandle* outContext);
 
 }}}}

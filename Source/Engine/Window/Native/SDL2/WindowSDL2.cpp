@@ -97,7 +97,7 @@ namespace Hx { namespace Window { namespace Native { namespace SDL2 {
 
 	void WindowSDL2::Initialize(int32 w, int32 h, int32 x, int32 y)
 	{
-		if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
+		if (SDL_Init(SDL_INIT_VIDEO) != 0)
 			throw std::runtime_error(std::string("ERROR: SDL_Init failed ") + std::string(SDL_GetError()));
 
 		this->NativeHandle = SDL_CreateWindow(

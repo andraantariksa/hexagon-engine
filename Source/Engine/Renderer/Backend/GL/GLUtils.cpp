@@ -1,4 +1,6 @@
 #include "Common.h"
+#include "Common.h"
+#include "Common.h"
 
 #ifdef HX_PLATFORM_SDL2
 #include <SDL.h>
@@ -12,35 +14,60 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 	using Hx::Window::Window;
 	
 #if defined(HX_PLATFORM_SDL2)
-	void InitOpenGL_SDL2(
+	void GLInit_SDL2(
 		SDL_Window* window,
 		const OpenGLInitDesc& initDesc,
-		OpenGLContext* outContext);
+		ContextHandle* outContext);
 #elif defined(HX_PLATFORM_WIN32)
-	void InitOpenGL_Win32(
+	void GLInit_Win32(
 		HWND hWnd,
 		const OpenGLInitDesc& initDesc,
-		OpenGLContext* outContext);
+		ContextHandle* outContext);
 #endif
 
-	void InitOpenGL(
+	void GLInit(
 		const Window& window,
 		const OpenGLInitDesc& initDesc,
-		OpenGLContext* outContext)
+		ContextHandle* outContext)
 	{
 #ifdef HX_PLATFORM_SDL2
 		using WindowSDL2 = Hx::Window::Native::SDL2::WindowSDL2;
-		WindowSDL2* native = dynamic_cast<WindowSDL2*>(window.GetNative());
+		WindowSDL2* native = static_cast<WindowSDL2*>(window.GetNative());
 		SDL_Window* sdlWindow = native->GetNativeHandle();
-		InitOpenGL_SDL2(sdlWindow, initDesc, outContext);
+		GLInit_SDL2(sdlWindow, initDesc, outContext);
 #endif
 	}
 
+	void GLMakeCurrent(
+		const Window& window,
+		ContextHandle context)
+	{
+		assert(context != nullptr);
 #if defined(HX_PLATFORM_SDL2)
-	void InitOpenGL_SDL2(
+		using WindowSDL2 = Hx::Window::Native::SDL2::WindowSDL2;
+		WindowSDL2* native = static_cast<WindowSDL2*>(window.GetNative());
+		SDL_Window* sdlWindow = native->GetNativeHandle();
+		SDL_GL_MakeCurrent(sdlWindow, (SDL_GLContext)context);
+#endif
+	}
+
+	void GLDestroy(ContextHandle* outContext)
+	{
+		if (outContext == nullptr)
+			return;
+
+#if defined(HX_PLATFORM_SDL2)
+		SDL_GL_DeleteContext(*outContext);
+#endif
+
+		*outContext = nullptr;
+	}
+
+#if defined(HX_PLATFORM_SDL2)
+	void GLInit_SDL2(
 		SDL_Window* window,
 		const OpenGLInitDesc& desc,
-		OpenGLContext* outContext)
+		ContextHandle* outContext)
 	{
 		SDL_GLContext context;
 		assert(window != nullptr && "Error: Window is nullptr");
@@ -70,13 +97,13 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 			return;
 		}
 
-		*outContext = (OpenGLContext)context;
+		*outContext = (ContextHandle)context;
 	}
 #elif defined(HX_PLATFORM_WIN32)
-	void InitOpenGL_Win32(
+	void GLInit_Win32(
 		HWND window,
 		const OpenGLInitDesc& desc,
-		OpenGLContext* outContext)
+		ContextHandle* outContext)
 	{
 		// TODO: Add Win32 opengl initialization
 	}

@@ -11,12 +11,12 @@ int main(int argc, char* argv[]) {
 		.SetSize(1280, 720)
 		.Build();
 
-	OpenGL::OpenGLContext context;
+	OpenGL::ContextHandle context;
 	OpenGL::OpenGLInitDesc initDesc;
 	initDesc.MajorVer = 3;
 	initDesc.MinorVer = 3;
 
-	OpenGL::InitOpenGL(win, initDesc, &context);
+	OpenGL::GLInit(win, initDesc, &context);
 
 	if (context != nullptr)
 		std::printf("OpenGL initialized\n");
