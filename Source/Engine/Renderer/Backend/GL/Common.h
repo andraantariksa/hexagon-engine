@@ -13,8 +13,8 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 
 	struct OpenGLInitDesc
 	{
-		int32 MajorVer;
-		int32 MinorVer;
+		int32 MajorVer = 3;
+		int32 MinorVer = 3;
 
 		// Swap buffer bits
 		int32 RedBits = 8;

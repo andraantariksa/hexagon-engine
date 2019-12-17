@@ -107,6 +107,6 @@ namespace Hx { namespace Window { namespace Native { namespace SDL2 {
 		Keycode::NumpadPeriod,
 		Keycode::Unknown,
 		Keycode::Menu
-	}
+	};
 
 }}}}

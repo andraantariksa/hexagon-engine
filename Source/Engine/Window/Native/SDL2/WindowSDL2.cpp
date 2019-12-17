@@ -64,20 +64,22 @@ namespace Hx { namespace Window { namespace Native { namespace SDL2 {
 		{
 		case SDL_KEYDOWN:
 		case SDL_KEYUP:
-			uint16 mod = sdlEvent.key.keysym.mod;
-			e.Type = EventType((uint32)EventType::KeyDown + sdlEvent.type - SDL_KEYDOWN);
-			e.KeyboardEvent.KeyCode = KeymapSDL2[sdlEvent.key.keysym.scancode];
-			e.KeyboardEvent.LControlKey = bool((mod & KMOD_LCTRL) >> 6);
-			e.KeyboardEvent.LShiftKey = bool(mod & KMOD_LSHIFT);
-			e.KeyboardEvent.LAltKey = bool((mod & KMOD_LALT) >> 8);
-			e.KeyboardEvent.RControlKey = bool((mod & KMOD_RCTRL) >> 7);
-			e.KeyboardEvent.RShiftKey = bool((mod & KMOD_RSHIFT) >> 1);
-			e.KeyboardEvent.RAltKey = bool((mod & KMOD_RALT) >> 9);
-			e.KeyboardEvent.ControlKey = bool(e.KeyboardEvent.LControlKey | e.KeyboardEvent.RControlKey);
-			e.KeyboardEvent.ShiftKey = bool(e.KeyboardEvent.LShiftKey | e.KeyboardEvent.RShiftKey);
-			e.KeyboardEvent.AltKey = bool(e.KeyboardEvent.LAltKey | e.KeyboardEvent.RAltKey);
-			e.KeyboardEvent.Repeat = sdlEvent.key.repeat > 0;
-			break;
+			{
+				uint16 mod = sdlEvent.key.keysym.mod;
+				e.Type = EventType((uint32)EventType::KeyDown + sdlEvent.type - SDL_KEYDOWN);
+				e.KeyboardEvent.KeyCode = KeymapSDL2[sdlEvent.key.keysym.scancode];
+				e.KeyboardEvent.LControlKey = bool((mod & KMOD_LCTRL) >> 6);
+				e.KeyboardEvent.LShiftKey = bool(mod & KMOD_LSHIFT);
+				e.KeyboardEvent.LAltKey = bool((mod & KMOD_LALT) >> 8);
+				e.KeyboardEvent.RControlKey = bool((mod & KMOD_RCTRL) >> 7);
+				e.KeyboardEvent.RShiftKey = bool((mod & KMOD_RSHIFT) >> 1);
+				e.KeyboardEvent.RAltKey = bool((mod & KMOD_RALT) >> 9);
+				e.KeyboardEvent.ControlKey = bool(e.KeyboardEvent.LControlKey | e.KeyboardEvent.RControlKey);
+				e.KeyboardEvent.ShiftKey = bool(e.KeyboardEvent.LShiftKey | e.KeyboardEvent.RShiftKey);
+				e.KeyboardEvent.AltKey = bool(e.KeyboardEvent.LAltKey | e.KeyboardEvent.RAltKey);
+				e.KeyboardEvent.Repeat = sdlEvent.key.repeat > 0;
+				break;
+			}
 		case SDL_MOUSEBUTTONDOWN:
 		case SDL_MOUSEBUTTONUP:
 			e.Type = EventType((uint32)EventType::MouseBtnDown + sdlEvent.type - SDL_MOUSEBUTTONDOWN);

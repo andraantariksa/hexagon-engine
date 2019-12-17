@@ -4,7 +4,7 @@
 
 namespace Hx { namespace Window {
 
-	enum class Keycode : uint8
+	enum class Keycode : int16
 	{
 		A = 0,
 		B,
