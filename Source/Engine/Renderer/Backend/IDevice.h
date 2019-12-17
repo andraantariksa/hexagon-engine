@@ -5,7 +5,7 @@
 #include "BackendAPI.h"
 #include "Common.h"
 #include "IBuffer.h"
-#include "IBuffer.h"
+#include "IDepthStencilState.h"
 #include "ITexture1D.h"
 #include "ITexture2D.h"
 #include "ITexture3D.h"
@@ -24,6 +24,8 @@ namespace Hx { namespace Renderer { namespace Backend {
 
 		virtual bool Create(const Hx::Window::Window& window) = 0;
 		virtual IDeferredContext* CreateDeferredContext() = 0;
+		virtual IDepthStencilState* CreateDepthStencilState(const DepthStencilDesc& desc) = 0;
+		virtual IBuffer* CreateBuffer(const BufferDesc& createDesc) = 0;
 		virtual IBuffer* CreateVertexBuffer(ResourceUsage usage, size_t bufferSize, const void* bufferData) = 0;
 		virtual IBuffer* CreateIndexBuffer(ResourceUsage usage, ResourceFormat indexFormat, size_t bufferSize, const void* bufferData) = 0;
 		virtual ITexture1D* CreateTexture1D(const Texture1DDesc& createDesc, const Texture1DResourceData& initialData) = 0;
@@ -33,7 +35,7 @@ namespace Hx { namespace Renderer { namespace Backend {
 		virtual IPixelShader* CreatePixelShader(uint32 size, const void* compiledShader) = 0;
 		virtual IShaderProgram* CreateShaderProgram(IVertexShader* vs, IPixelShader* ps) = 0;
 		virtual IVertexDecl* CreateVertexDeclaration(IShaderProgram* program, const VertexElement* vertElems, uint32 numElems) = 0;
-		virtual IBuffer* CreateUniformBuffer() = 0;
+		virtual IBuffer* CreateUniformBuffer(size_t bufferSize, const void* bufferData) = 0;
 		virtual IContext* GetImmediateContext() = 0;
 		virtual BackendAPI GetBackendAPI() = 0;
 

@@ -1,10 +1,11 @@
 #pragma once
 
 #include "../Types.h"
+#include "Keyboard.h"
 
 namespace Hx { namespace Window {
 
-	enum EventType
+	enum class EventType : uint8
 	{
 		// Keyboard events
 		KeyDown,
@@ -15,8 +16,6 @@ namespace Hx { namespace Window {
 		MouseBtnUp,
 		MouseWheel,
 		MouseMove,
-		MouseHover,
-		MouseLeave,
 
 		// Window events
 		WindowClose,
@@ -24,27 +23,80 @@ namespace Hx { namespace Window {
 		WindowMove,
 		WindowLostFocus,
 		WindowGainFocus,
+
+		Count
 	};
 
-	class Event
+	enum class MouseButton : uint8
 	{
-	public:
+		Left = 1,
+		Middle,
+		Right,
+		X1,
+		X2,
 
-		struct SizeEvent
+		Count
+	};
+
+	struct SizeEventData
+	{
+		int32 Width;
+		int32 Height;
+	};
+
+	struct MouseEventData
+	{
+		MouseButton Button;
+		uint8 Clicks;
+		int32 X;
+		int32 Y;
+	};
+
+	struct MouseMotionEventData
+	{
+		uint8 Buttons;
+		int32 X;
+		int32 Y;
+		int32 RelativeX;
+		int32 RelativeY;
+	};
+
+	struct MouseWheelEventData
+	{
+		int32 AmountX;
+		int32 AmountY;
+		bool Direction;
+	};
+
+	struct KeyEventData
+	{
+		Keycode KeyCode;
+		bool LControlKey;
+		bool LShiftKey;
+		bool LAltKey;
+		bool RControlKey;
+		bool RShiftKey;
+		bool RAltKey;
+		bool ControlKey;
+		bool ShiftKey;
+		bool AltKey;
+		bool NumLockKey;
+		bool CapsLockKey;
+		bool Repeat;
+	};
+
+	struct Event
+	{
+		EventType Type;
+
+		union
 		{
-			int32 Width;
-			int32 Height;
+			MouseEventData MouseButtonEvent;
+			MouseMotionEventData MouseMoveEvent;
+			MouseWheelEventData MouseWheelEvent;
+			KeyEventData KeyboardEvent;
+			SizeEventData WindowResize;
 		};
-
-		struct KeyEvent
-		{
-			int8 KeyCode;
-			bool ControlKey;
-			bool ShiftKey;
-			bool AltKey;
-			bool Toggle;
-		};
-
 	};
 
 } }

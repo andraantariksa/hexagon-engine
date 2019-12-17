@@ -1,9 +1,9 @@
 #include "DeviceGL.h"
-#include "glad/glad.h"
 
 namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL { 
 
 	DeviceGL::DeviceGL()
+		: Context(nullptr)
 	{
 	}
 
@@ -41,14 +41,44 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 		return nullptr;
 	}
 
-	IVertexBuffer* DeviceGL::CreateVertexBuffer(ResourceUsage usage, size_t bufferSize, const void* bufferData)
+	IDepthStencilState* DeviceGL::CreateDepthStencilState(const DepthStencilDesc& createDesc)
 	{
 		return nullptr;
 	}
 
-	IIndexBuffer* DeviceGL::CreateIndexBuffer(ResourceUsage usage, ResourceFormat indexFormat, size_t bufferSize, const void* bufferData)
+	IBuffer* DeviceGL::CreateBuffer(const BufferDesc& createDesc)
 	{
 		return nullptr;
+	}
+
+	IBuffer* DeviceGL::CreateVertexBuffer(ResourceUsage usage, size_t bufferSize, const void* bufferData)
+	{
+		uint32 handle = 0; 
+
+		glGenBuffers(1, &handle);
+		glBindBuffer(GL_ARRAY_BUFFER, handle);
+
+		if (bufferSize > 0 && bufferData != nullptr)
+			glBufferData(GL_ARRAY_BUFFER, bufferSize, bufferData, (GLenum)GLResourceUsageDraw[(uint32)usage]);
+
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+		return new BufferGL(handle);
+	}
+
+	IBuffer* DeviceGL::CreateIndexBuffer(ResourceUsage usage, ResourceFormat indexFormat, size_t bufferSize, const void* bufferData)
+	{
+		uint32 handle = 0;
+
+		glGenBuffers(1, &handle);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, handle);
+
+		if (bufferSize > 0 && bufferData != nullptr)
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, bufferSize, bufferData, (GLenum)GLResourceUsageDraw[(uint32)usage]);
+
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+		return new BufferGL(handle);
 	}
 
 	ITexture1D* DeviceGL::CreateTexture1D(const Texture1DDesc& createDesc, const Texture1DResourceData& initialData)
@@ -68,6 +98,24 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 
 	IVertexShader* DeviceGL::CreateVertexShader(uint32 size, const void* compiledShader)
 	{
+		uint32 handle;
+		GLint isize = size;
+		GLint success = 0;
+
+		if (size < 1 && compiledShader == nullptr)
+			return nullptr;
+
+		handle = glCreateShader(GL_VERTEX_SHADER);
+		glShaderSource(handle, 1, (const GLchar**)&compiledShader, &isize);
+		glCompileShader(handle);
+
+		glGetShaderiv(handle, GL_COMPILE_STATUS, &success);
+		if (success == GL_FALSE)
+		{
+			glDeleteShader(handle);
+			return nullptr;
+		}
+
 		return nullptr;
 	}
 
@@ -86,7 +134,7 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 		return nullptr;
 	}
 
-	IUniformBuffer* DeviceGL::CreateUniformBuffer()
+	IBuffer* DeviceGL::CreateUniformBuffer(size_t bufferSize, const void* bufferData)
 	{
 		return nullptr;
 	}

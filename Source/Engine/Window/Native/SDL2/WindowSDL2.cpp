@@ -1,4 +1,5 @@
 #include "WindowSDL2.h"
+#include "KeymapSDL2.h"
 
 #include <stdexcept>
 
@@ -50,6 +51,58 @@ namespace Hx { namespace Window { namespace Native { namespace SDL2 {
 		int32 w;
 		SDL_GetWindowSize(this->NativeHandle, &w, nullptr);
 		SDL_SetWindowSize(this->NativeHandle, w, height);
+	}
+
+	bool WindowSDL2::PollEvent(Hx::Window::Event& e)
+	{
+		SDL_Event sdlEvent;
+		bool ret;
+
+		ret = SDL_PollEvent(&sdlEvent);
+
+		switch (sdlEvent.type)
+		{
+		case SDL_KEYDOWN:
+		case SDL_KEYUP:
+			uint16 mod = sdlEvent.key.keysym.mod;
+			e.Type = EventType((uint32)EventType::KeyDown + sdlEvent.type - SDL_KEYDOWN);
+			e.KeyboardEvent.KeyCode = KeymapSDL2[sdlEvent.key.keysym.scancode];
+			e.KeyboardEvent.LControlKey = bool((mod & KMOD_LCTRL) >> 6);
+			e.KeyboardEvent.LShiftKey = bool(mod & KMOD_LSHIFT);
+			e.KeyboardEvent.LAltKey = bool((mod & KMOD_LALT) >> 8);
+			e.KeyboardEvent.RControlKey = bool((mod & KMOD_RCTRL) >> 7);
+			e.KeyboardEvent.RShiftKey = bool((mod & KMOD_RSHIFT) >> 1);
+			e.KeyboardEvent.RAltKey = bool((mod & KMOD_RALT) >> 9);
+			e.KeyboardEvent.ControlKey = bool(e.KeyboardEvent.LControlKey | e.KeyboardEvent.RControlKey);
+			e.KeyboardEvent.ShiftKey = bool(e.KeyboardEvent.LShiftKey | e.KeyboardEvent.RShiftKey);
+			e.KeyboardEvent.AltKey = bool(e.KeyboardEvent.LAltKey | e.KeyboardEvent.RAltKey);
+			e.KeyboardEvent.Repeat = sdlEvent.key.repeat > 0;
+			break;
+		case SDL_MOUSEBUTTONDOWN:
+		case SDL_MOUSEBUTTONUP:
+			e.Type = EventType((uint32)EventType::MouseBtnDown + sdlEvent.type - SDL_MOUSEBUTTONDOWN);
+			e.MouseButtonEvent.Button = MouseButton(sdlEvent.button.button);
+			e.MouseButtonEvent.Clicks = sdlEvent.button.clicks;
+			e.MouseButtonEvent.X = sdlEvent.button.x;
+			e.MouseButtonEvent.Y = sdlEvent.button.y;
+			break;
+		case SDL_MOUSEMOTION:
+			e.Type = EventType::MouseMove;
+			e.MouseMoveEvent.Buttons = sdlEvent.motion.state;
+			e.MouseMoveEvent.X = sdlEvent.motion.x;
+			e.MouseMoveEvent.X = sdlEvent.motion.y;
+			e.MouseMoveEvent.RelativeX = sdlEvent.motion.xrel;
+			e.MouseMoveEvent.RelativeY = sdlEvent.motion.yrel;
+			break;
+		case SDL_MOUSEWHEEL:
+			e.Type = EventType::MouseWheel;
+			e.MouseWheelEvent.AmountX = sdlEvent.wheel.x;
+			e.MouseWheelEvent.AmountY = sdlEvent.wheel.y;
+			e.MouseWheelEvent.Direction = (bool)sdlEvent.wheel.direction;
+			break;
+		}
+
+		return ret;
 	}
 
 	const std::string& WindowSDL2::GetTitle() const

@@ -19,7 +19,8 @@ namespace Hx { namespace Renderer { namespace Backend {
 		virtual void SetViewport(uint32 numViewports, const Viewport* viewports) = 0;
 		virtual void SetShaderProgram(IShaderProgram* shaderProgram) = 0;
 		virtual void SetVertexDeclaration(IVertexDecl* vertexDeclaration) = 0;
-		virtual void SetVertexBuffer(IBuffer* vertexBuffer) = 0;
+		virtual void SetVertexBuffers(IBuffer* vertexBuffer) = 0;
+		virtual void SetIndexBuffers(IBuffer* indexBuffer) = 0;
 		virtual void Draw(uint32 vertexCount, uint32 startIndex) = 0;
 		virtual void DrawIndexed(uint32 indexCount, uint32 startIndex, uint32 baseIndex) = 0;
 

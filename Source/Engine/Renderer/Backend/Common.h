@@ -74,6 +74,42 @@ namespace Hx { namespace Renderer { namespace Backend {
 		Count // Keep at last
 	};
 
+	enum class CmpFunction : int8
+	{
+		Never,
+		Less,
+		Equal,
+		LessEqual,
+		Greater,
+		NotEqual,
+		GreaterEqual,
+		Always,
+
+		Count
+	};
+
+	enum class StencilOp : int8
+	{
+		Keep,
+		Zero,
+		Replace,
+		IncSat,
+		DecSat,
+		Inv,
+		Inc,
+		Dec,
+
+		Count
+	};
+
+	enum class ElementClass
+	{
+		PerVertexData,
+		PerInstanceData,
+
+		Count
+	};
+
 	struct Viewport
 	{
 		float			TopLeftX;
@@ -109,11 +145,34 @@ namespace Hx { namespace Renderer { namespace Backend {
 		uint32			Quality;
 	};
 
+	struct DepthStencilDesc
+	{
+		typedef struct
+		{
+			StencilOp			StencilFailOp;
+			StencilOp			StencilDepthFailOp;
+			StencilOp			StencilPassOp;
+			CmpFunction			StencilFunc;
+		} StencilState;
+
+		bool				DepthEnable;
+		bool				CanWrite;
+		CmpFunction			DepthFunction;
+		bool				StencilEnable;
+		uint8				StencilReadMask;
+		uint8				StencilWriteMask;
+		StencilState		FrontFace;
+		StencilState		BackFace;
+	};
+
 	struct BufferDesc
 	{
-		uint32			Length;
-		ResourceUsage	ResourceUsage;
-		uint32			
+		uint32				Length;
+		ResourceUsage		ResourceUsage;
+		ResourceBindFlag	BindFlags;
+		ResourceAccess		AccessFlags;
+		ResourceMisc		MiscFlags;
+		uint32				StrideSize;
 	};
 
 	struct Texture1DDesc
@@ -135,7 +194,7 @@ namespace Hx { namespace Renderer { namespace Backend {
 		uint32				MipMapLevels;
 		uint32				ArrayLength;
 		ResourceFormat		Format;
-		MultisampleDesc	MultisampleDesc;
+		MultisampleDesc		MultisampleDesc;
 		ResourceUsage		Usage;
 		ResourceBindFlag	BindFlags;
 		ResourceAccess		AccessFlags;
@@ -157,8 +216,13 @@ namespace Hx { namespace Renderer { namespace Backend {
 
 	struct VertexElement
 	{
-		const char*			SemanticName;
-
+		const char*			Name;
+		uint32				Index;
+		ResourceFormat		Format;
+		uint32				InputSlot;
+		uint32				AlignedByteOffset;
+		ElementClass		InputSlotClass;
+		uint32				NumberOfInstance;
 	};
 
 }}}

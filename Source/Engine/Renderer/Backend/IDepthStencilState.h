@@ -2,12 +2,12 @@
 
 namespace Hx { namespace Renderer { namespace Backend {
 
-	struct IBuffer
+	struct IDepthStencilState
 	{
-		virtual ~IBuffer() { }
+		virtual ~IDepthStencilState() { }
 
 	protected:
-		IBuffer() { }
+		IDepthStencilState() { }
 	};
 
 }}}

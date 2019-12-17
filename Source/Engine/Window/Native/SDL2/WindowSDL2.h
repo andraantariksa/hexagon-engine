@@ -18,6 +18,8 @@ namespace Hx { namespace Window { namespace Native { namespace SDL2 {
 		void SetWidth(int32 width) override;
 		void SetHeight(int32 height) override;
 
+		bool PollEvent(Hx::Window::Event& e) override;
+
 		const std::string& GetTitle() const override;
 		int32 GetPositionX() override;
 		int32 GetPositionY() override;

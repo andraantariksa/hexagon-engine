@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../Types.h"
+#include "../Event.h"
 #include <string>
 
 namespace Hx { namespace Window { namespace Native {
@@ -14,6 +15,8 @@ namespace Hx { namespace Window { namespace Native {
 		virtual void SetSize(int32 width, int32 height) = 0;
 		virtual void SetWidth(int32 width) = 0;
 		virtual void SetHeight(int32 height) = 0;
+
+		virtual bool PollEvent(Hx::Window::Event& e) = 0;
 
 		virtual const std::string& GetTitle() const = 0;
 		virtual int32 GetPositionX() = 0;

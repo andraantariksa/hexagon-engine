@@ -35,7 +35,11 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 	{
 	}
 
-	void ContextGL::SetVertexBuffer(IVertexBuffer* vertexBuffer)
+	void ContextGL::SetVertexBuffers(IBuffer* vertexBuffer)
+	{
+	}
+
+	void ContextGL::SetIndexBuffers(IBuffer* indexBuffer)
 	{
 	}
 
@@ -52,7 +56,7 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 		return int32();
 	}
 
-	void ContextGL::SetUniformBufferData(IUniformBuffer* uniformBuffer, int32 index, const void* data, size_t size)
+	void ContextGL::SetUniformBufferData(IBuffer* uniformBuffer, int32 index, const void* data, size_t size)
 	{
 	}
 
