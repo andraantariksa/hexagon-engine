@@ -1,10 +1,17 @@
+jobs:
+  allow_failures:
+    os: windows
 language: cpp
-dist: bionic
+os:
+  - linux
+  - osx
+  - windows
 compiler:
   - clang
   - gcc
 addons:
   apt:
+    update: true
     packages:
     - cmake
     - libsdl2-dev
@@ -16,16 +23,26 @@ addons:
     - xserver-xorg-input-all
     - libwayland-egl1-mesa
     - pulseaudio
-before_install:
-  - pip install --user codecov
+  homebrew:
+    update: true
+    packages:
+    - cmake
+    - sdl2
+  chocolatey:
+    update: true
+    packages:
+    - python
+    - cmake
 before_script:
-  # evironment for live tests
-  - dbus-launch pulseaudio --start
-  - export SDL_AUDIODRIVER=pulseaudio
+  - pip install --user codecov
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then 
+      dbus-launch pulseaudio --start;
+      export SDL_AUDIODRIVER=pulseaudio;
 
-  - /sbin/start-stop-daemon --start --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 800x600x24 -ac +extension GLX
-  - export SDL_VIDEODRIVER=x11
-  - export DISPLAY=:99.0
+      /sbin/start-stop-daemon --start --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 800x600x24 -ac +extension GLX;
+      export SDL_VIDEODRIVER=x11;
+      export DISPLAY=:99.0;
+    fi
 script:
   - make test
 after_success:
