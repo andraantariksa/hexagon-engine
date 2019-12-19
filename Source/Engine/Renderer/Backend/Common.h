@@ -168,7 +168,7 @@ namespace Hx { namespace Renderer { namespace Backend {
 	struct BufferDesc
 	{
 		uint32				Length;
-		ResourceUsage		ResourceUsage;
+		ResourceUsage		Usage;
 		ResourceBindFlag	BindFlags;
 		ResourceAccess		AccessFlags;
 		ResourceMisc		MiscFlags;
