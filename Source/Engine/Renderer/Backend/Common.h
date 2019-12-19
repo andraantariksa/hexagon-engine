@@ -168,7 +168,7 @@ namespace Hx { namespace Renderer { namespace Backend {
 	struct BufferDesc
 	{
 		uint32				Length;
-		ResourceUsage		ResourceUsage;
+		ResourceUsage		Usage;
 		ResourceBindFlag	BindFlags;
 		ResourceAccess		AccessFlags;
 		ResourceMisc		MiscFlags;
@@ -181,7 +181,7 @@ namespace Hx { namespace Renderer { namespace Backend {
 		uint32				MipMapLevels;
 		uint32				ArrayLength;
 		ResourceFormat		Format;
-		MultisampleDesc		MultisampleDesc;
+		MultisampleDesc		Multisample;
 		ResourceBindFlag	BindFlags;
 		ResourceAccess		AccessFlags;
 		ResourceMisc		MiscFlags;
@@ -194,7 +194,7 @@ namespace Hx { namespace Renderer { namespace Backend {
 		uint32				MipMapLevels;
 		uint32				ArrayLength;
 		ResourceFormat		Format;
-		MultisampleDesc		MultisampleDesc;
+		MultisampleDesc		Multisample;
 		ResourceUsage		Usage;
 		ResourceBindFlag	BindFlags;
 		ResourceAccess		AccessFlags;
