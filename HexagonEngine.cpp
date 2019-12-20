@@ -1,27 +1,18 @@
 #include "Source/Engine/Window/Window.h"
 #include "Source/Engine/Renderer/Backend/GL/Common.h"
+#include "Source/Hx.h"
 #include "Dependencies/SDL2/include/SDL.h"
 #include <cstdio>
 
 using namespace Hx::Renderer::Backend;
 
 int main(int argc, char* argv[]) {
-	std::printf("Starting the Hexagon Engine\n");
-	Hx::Window::Window win = Hx::Window::Window::Builder()
-		.SetSize(1280, 720)
-		.Build();
+	Hx::Math::Vec3D v(1, 1, 1);
+	Hx::Math::Vec3F v1;
 
-	OpenGL::ContextHandle context;
-	OpenGL::OpenGLInitDesc initDesc;
-	initDesc.MajorVer = 3;
-	initDesc.MinorVer = 3;
+	v1 = v;
 
-	OpenGL::GLInit(win, initDesc, &context);
+	std::printf("%f %f %f\n", v1.X, v1.Y, v1.Z);
 
-	if (context != nullptr)
-		std::printf("OpenGL initialized\n");
-
-	SDL_Delay(3000);
-	SDL_GL_DeleteContext(context);
 	return 0;
 }
