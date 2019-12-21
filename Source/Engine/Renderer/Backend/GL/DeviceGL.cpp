@@ -293,7 +293,6 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 			// specify attributes
 			for (int i = size; i > 0; i--)
 			{
-				GLenum err;
 				VertexAttributeInfo* info = &attribs[i - 1];
 
 				switch(info->attrBaseType)
@@ -306,8 +305,6 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 					glVertexAttribIPointer(info->attrId, info->attrSize, info->attrBaseType, (GLsizei)strideSize, (GLvoid*)strideOffset);
 					break;
 				}
-
-				err = glGetError();
 
 				strideOffset += (size_t)(info->attrSize * 4);
 			}
