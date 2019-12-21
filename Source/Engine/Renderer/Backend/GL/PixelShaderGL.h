@@ -1,26 +1,25 @@
 #pragma once
 
 #include "../../../Types.h"
-#include "../IVertexDecl.h"
-#include "../IShaderProgram.h"
+#include "../IPixelShader.h"
 
 namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 
-	class VertexDeclGL : public IVertexDecl
+	class PixelShaderGL : public IPixelShader
 	{
 	public:
-		VertexDeclGL(uint32 handle, IShaderProgram* sp)
+		PixelShaderGL(uint32 handle)
 			: Handle(handle)
 		{
+
 		}
 
-		~VertexDeclGL() = default;
+		~PixelShaderGL() = default;
 
 		uint32 GetHandle() { return this->Handle; }
 
 	private:
 		uint32 Handle;
-		IShaderProgram* ShaderProgram;
 	};
 
 }}}}

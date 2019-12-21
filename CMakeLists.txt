@@ -4,6 +4,7 @@ project(HexagonEngine)
 
 # SDL 2
 set(SDL2_DIR Dependencies/SDL2)
+set(SPDLOG_DIR Dependencies/spdlog)
 find_package(SDL2 REQUIRED PATH Dependencies/SDL2)
 
 set(SRC_FILES

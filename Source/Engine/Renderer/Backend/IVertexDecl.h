@@ -8,10 +8,7 @@ namespace Hx { namespace Renderer { namespace Backend {
 	{
 		virtual ~IVertexDecl() { }
 
-		virtual size_t GetNumElements() = 0;
-		virtual void GetElements(VertexElement* elements) = 0;
-
-	private:
+	protected:
 		IVertexDecl() { };
 	};
 

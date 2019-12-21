@@ -3,6 +3,10 @@
 #include "Common.h"
 #include "BufferGL.h"
 #include "ContextGL.h"
+#include "VertexShaderGL.h"
+#include "PixelShaderGL.h"
+#include "ShaderProgramGL.h"
+#include "VertexDeclGL.h"
 
 namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL { 
 	

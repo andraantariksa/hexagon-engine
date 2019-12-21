@@ -16,7 +16,7 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 
 		~VertexShaderGL() = default;
 
-		uint32 GetHandle() { return Handle; }
+		uint32 GetHandle() { return this->Handle; }
 
 	private:
 		uint32 Handle;
