@@ -3,6 +3,7 @@
 #include "../Types.h"
 #include "Vec2.h"
 #include "Vec3.h"
+#include <type_traits>
 
 namespace Hx { namespace Math {
 
@@ -73,6 +74,25 @@ namespace Hx { namespace Math {
 			a.X > b.X ? a.X : b.X,
 			a.Y > b.Y ? a.Y : b.Y,
 			a.Z > b.Z ? a.Z : b.Z);
+	}
+
+	template<typename T>
+	inline T Clamp(const T& x, const T& min, const T& max)
+	{
+		return Min(Max(x, min), max);
+	}
+
+	template<typename T,
+		typename = typename std::enable_if<
+		std::is_floating_point<T>::value
+		|| std::is_same<T, Vec2F>::value
+		|| std::is_same<T, Vec2D>::value
+		|| std::is_same<T, Vec3F>::value
+		|| std::is_same<T, Vec3D>::value>
+		::type>
+	inline T Saturate(const T& x)
+	{
+		return Clamp(x, T(0), T(1));
 	}
 
 }}

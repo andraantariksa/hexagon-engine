@@ -234,6 +234,20 @@ namespace Hx { namespace Math {
 	}
 
 	template<typename T>
+	inline Vec3<T> operator+(const Vec3<T>& a)
+	{
+		return Vec3<T>(+a.X, +a.Y, +a.Z);
+	}
+
+	template<typename T>
+	inline Vec3<T> operator-(const Vec3<T>& a)
+	{
+		return Vec3<T>(-a.X, -a.Y, -a.Z);
+	}
+
+	// ----------------------------------------------------------------------------------
+
+	template<typename T>
 	inline T Length(const Vec3<T>& v)
 	{
 		T x2 = v.X * v.X;
@@ -260,20 +274,18 @@ namespace Hx { namespace Math {
 	}
 
 	template<typename T>
+	inline T Distance(const Vec3<T>& a, const Vec3<T>& b)
+	{
+		return Length(a - b);
+	}
+
+	template<typename T>
 	inline T DotProduct(const Vec3<T>& a, const Vec3<T>& b)
 	{
 		T axbx = a.X * b.X;
 		T ayby = a.Y * b.Y;
 		T azbz = a.Z * b.Z;
-		return (T)std::sqrt(axbx + ayby + azbz);
-	}
-
-	inline float DotProduct(const Vec3<float>& a, const Vec3<float>& b)
-	{
-		float axbx = a.X * b.X;
-		float ayby = a.Y * b.Y;
-		float azbz = a.Z * b.Z;
-		return std::sqrtf(axbx + ayby + azbz);
+		return axbx + ayby + azbz;
 	}
 
 	template<typename T>
@@ -283,6 +295,24 @@ namespace Hx { namespace Math {
 		T j = a.Z * b.X - a.X * b.Z;
 		T k = a.X * b.Y - a.Y * b.X;
 		return Vec3<T>(i, j, k);
+	}
+
+	template<typename T>
+	inline T TripleProductScalar(const Vec3<T>& a, const Vec3<T>& b, const Vec3<T>& c)
+	{
+		// Actually, we calculates matrix determinant instead
+		T c0 = a.X * ((b.Y * c.Z) - (b.Z * c.Y));
+		T c1 = a.Y * ((b.X * c.Z) - (b.Z * c.X));
+		T c2 = a.Z * ((b.X * c.Y) - (b.Y * c.X));
+		return c0 - c1 + c2;
+	}
+
+	template<typename T>
+	inline Vec3<T> TripleProductVector(const Vec3<T>& a, const Vec3<T>& b, const Vec3<T>& c)
+	{
+		T AdotC = DotProduct(a, c);
+		T AdotB = DotProduct(a, b);
+		return (b * AdotC) - (c * AdotB);
 	}
 
 	typedef Vec3<float>		Vec3F;

@@ -3,16 +3,16 @@
 #include "Source/Hx.h"
 #include "Dependencies/SDL2/include/SDL.h"
 #include <cstdio>
+#include <iostream>
 
 using namespace Hx::Renderer::Backend;
 
 int main(int argc, char* argv[]) {
-	Hx::Math::Vec3D v(1, 1, 1);
-	Hx::Math::Vec3F v1;
+	Hx::Math::Vec3F v(1, 2, 2);
+	Hx::Math::Vec3F v1(1, 2, 1);
+	Hx::Math::Vec3F v2(3, 2, 1);
 
-	v1 = v;
-
-	std::printf("%f %f %f\n", v1.X, v1.Y, v1.Z);
+	std::cout << Hx::Math::__Bruh<int, int, unsigned int>::i << std::endl;
 
 	return 0;
 }

@@ -223,6 +223,20 @@ namespace Hx { namespace Math {
 	}
 
 	template<typename T>
+	inline Vec2<T> operator+(const Vec2<T>& a)
+	{
+		return Vec2<T>(+a.X, +a.Y);
+	}
+
+	template<typename T>
+	inline Vec2<T> operator-(const Vec2<T>& a)
+	{
+		return Vec2<T>(-a.X, -a.Y);
+	}
+
+	// ----------------------------------------------------------------------------------
+
+	template<typename T>
 	inline T Length(const Vec2<T>& v)
 	{
 		T x2 = v.X * v.X;
@@ -250,14 +264,7 @@ namespace Hx { namespace Math {
 	{
 		T axbx = a.X * b.X;
 		T ayby = a.Y * b.Y;
-		return (T)std::sqrt(axbx + ayby);
-	}
-
-	inline float DotProduct(const Vec2<float>& a, const Vec2<float>& b)
-	{
-		float axbx = a.X * b.X;
-		float ayby = a.Y * b.Y;
-		return std::sqrtf(axbx + ayby);
+		return axbx + ayby;
 	}
 	
 	typedef Vec2<float>		Vec2F;
