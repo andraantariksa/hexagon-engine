@@ -12,7 +12,5 @@ int main(int argc, char* argv[]) {
 	Hx::Math::Vec3F v1(1, 2, 1);
 	Hx::Math::Vec3F v2(3, 2, 1);
 
-	std::cout << Hx::Math::__Bruh<int, int, unsigned int>::i << std::endl;
-
 	return 0;
 }
