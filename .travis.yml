@@ -65,6 +65,7 @@ jobs:
         - make test
     - stage: Documentation Generation
       if: os = linux
+      language: generic
       before_deploy:
         - doxygen
       deploy:
