@@ -256,12 +256,12 @@ namespace Hx { namespace Math {
 		return (T)std::sqrt(x2 + y2 + z2);
 	}
 
-	inline double Length(const Vec3<double>& v)
+	inline double Length(const Vec3<float>& v)
 	{
 		double x2 = v.X * v.X;
 		double y2 = v.Y * v.Y;
 		double z2 = v.Z * v.Z;
-		return std::sqrt(x2 + y2 + z2);
+		return sqrtf(x2 + y2 + z2);
 	}
 
 	template<typename T>

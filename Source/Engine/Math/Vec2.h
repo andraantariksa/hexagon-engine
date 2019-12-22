@@ -244,11 +244,11 @@ namespace Hx { namespace Math {
 		return (T)std::sqrt(x2 + y2);
 	}
 
-	inline double Length(const Vec2<double>& v)
+	inline float Length(const Vec2<float>& v)
 	{
-		double x2 = v.X * v.X;
-		double y2 = v.Y * v.Y;
-		return std::sqrt(x2 + y2);
+		float x2 = v.X * v.X;
+		float y2 = v.Y * v.Y;
+		return sqrtf(x2 + y2);
 	}
 
 	template<typename T>
