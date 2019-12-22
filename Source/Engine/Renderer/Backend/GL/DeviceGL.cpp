@@ -1,4 +1,5 @@
 #include "DeviceGL.h"
+#include <cstring>
 
 namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL { 
 
@@ -202,7 +203,7 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 				VertexAttributeInfo* info = &attribs[i];
 
 				info->attrName = new char[maxChars];
-				memset(info->attrName, 0, maxChars);
+				std::memset(info->attrName, 0, maxChars);
 				glGetActiveAttrib(pr, i, maxChars, &info->attrLen, &info->attrSize, &info->attrType, info->attrName);
 				info->attrId = glGetAttribLocation(pr, info->attrName);
 				glEnableVertexAttribArray(info->attrId);

@@ -18,7 +18,11 @@ add_subdirectory("Source")
 add_executable(HexagonEngineApp ${SRC_FILES} ${HEADER_FILES})
 
 target_include_directories(HexagonEngineApp PRIVATE ${SDL2_INCLUDE_DIRS})
-target_link_libraries(HexagonEngineApp HexagonEngineCore ${SDL2_LIBRARIES})
+target_link_libraries(HexagonEngineApp
+	HexagonEngineCore
+	${SDL2_LIBRARIES}
+	${CMAKE_DL_LIBS}
+)
 
 if(NOT WIN32)
 add_subdirectory("Test")
