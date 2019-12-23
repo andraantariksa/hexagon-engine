@@ -7,6 +7,7 @@
 #include "PixelShaderGL.h"
 #include "ShaderProgramGL.h"
 #include "VertexDeclGL.h"
+#include "FrameBufferGL.h"
 
 namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL { 
 	
@@ -16,7 +17,7 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 		DeviceGL();
 		~DeviceGL();
 
-		bool Create(const Hx::Window::Window& window) override;
+		bool Create(Hx::Window::Window& window) override;
 		IDeferredContext* CreateDeferredContext() override;
 		IDepthStencilState* CreateDepthStencilState(const DepthStencilDesc& createDesc) override;
 		IBuffer* CreateBuffer(const BufferDesc& createDesc) override;
@@ -30,11 +31,16 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 		IShaderProgram* CreateShaderProgram(IVertexShader* vs, IPixelShader* ps) override;
 		IVertexDecl* CreateVertexDeclaration(IShaderProgram* program, const VertexElement* vertElems, uint32 numElems) override;
 		IBuffer* CreateUniformBuffer(size_t bufferSize, const void* bufferData) override;
-		IContext* GetImmediateContext() override { return nullptr; }
+		void SwapBuffers() override;
+		IContext* GetImmediateContext() override { return this->Context; }
+		IFrameBuffer* GetSwapBuffer() override { return static_cast<IFrameBuffer*>(this->DefaultFrameBuffer); }
 		BackendAPI GetBackendAPI() override { return BackendAPI::OGL; }
 
 	private:
+		FrameBufferGL* DefaultFrameBuffer;
+		FrameBufferGL* DefaultDepthBuffer;
 		ContextGL* Context;
+		Hx::Window::Window* RenderWindow;
 	};
 
 }}}}

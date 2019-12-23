@@ -44,6 +44,11 @@ namespace Hx { namespace Window {
 			this->NativeWindow->SetHeight(height);
 		}
 
+		bool PollEvent(Event& e)
+		{
+			return this->NativeWindow->PollEvent(e);
+		}
+
 		const std::string& GetTitle() const
 		{
 			return this->NativeWindow->GetTitle();

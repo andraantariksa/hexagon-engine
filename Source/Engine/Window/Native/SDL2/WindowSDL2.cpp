@@ -62,6 +62,47 @@ namespace Hx { namespace Window { namespace Native { namespace SDL2 {
 
 		switch (sdlEvent.type)
 		{
+		case SDL_WINDOWEVENT:
+			switch (sdlEvent.window.event)
+			{
+			case SDL_WINDOWEVENT_SHOWN:
+				e.Type = EventType::WindowShow;
+				break;
+			case SDL_WINDOWEVENT_HIDDEN:
+				e.Type = EventType::WindowHide;
+				break;
+			case SDL_WINDOWEVENT_MOVED:
+				e.Type = EventType::WindowMove;
+				e.WindowMoveEvent.X = sdlEvent.window.data1;
+				e.WindowMoveEvent.Y = sdlEvent.window.data2;
+				break;
+			case SDL_WINDOWEVENT_CLOSE:
+				e.Type = EventType::WindowClose;
+				break;
+			case SDL_WINDOWEVENT_RESIZED:
+				e.Type = EventType::WindowResize;
+				e.WindowMoveEvent.X = sdlEvent.window.data1;
+				e.WindowMoveEvent.Y = sdlEvent.window.data2;
+				break;
+			case SDL_WINDOWEVENT_SIZE_CHANGED:
+				e.Type = EventType::WindowResize;
+				e.WindowMoveEvent.X = sdlEvent.window.data1;
+				e.WindowMoveEvent.Y = sdlEvent.window.data2;
+				break;
+			case SDL_WINDOWEVENT_MINIMIZED:
+				e.Type = EventType::WindowMinimize;
+				break;
+			case SDL_WINDOWEVENT_MAXIMIZED:
+				e.Type = EventType::WindowMaximize;
+				break;
+			case SDL_WINDOWEVENT_FOCUS_GAINED:
+				e.Type = EventType::WindowLostFocus;
+				break;
+			case SDL_WINDOWEVENT_FOCUS_LOST:
+				e.Type = EventType::WindowGainFocus;
+				break;
+			}
+			break;
 		case SDL_KEYDOWN:
 		case SDL_KEYUP:
 			{

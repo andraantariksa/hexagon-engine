@@ -4,7 +4,9 @@
 namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL { 
 
 	DeviceGL::DeviceGL()
-		: Context(nullptr)
+		: Context(nullptr),
+		DefaultFrameBuffer(nullptr),
+		DefaultDepthBuffer(nullptr)
 	{
 	}
 
@@ -12,13 +14,15 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 	{
 	}
 
-	bool DeviceGL::Create(const Hx::Window::Window& window)
+	bool DeviceGL::Create(Hx::Window::Window& window)
 	{
 		ContextHandle ctx = nullptr;
 		OpenGLInitDesc initDesc;
 
 		initDesc.MajorVer = 3;
 		initDesc.MinorVer = 3;
+
+		this->RenderWindow = &window;
 
 		GLInit(window, initDesc, &ctx);
 		if (ctx == nullptr)
@@ -32,6 +36,9 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 
 		GLMakeCurrent(window, ctx);
 		this->Context = new ContextGL(ctx);
+
+		// Default framebuffer
+		this->DefaultFrameBuffer = new FrameBufferGL(0);
 
 		return true;
 	}
@@ -184,6 +191,7 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 		glGenVertexArrays(1, &handle);
 		glBindVertexArray(handle); // bind
 		
+		// auto-detect vertex declaration
 		if (vertElems == nullptr || numElems == 0)
 		{
 			GLint size, maxChars;
@@ -284,7 +292,7 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 					break;
 				}
 
-				strideSize += (size_t)(info->attrSize * 4);
+				strideSize += (size_t)info->attrSize * 4;
 			}
 
 			// pretend we have a buffer binded to the current VAO
@@ -307,7 +315,7 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 					break;
 				}
 
-				strideOffset += (size_t)(info->attrSize * 4);
+				strideOffset += (size_t)info->attrSize * 4;
 			}
 
 			// delete temporary buffer
@@ -319,12 +327,17 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 
 		glBindVertexArray(0); // unbind
 
-		return new VertexDeclGL(handle, program);
+		return new VertexDeclGL(handle);
 	}
 
 	IBuffer* DeviceGL::CreateUniformBuffer(size_t bufferSize, const void* bufferData)
 	{
 		return nullptr;
+	}
+
+	void DeviceGL::SwapBuffers()
+	{
+		GLSwapBuffers(*this->RenderWindow);
 	}
 
 }}}}

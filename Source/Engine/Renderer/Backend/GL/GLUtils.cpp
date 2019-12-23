@@ -42,9 +42,9 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 		const Window& window,
 		ContextHandle context)
 	{
+		using WindowSDL2 = Hx::Window::Native::SDL2::WindowSDL2;
 		assert(context != nullptr);
 #if defined(HX_PLATFORM_SDL2)
-		using WindowSDL2 = Hx::Window::Native::SDL2::WindowSDL2;
 		WindowSDL2* native = static_cast<WindowSDL2*>(window.GetNative());
 		SDL_Window* sdlWindow = native->GetNativeHandle();
 		SDL_GL_MakeCurrent(sdlWindow, (SDL_GLContext)context);
@@ -61,6 +61,14 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 #endif
 
 		*outContext = nullptr;
+	}
+
+	void GLSwapBuffers(Window& window)
+	{
+		using WindowSDL2 = Hx::Window::Native::SDL2::WindowSDL2;
+#ifdef HX_PLATFORM_SDL2
+		SDL_GL_SwapWindow(static_cast<WindowSDL2*>(window.GetNative())->GetNativeHandle());
+#endif
 	}
 
 #if defined(HX_PLATFORM_SDL2)
@@ -98,7 +106,10 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 		}
 
 		*outContext = (ContextHandle)context;
+		
+		SDL_GL_SetSwapInterval(1);
 	}
+
 #elif defined(HX_PLATFORM_WIN32)
 	void GLInit_Win32(
 		HWND window,

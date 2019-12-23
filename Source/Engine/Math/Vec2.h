@@ -18,7 +18,7 @@ namespace Hx { namespace Math {
 		Vec2(T x, T y);
 		Vec2(const Vec2<T>& other);
 		template<typename OtherT>
-		Vec2(const Vec2<OtherT>& other);
+		explicit Vec2(const Vec2<OtherT>& other);
 	
 		Vec2<T>& operator=(const Vec2<T>& other);
 		template<typename OtherT>
@@ -34,6 +34,11 @@ namespace Hx { namespace Math {
 		Vec2<T>& operator-=(T s);
 		Vec2<T>& operator*=(T s);
 		Vec2<T>& operator/=(T s);
+
+		Vec2<T> Abs();
+		T Length();
+		T LengthSq();
+		Vec2<T> Normalized();
 	};
 	
 	template<typename T>
@@ -149,6 +154,44 @@ namespace Hx { namespace Math {
 		this->Y /= s;
 		return *this;
 	}
+
+	template<typename T>
+	inline Vec2<T> Vec2<T>::Abs()
+	{
+		return Vec2<T>(
+			this->X < 0 ? -this->X : this->X,
+			this->Y < 0 ? -this->Y : this->Y);
+	}
+
+	template<typename T>
+	inline T Vec2<T>::Length()
+	{
+		T x2 = this->X * this->X;
+		T y2 = this->Y * this->Y;
+		return (T)std::sqrt(x2 + y2);
+	}
+
+	inline float Vec2<float>::Length()
+	{
+		float x2 = this->X * this->X;
+		float y2 = this->Y * this->Y;
+		return std::sqrtf(x2 + y2);
+	}
+
+	template<typename T>
+	inline T Vec2<T>::LengthSq()
+	{
+		T x2 = this->X * this->X;
+		T y2 = this->Y * this->Y;
+		return x2 + y2;
+	}
+
+	template<typename T>
+	inline Vec2<T> Vec2<T>::Normalized()
+	{
+		T len = this->Length();
+		return *this / len;
+	}
 	
 	template<typename T>
 	inline Vec2<T> operator+(const Vec2<T>& a, const Vec2<T>& b)
@@ -257,6 +300,13 @@ namespace Hx { namespace Math {
 		T x2 = v.X * v.X;
 		T y2 = v.Y * v.Y;
 		return x2 + y2;
+	}
+
+	template<typename T>
+	inline Vec2<T> Normalize(const Vec2<T>& v)
+	{
+		T len = Length(v);
+		return v / len;
 	}
 
 	template<typename T>

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../../Types.h"
+#include "glad/glad.h"
 #include "../IShaderProgram.h"
 
 namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
@@ -13,7 +14,10 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 		{
 		}
 
-		~ShaderProgramGL() = default;
+		~ShaderProgramGL()
+		{
+			glDeleteProgram(this->Handle);
+		}
 
 		IVertexShader* GetVertexShader() override { return this->VertexShader; }
 		IPixelShader* GetPixelShader() override { return this->PixelShader; }

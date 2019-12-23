@@ -19,6 +19,7 @@ namespace Hx { namespace Renderer { namespace Backend {
 		virtual void SetViewport(uint32 numViewports, const Viewport* viewports) = 0;
 		virtual void SetShaderProgram(IShaderProgram* shaderProgram) = 0;
 		virtual void SetVertexDeclaration(IVertexDecl* vertexDeclaration) = 0;
+		virtual void SetPrimitiveTopology(PrimitiveTopology mode) = 0;
 		virtual void SetVertexBuffers(IBuffer* vertexBuffer) = 0;
 		virtual void SetIndexBuffers(IBuffer* indexBuffer) = 0;
 		virtual void Draw(uint32 vertexCount, uint32 startIndex) = 0;
@@ -27,6 +28,8 @@ namespace Hx { namespace Renderer { namespace Backend {
 		// Uniform-related function
 		virtual int32 GetUniformBufferIndex(const char* uniformBlockName, size_t strSize) = 0;
 		virtual void SetUniformBufferData(IBuffer* uniformBuffer, int32 index, const void* data, size_t size) = 0;
+
+		virtual IVertexDecl* GetVertexDeclaration() = 0;
 
 	protected:
 		IContext() { }

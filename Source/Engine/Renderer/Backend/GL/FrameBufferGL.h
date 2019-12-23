@@ -1,22 +1,22 @@
 #pragma once
 
-#include "../../../Types.h"
 #include "glad/glad.h"
-#include "../IPixelShader.h"
+#include "../../../Types.h"
+#include "../IFrameBuffer.h"
 
 namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 
-	class PixelShaderGL : public IPixelShader
+	class FrameBufferGL : public IFrameBuffer
 	{
 	public:
-		PixelShaderGL(uint32 handle)
+		FrameBufferGL(uint32 handle)
 			: Handle(handle)
 		{
 		}
 
-		~PixelShaderGL()
+		~FrameBufferGL()
 		{
-			glDeleteShader(this->Handle);
+			glDeleteBuffers(1, &this->Handle);
 		}
 
 		uint32 GetHandle() { return this->Handle; }
@@ -25,4 +25,4 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 		uint32 Handle;
 	};
 
-}}}}
+} } } }

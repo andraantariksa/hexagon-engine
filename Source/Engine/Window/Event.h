@@ -18,9 +18,13 @@ namespace Hx { namespace Window {
 		MouseMove,
 
 		// Window events
+		WindowShow,
+		WindowHide,
 		WindowClose,
 		WindowResize,
 		WindowMove,
+		WindowMinimize,
+		WindowMaximize,
 		WindowLostFocus,
 		WindowGainFocus,
 
@@ -38,10 +42,16 @@ namespace Hx { namespace Window {
 		Count
 	};
 
-	struct SizeEventData
+	struct WindowSizeEventData
 	{
 		int32 Width;
 		int32 Height;
+	};
+
+	struct WindowMoveEventData
+	{
+		int32 X;
+		int32 Y;
 	};
 
 	struct MouseEventData
@@ -91,11 +101,12 @@ namespace Hx { namespace Window {
 
 		union
 		{
+			WindowSizeEventData WindowResizeEvent;
+			WindowMoveEventData WindowMoveEvent;
+			MouseWheelEventData MouseWheelEvent;
 			MouseEventData MouseButtonEvent;
 			MouseMotionEventData MouseMoveEvent;
-			MouseWheelEventData MouseWheelEvent;
 			KeyEventData KeyboardEvent;
-			SizeEventData WindowResize;
 		};
 	};
 

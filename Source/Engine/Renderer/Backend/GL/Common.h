@@ -44,4 +44,6 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 
 	void GLDestroy(ContextHandle* outContext);
 
+	void GLSwapBuffers(Hx::Window::Window& window);
+
 }}}}

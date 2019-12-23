@@ -102,6 +102,22 @@ namespace Hx { namespace Renderer { namespace Backend {
 		Count
 	};
 
+	enum class PrimitiveTopology
+	{
+		Undefined = 0,
+		Points,
+		LineList,
+		LineStrip,
+		TriList,
+		TriStrip,
+		LineListAdj,
+		LineStripAdj,
+		TriListAdj,
+		TriStripAdj,
+
+		Count
+	};
+
 	enum class ElementClass
 	{
 		PerVertexData,

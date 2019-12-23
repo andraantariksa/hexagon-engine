@@ -31,18 +31,43 @@ int main(int argc, char* argv[]) {
 	Hx::Window::Window* window = new Hx::Window::Window();
 	OpenGL::DeviceGL* device = new OpenGL::DeviceGL();
 	OpenGL::OpenGLInitDesc initDesc;
+	IContext* ctx;
+	IFrameBuffer* swap;
 	IVertexShader* vs;
 	IPixelShader* ps;
 	IShaderProgram* program;
 	IVertexDecl* vd;
+	static const float f[4] = { 1.0f, 0.0f, 0.0f, 1.0f };
 
 	if (device->Create(*window))
 		std::cout << "OpenGL initialized\n";
 
+	ctx = device->GetImmediateContext();
+	swap = device->GetSwapBuffer();
+
 	vs = device->CreateVertexShader(sizeof(c), c);
 	ps = device->CreatePixelShader(sizeof(cps), cps);
 	program = device->CreateShaderProgram(vs, ps);
-	vd = device->CreateVertexDeclaration(program, nullptr, 0);
+	vd = device->CreateVertexDeclaration(program, nullptr, 0); // auto-detect vertex declaration
+
+	bool exit = false;
+	while (!exit)
+	{
+		Hx::Window::Event e;
+		while (window->PollEvent(e))
+		{
+			switch (e.Type)
+			{
+			case Hx::Window::EventType::WindowClose:
+				exit = true;
+				break;
+			}
+		}
+
+		ctx->ClearFrameBuffer(swap, f);
+
+		device->SwapBuffers();
+	}
 
 	delete vd;
 	delete program;

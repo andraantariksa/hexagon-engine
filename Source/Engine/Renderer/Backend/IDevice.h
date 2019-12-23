@@ -22,7 +22,7 @@ namespace Hx { namespace Renderer { namespace Backend {
 	{
 		virtual ~IDevice() { }
 
-		virtual bool Create(const Hx::Window::Window& window) = 0;
+		virtual bool Create(Hx::Window::Window& window) = 0;
 		virtual IDeferredContext* CreateDeferredContext() = 0;
 		virtual IDepthStencilState* CreateDepthStencilState(const DepthStencilDesc& desc) = 0;
 		virtual IBuffer* CreateBuffer(const BufferDesc& createDesc) = 0;
@@ -36,8 +36,11 @@ namespace Hx { namespace Renderer { namespace Backend {
 		virtual IShaderProgram* CreateShaderProgram(IVertexShader* vs, IPixelShader* ps) = 0;
 		virtual IVertexDecl* CreateVertexDeclaration(IShaderProgram* program, const VertexElement* vertElems, uint32 numElems) = 0;
 		virtual IBuffer* CreateUniformBuffer(size_t bufferSize, const void* bufferData) = 0;
+		virtual void SwapBuffers() = 0;
 		virtual IContext* GetImmediateContext() = 0;
+		virtual IFrameBuffer* GetSwapBuffer() = 0;
 		virtual BackendAPI GetBackendAPI() = 0;
+
 
 	protected:
 		IDevice() { }
