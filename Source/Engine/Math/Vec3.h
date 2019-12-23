@@ -190,7 +190,7 @@ namespace Hx { namespace Math {
 		float x2 = this->X * this->X;
 		float y2 = this->Y * this->Y;
 		float z2 = this->Z * this->Z;
-		return std::sqrtf(x2 + y2 + z2);
+		return sqrtf(x2 + y2 + z2);
 	}
 
 	template<typename T>
