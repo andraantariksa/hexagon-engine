@@ -171,11 +171,12 @@ namespace Hx { namespace Math {
 		return (T)std::sqrt(x2 + y2);
 	}
 
+	template<>
 	inline float Vec2<float>::Length()
 	{
 		float x2 = this->X * this->X;
 		float y2 = this->Y * this->Y;
-		return std::sqrtf(x2 + y2);
+		return sqrtf(x2 + y2);
 	}
 
 	template<typename T>

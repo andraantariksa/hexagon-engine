@@ -184,6 +184,7 @@ namespace Hx { namespace Math {
 		return (T)std::sqrt(x2 + y2 + z2);
 	}
 
+	template<>
 	inline float Vec3<float>::Length()
 	{
 		float x2 = this->X * this->X;
