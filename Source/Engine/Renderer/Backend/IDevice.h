@@ -12,7 +12,7 @@
 #include "IVertexShader.h"
 #include "IPixelShader.h"
 #include "IShaderProgram.h"
-#include "IVertexDecl.h"
+#include "IVertexStream.h"
 #include "IBuffer.h"
 #include "IDeferredContext.h"
 
@@ -34,7 +34,7 @@ namespace Hx { namespace Renderer { namespace Backend {
 		virtual IVertexShader* CreateVertexShader(uint32 size, const void* compiledShader) = 0;
 		virtual IPixelShader* CreatePixelShader(uint32 size, const void* compiledShader) = 0;
 		virtual IShaderProgram* CreateShaderProgram(IVertexShader* vs, IPixelShader* ps) = 0;
-		virtual IVertexDecl* CreateVertexDeclaration(IShaderProgram* program, const VertexElement* vertElems, uint32 numElems) = 0;
+		virtual IVertexStream* CreateVertexStream(IShaderProgram* program, const VertexElement* vertElems, uint32 numElems, IBuffer* vertexBuffer, IBuffer* indexBuffer) = 0;
 		virtual IBuffer* CreateUniformBuffer(size_t bufferSize, const void* bufferData) = 0;
 		virtual void SwapBuffers() = 0;
 		virtual IContext* GetImmediateContext() = 0;

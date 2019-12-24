@@ -8,7 +8,7 @@
 using namespace Hx::Renderer::Backend;
 
 static const char c[] =
-"#version 330\n"
+"#version 330 core\n"
 "in vec3 pos;"
 "in vec3 color;"
 "out vec3 outColor;"
@@ -19,13 +19,19 @@ static const char c[] =
 "}";
 
 static const char cps[] =
-"#version 330\n"
-"in vec3 inColor;"
-"layout(location = 0) out vec4 color;"
+"#version 330 core\n"
+"in vec3 outColor;"
+"out vec4 color;"
 "void main()"
 "{"
-"color = vec4(inColor, 1.0);"
+"color = vec4(outColor, 1.0);"
 "}";
+
+static float vertexdata[] = {
+	-0.5,-0.5, 0.0, 1.0, 0.0, 0.0,
+	0.5,-0.5, 0.0, 0.0, 1.0, 0.0,
+	0.0, 0.5, 0.0,0.0, 0.0, 1.0
+};
 
 int main(int argc, char* argv[]) {
 	Hx::Window::Window* window = new Hx::Window::Window();
@@ -36,8 +42,9 @@ int main(int argc, char* argv[]) {
 	IVertexShader* vs;
 	IPixelShader* ps;
 	IShaderProgram* program;
-	IVertexDecl* vd;
-	static const float f[4] = { 1.0f, 0.0f, 0.0f, 1.0f };
+	IVertexStream* vstream;
+	IBuffer* vb;
+	static const float f[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
 
 	if (device->Create(*window))
 		std::cout << "OpenGL initialized\n";
@@ -48,7 +55,9 @@ int main(int argc, char* argv[]) {
 	vs = device->CreateVertexShader(sizeof(c), c);
 	ps = device->CreatePixelShader(sizeof(cps), cps);
 	program = device->CreateShaderProgram(vs, ps);
-	vd = device->CreateVertexDeclaration(program, nullptr, 0); // auto-detect vertex declaration
+	vb = device->CreateVertexBuffer(ResourceUsage::Default, sizeof(vertexdata), (void*)vertexdata);
+	// we use auto-detect shader attribute for now, since we don't have manual configuration method, it'll comes later
+	vstream = device->CreateVertexStream(program, nullptr, 0, vb, nullptr);
 
 	bool exit = false;
 	while (!exit)
@@ -66,10 +75,16 @@ int main(int argc, char* argv[]) {
 
 		ctx->ClearFrameBuffer(swap, f);
 
+		ctx->SetShaderProgram(program);
+		ctx->SetVertexStream(vstream);
+		ctx->SetPrimitiveTopology(PrimitiveTopology::TriList);
+		ctx->Draw(3, 0);
+
 		device->SwapBuffers();
 	}
 
-	delete vd;
+	delete vstream;
+	delete vb;
 	delete program;
 	delete vs;
 	delete ps;

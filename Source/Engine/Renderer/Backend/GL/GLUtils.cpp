@@ -78,10 +78,16 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 		ContextHandle* outContext)
 	{
 		SDL_GLContext context;
+		int contextFlag = 0;
 		assert(window != nullptr && "Error: Window is nullptr");
 
+		contextFlag |= SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG;
+#ifndef NDEBUG
+		contextFlag |= SDL_GL_CONTEXT_DEBUG_FLAG;
+#endif
+
 		// Set context attributes
-		SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG);
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, contextFlag);
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, desc.MajorVer); // Set OpenGL standard
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, desc.MinorVer);

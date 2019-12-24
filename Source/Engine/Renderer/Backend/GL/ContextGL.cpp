@@ -1,8 +1,18 @@
 #include "ContextGL.h"
 #include "BufferGL.h"
-#include "VertexDeclGL.h"
+#include "VertexStreamGL.h"
 #include "ShaderProgramGL.h"
 #include "FrameBufferGL.h"
+#include <cassert>
+#include <cstdio>
+
+#ifndef NDEBUG
+#define HX_CHECK_GL_ERROR() \
+	int __glError = glGetError();					\
+	assert(__glError == 0)
+#else
+#define HX_CHECK_GL_ERROR()
+#endif
 
 namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL { 
 
@@ -18,12 +28,29 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 	void ContextGL::ClearFrameBuffer(IFrameBuffer* frameBuffer, const float colorRGBA[4])
 	{
 		FrameBufferGL* fb = static_cast<FrameBufferGL*>(frameBuffer);
+		uint32 handle = fb->GetHandle();
 		static const GLenum drawBuffer = GL_COLOR_ATTACHMENT0;
-		glBindFramebuffer(GL_FRAMEBUFFER, fb->GetHandle());
-		glDrawBuffers(1, &drawBuffer);
-		glClearBufferfv(GL_COLOR, 0, colorRGBA);
-		if (fb->GetHandle() != 0)
+
+		glBindFramebuffer(GL_FRAMEBUFFER, handle);
+
+		if (handle != 0)
+		{
+			glDrawBuffers(1, &drawBuffer);
+			glClearBufferfv(GL_COLOR, 0, colorRGBA);
 			glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		}
+		else
+		{
+			glClearColor(
+				colorRGBA[0],
+				colorRGBA[1],
+				colorRGBA[2],
+				colorRGBA[3]);
+
+			glClear(GL_COLOR_BUFFER_BIT);
+		}
+
+		HX_CHECK_GL_ERROR();
 	}
 
 	void ContextGL::ClearDepthStencilBuffer(IDepthStencilBuffer* depthBuffer, ClearFlag clearFlags, float depth, uint8 stencil)
@@ -41,16 +68,19 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 	void ContextGL::SetShaderProgram(IShaderProgram* shaderProgram)
 	{
 		glUseProgram(static_cast<ShaderProgramGL*>(shaderProgram)->GetHandle());
+		HX_CHECK_GL_ERROR();
 	}
 
-	void ContextGL::SetVertexDeclaration(IVertexDecl* vertexDeclaration)
+	void ContextGL::SetVertexStream(IVertexStream* vertexStream)
 	{
-		glBindVertexArray(static_cast<VertexDeclGL*>(vertexDeclaration)->GetHandle());
+		glBindVertexArray(static_cast<VertexStreamGL*>(vertexStream)->GetHandle());
+		HX_CHECK_GL_ERROR();
 	}
 
 	void ContextGL::SetPrimitiveTopology(PrimitiveTopology mode)
 	{
 		static uint32 toGL[] = {
+			GL_NONE,
 			GL_POINTS,
 			GL_LINES,
 			GL_LINE_STRIP,
@@ -65,19 +95,10 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 		this->States.PrimTopo = toGL[(size_t)mode];
 	}
 
-	void ContextGL::SetVertexBuffers(IBuffer* vertexBuffer)
-	{
-		glBindBuffer(GL_ARRAY_BUFFER, static_cast<BufferGL*>(vertexBuffer)->GetHandle());
-	}
-
-	void ContextGL::SetIndexBuffers(IBuffer* indexBuffer)
-	{
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, static_cast<BufferGL*>(indexBuffer)->GetHandle());
-	}
-
 	void ContextGL::Draw(uint32 vertexCount, uint32 startIndex)
 	{
 		glDrawArrays(this->States.PrimTopo, startIndex, vertexCount);
+		HX_CHECK_GL_ERROR();
 	}
 
 	void ContextGL::DrawIndexed(uint32 indexCount, uint32 startIndex, uint32 baseIndex)

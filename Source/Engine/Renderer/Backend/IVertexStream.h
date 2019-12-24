@@ -4,12 +4,12 @@
 
 namespace Hx { namespace Renderer { namespace Backend {
 
-	struct IVertexDecl
+	struct IVertexStream
 	{
-		virtual ~IVertexDecl() { }
+		virtual ~IVertexStream() { }
 
 	protected:
-		IVertexDecl() { };
+		IVertexStream() { };
 	};
 
 }}}

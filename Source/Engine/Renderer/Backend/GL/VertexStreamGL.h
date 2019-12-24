@@ -2,20 +2,20 @@
 
 #include "../../../Types.h"
 #include "glad/glad.h"
-#include "../IVertexDecl.h"
+#include "../IVertexStream.h"
 #include "../IShaderProgram.h"
 
 namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 
-	class VertexDeclGL : public IVertexDecl
+	class VertexStreamGL : public IVertexStream
 	{
 	public:
-		VertexDeclGL(uint32 handle)
+		VertexStreamGL(uint32 handle)
 			: Handle(handle)
 		{
 		}
 
-		~VertexDeclGL()
+		~VertexStreamGL()
 		{
 			glDeleteVertexArrays(1, &this->Handle);
 		}

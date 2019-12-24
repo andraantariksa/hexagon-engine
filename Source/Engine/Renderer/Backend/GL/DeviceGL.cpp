@@ -1,12 +1,19 @@
 #include "DeviceGL.h"
 #include <cstring>
+#include <cstdio>
 
 namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL { 
+
+	void GLErrorMsgCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)
+	{
+		std::printf("GL Error: %s\n", message);
+	}
 
 	DeviceGL::DeviceGL()
 		: Context(nullptr),
 		DefaultFrameBuffer(nullptr),
-		DefaultDepthBuffer(nullptr)
+		DefaultDepthBuffer(nullptr),
+		RenderWindow(nullptr)
 	{
 	}
 
@@ -19,7 +26,7 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 		ContextHandle ctx = nullptr;
 		OpenGLInitDesc initDesc;
 
-		initDesc.MajorVer = 3;
+		initDesc.MajorVer = 4;
 		initDesc.MinorVer = 3;
 
 		this->RenderWindow = &window;
@@ -36,6 +43,11 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 
 		GLMakeCurrent(window, ctx);
 		this->Context = new ContextGL(ctx);
+
+#ifndef NDEBUG
+		glEnable(GL_DEBUG_OUTPUT);
+		glDebugMessageCallback(GLErrorMsgCallback, nullptr);
+#endif
 
 		// Default framebuffer
 		this->DefaultFrameBuffer = new FrameBufferGL(0);
@@ -174,7 +186,7 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 		return new ShaderProgramGL(handle, vs, ps);
 	}
 
-	IVertexDecl* DeviceGL::CreateVertexDeclaration(IShaderProgram* program, const VertexElement* vertElems, uint32 numElems)
+	IVertexStream* DeviceGL::CreateVertexStream(IShaderProgram* program, const VertexElement* vertElems, uint32 numElems, IBuffer* vertexBuffer, IBuffer* indexBuffer)
 	{
 		typedef struct
 		{
@@ -187,20 +199,27 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 		} VertexAttributeInfo;
 
 		uint32 handle;
+		uint32 pr = static_cast<ShaderProgramGL*>(program)->GetHandle();
+
+		if (vertexBuffer == nullptr)
+			return nullptr;
 
 		glGenVertexArrays(1, &handle);
 		glBindVertexArray(handle); // bind
+
+		glBindBuffer(GL_ARRAY_BUFFER, static_cast<BufferGL*>(vertexBuffer)->GetHandle());
+		if (indexBuffer != nullptr)
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, static_cast<BufferGL*>(indexBuffer)->GetHandle());
 		
 		// auto-detect vertex declaration
 		if (vertElems == nullptr || numElems == 0)
 		{
 			GLint size, maxChars;
-			GLuint bufferTmp;
 			size_t strideSize = 0;
 			size_t strideOffset = 0;
-			uint32 pr = static_cast<ShaderProgramGL*>(program)->GetHandle();
 			VertexAttributeInfo* attribs;
 
+			// retrieve attribute count and max chars of attributes
 			glGetProgramiv(pr, GL_ACTIVE_ATTRIBUTES, &size);
 			glGetProgramiv(pr, GL_ACTIVE_ATTRIBUTE_MAX_LENGTH, &maxChars);
 			attribs = new VertexAttributeInfo[size];
@@ -214,8 +233,7 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 				std::memset(info->attrName, 0, maxChars);
 				glGetActiveAttrib(pr, i, maxChars, &info->attrLen, &info->attrSize, &info->attrType, info->attrName);
 				info->attrId = glGetAttribLocation(pr, info->attrName);
-				glEnableVertexAttribArray(info->attrId);
-
+				
 				switch (info->attrType)
 				{
 				case GL_FLOAT:
@@ -295,10 +313,6 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 				strideSize += (size_t)info->attrSize * 4;
 			}
 
-			// pretend we have a buffer binded to the current VAO
-			glGenBuffers(1, &bufferTmp);
-			glBindBuffer(GL_ARRAY_BUFFER, bufferTmp);
-
 			// specify attributes
 			for (int i = size; i > 0; i--)
 			{
@@ -315,19 +329,24 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 					break;
 				}
 
+				glEnableVertexAttribArray(info->attrId);
+				
+				// delete attribute name from memory
+				delete[] info->attrName;
+				info->attrName = nullptr;
+
 				strideOffset += (size_t)info->attrSize * 4;
 			}
 
-			// delete temporary buffer
-			glBindBuffer(GL_ARRAY_BUFFER, 0);
-			glDeleteBuffers(1, &bufferTmp);
-
 			delete[] attribs;
 		}
+		
+		// unbind
+		glBindVertexArray(0);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-		glBindVertexArray(0); // unbind
-
-		return new VertexDeclGL(handle);
+		return new VertexStreamGL(handle);
 	}
 
 	IBuffer* DeviceGL::CreateUniformBuffer(size_t bufferSize, const void* bufferData)

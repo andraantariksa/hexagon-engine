@@ -6,7 +6,7 @@
 #include "VertexShaderGL.h"
 #include "PixelShaderGL.h"
 #include "ShaderProgramGL.h"
-#include "VertexDeclGL.h"
+#include "VertexStreamGL.h"
 #include "FrameBufferGL.h"
 
 namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL { 
@@ -29,7 +29,7 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 		IVertexShader* CreateVertexShader(uint32 size, const void* compiledShader) override;
 		IPixelShader* CreatePixelShader(uint32 size, const void* compiledShader) override;
 		IShaderProgram* CreateShaderProgram(IVertexShader* vs, IPixelShader* ps) override;
-		IVertexDecl* CreateVertexDeclaration(IShaderProgram* program, const VertexElement* vertElems, uint32 numElems) override;
+		IVertexStream* CreateVertexStream(IShaderProgram* program, const VertexElement* vertElems, uint32 numElems, IBuffer* vertexBuffer, IBuffer* indexBuffer) override;
 		IBuffer* CreateUniformBuffer(size_t bufferSize, const void* bufferData) override;
 		void SwapBuffers() override;
 		IContext* GetImmediateContext() override { return this->Context; }
