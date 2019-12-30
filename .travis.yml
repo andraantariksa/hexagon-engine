@@ -18,19 +18,27 @@ addons:
     packages:
       - cmake
       - sdl2
-  chocolatey:
-    update: true
-    packages:
-      - python
-      - cmake
 
 jobs:
   stages:
+    - Test using GCC in Windows
     - Test using Clang in Linux
     - Test using GCC in Linux
     - Test using Clang in OSX
     - Documentation Generation
   include:
+    - stage: Test using MSVC in Windows
+      os: windows
+      language: cpp
+      compiler: gcc
+      before_script:
+        - choco install python --version 3.8.1
+        - choco install cmake
+        - choco install make
+        - python Script/WindowsCI.py
+      script:
+        - make test-windows
+      env: PATH="/c/Python38:/c/Python38/Scripts:/c/Program Files/CMake/bin:/c/ProgramData/chocolatey/bin:$PATH"
     - stage: Test using Clang in Linux
       os: linux
       language: cpp
