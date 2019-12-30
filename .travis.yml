@@ -25,6 +25,9 @@ addons:
       - cmake
 
 jobs:
+  allow_failures:
+    - name: Allow failures on every branch except master branch
+      if: branch != master
   stages:
     - Test using Clang in Linux
     - Test using GCC in Linux
