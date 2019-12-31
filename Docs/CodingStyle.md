@@ -42,7 +42,6 @@ struct Strukt
 {
     // Data field
 };
-
 ```
 
 - Enums type should be defined by using it's namespace
@@ -54,9 +53,7 @@ enum Boolean{
 };
 
 ...
-
 Boolean::True;
-
 ```
 
 - Interfaces/Abstract classes must begin with 'I' prefix and followed by a name with PascalCasing (ex: `IMyInterface`)

@@ -2,9 +2,15 @@
 
 ![Travis CI](https://travis-ci.org/andraantariksa/hexagon-engine.svg?branch=master)
 
+[Documentation](http://andraaa.github.io/hexagon-engine/)
+
 ## Overview
 
 Hexagon Engine is an experimental game engine
+
+## Getting Started
+
+You need to install SDL2 library and CMake to build the project
 
 ### Windows
 
@@ -28,7 +34,11 @@ sudo apt-get install libsdl2-dev
 sudo pacman -S sdl2
 ```
 
-TODO
+### OSX
+
+```
+brew install sdl2
+```
 
 ## Contributing
 
