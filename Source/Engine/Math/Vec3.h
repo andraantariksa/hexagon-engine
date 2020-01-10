@@ -363,9 +363,9 @@ namespace Hx { namespace Math {
 		return (b * AdotC) - (c * AdotB);
 	}
 
-	using Vec3F = typename Vec3<float>;
-	using Vec3D = typename Vec3<double>;
-	using Vec3I = typename Vec3<int32>;
-	using Vec3U = typename Vec3<uint32>;
+	using Vec3F = Vec3<float>;
+	using Vec3D = Vec3<double>;
+	using Vec3I = Vec3<int32>;
+	using Vec3U = Vec3<uint32>;
 
 }}

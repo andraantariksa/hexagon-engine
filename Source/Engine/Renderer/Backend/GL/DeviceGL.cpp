@@ -200,7 +200,7 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 		return new Texture3DGL(handle);
 	}
 
-	ISamplerState* DeviceGL::CreateSampleState(const SamplerStateDesc& createDesc) const
+	ISamplerState* DeviceGL::CreateSamplerState(const SamplerStateDesc& createDesc)
 	{
 		return nullptr;
 	}

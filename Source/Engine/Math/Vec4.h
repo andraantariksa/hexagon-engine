@@ -245,7 +245,7 @@ namespace Hx { namespace Math {
 	template<typename T>
 	inline Vec4<T> operator/(const Vec4<T>& a, const Vec4<T>& b)
 	{
-		return Vec4<T>(a.X / b.X, a.Y / b.Y, a.Z / b.Z, , a.W / b.W);
+		return Vec4<T>(a.X / b.X, a.Y / b.Y, a.Z / b.Z, a.W / b.W);
 	}
 
 	template<typename T>
@@ -374,9 +374,9 @@ namespace Hx { namespace Math {
 		return Vec4<T>(i, j, k, l);
 	}
 
-	using Vec4F = typename Vec4<float>;
-	using Vec4D = typename Vec4<double>;
-	using Vec4I = typename Vec4<int32>;
-	using Vec4U = typename Vec4<uint32>;
+	using Vec4F = Vec4<float>;
+	using Vec4D = Vec4<double>;
+	using Vec4I = Vec4<int32>;
+	using Vec4U = Vec4<uint32>;
 
 }}

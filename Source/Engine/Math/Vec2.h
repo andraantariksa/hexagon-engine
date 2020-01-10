@@ -318,9 +318,9 @@ namespace Hx { namespace Math {
 		return axbx + ayby;
 	}
 	
-	using Vec2F = typename Vec2<float>;
-	using Vec2D = typename Vec2<double>;
-	using Vec2I = typename Vec2<int32>;
-	using Vec2U = typename Vec2<uint32>;
+	using Vec2F = Vec2<float>;
+	using Vec2D = Vec2<double>;
+	using Vec2I = Vec2<int32>;
+	using Vec2U = Vec2<uint32>;
 
 }}

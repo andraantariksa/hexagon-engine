@@ -1,3 +1,4 @@
+#if 0
 #include "Source/Engine/Window/Window.h"
 #include "Source/Engine/Renderer/Backend/GL/DeviceGL.h"
 #include "Source/Hx.h"
@@ -138,3 +139,11 @@ int main(int argc, char* argv[]) {
 	delete window;
 	return 0;
 }
+#endif
+
+#if 1
+int main()
+{
+	return 0;
+}
+#endif

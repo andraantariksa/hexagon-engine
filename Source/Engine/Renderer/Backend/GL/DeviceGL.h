@@ -30,7 +30,7 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 		ITexture1D* CreateTexture1D(const Texture1DDesc& createDesc, const Texture1DResourceData* initialData) override;
 		ITexture2D* CreateTexture2D(const Texture2DDesc& createDesc, const Texture2DResourceData* initialData) override;
 		ITexture3D* CreateTexture3D(const Texture3DDesc& createDesc, const Texture3DResourceData* initialData) override;
-		ISamplerState* CreateSampleState(const SamplerStateDesc& createDesc) const;
+		ISamplerState* CreateSamplerState(const SamplerStateDesc& createDesc) override;
 		IVertexShader* CreateVertexShader(uint32 size, const void* compiledShader) override;
 		IPixelShader* CreatePixelShader(uint32 size, const void* compiledShader) override;
 		IShaderProgram* CreateShaderProgram(IVertexShader* vs, IPixelShader* ps) override;
