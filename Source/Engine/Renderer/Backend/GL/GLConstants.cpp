@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GLConstants.h"
+#include "GLConstants.hpp"
 
 namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 

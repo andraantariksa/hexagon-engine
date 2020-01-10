@@ -1,5 +1,5 @@
-#include "RenderContextGL.h"
-#include "BufferGL.h"
+#include "RenderContextGL.hpp"
+#include "BufferGL.hpp"
 
 #include <cassert>
 #include <cstdio>

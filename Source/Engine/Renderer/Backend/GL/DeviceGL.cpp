@@ -1,6 +1,6 @@
-#include "DeviceGL.h"
+#include "DeviceGL.hpp"
 #include "glad/glad.h"
-#include "DeviceGL.h"
+#include "DeviceGL.hpp"
 #include <cstring>
 #include <cstdio>
 

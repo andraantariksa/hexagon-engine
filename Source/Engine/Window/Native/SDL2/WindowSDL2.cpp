@@ -1,5 +1,5 @@
-#include "WindowSDL2.h"
-#include "KeymapSDL2.h"
+#include "WindowSDL2.hpp"
+#include "KeymapSDL2.hpp"
 
 #include <stdexcept>
 

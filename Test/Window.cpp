@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Source/Engine/Window/Window.h>
+#include <Source/Engine/Window/Window.hpp>
 #include <gtest/gtest.h>
 
 namespace {

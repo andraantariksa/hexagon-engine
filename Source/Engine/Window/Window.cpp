@@ -1,8 +1,8 @@
-#include "Window.h"
-#include "../../Config.h"
+#include "Window.hpp"
+#include "../../Config.hpp"
 
 #ifdef HX_PLATFORM_SDL2
-#include "Native/SDL2/WindowSDL2.h"
+#include "Native/SDL2/WindowSDL2.hpp"
 #endif
 
 namespace Hx { namespace Window {

@@ -8,14 +8,12 @@ set(SPDLOG_DIR Dependencies/spdlog)
 find_package(SDL2 REQUIRED PATH Dependencies/SDL2)
 
 set(SRC_FILES
-	HexagonEngine.cpp)
-
-set(HEADER_FILES
-	HexagonEngine.h)
+	"Example/Basic.cpp"
+)
 
 add_subdirectory("Source")
 
-add_executable(HexagonEngineApp ${SRC_FILES} ${HEADER_FILES})
+add_executable(HexagonEngineApp ${SRC_FILES})
 
 target_include_directories(HexagonEngineApp PRIVATE ${SDL2_INCLUDE_DIRS})
 target_link_libraries(HexagonEngineApp

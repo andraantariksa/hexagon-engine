@@ -1,8 +1,8 @@
-#include "Common.h"
+#include "Common.hpp"
 
 #ifdef HX_PLATFORM_SDL2
 #include <SDL.h>
-#include "../../../Window/Native/SDL2/WindowSDL2.h"
+#include "../../../Window/Native/SDL2/WindowSDL2.hpp"
 #endif
 
 #include <cassert>
