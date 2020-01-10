@@ -5,7 +5,7 @@
 
 namespace Hx { namespace Renderer { namespace Backend {
 
-	struct IShaderProgram
+	struct HX_NOVTABLE IShaderProgram
 	{
 		virtual ~IShaderProgram() { }
 

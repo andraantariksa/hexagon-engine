@@ -1,8 +1,10 @@
 #pragma once
 
+#include "../../Types.h"
+
 namespace Hx { namespace Renderer { namespace Backend {
 
-	struct IDepthStencilBuffer
+	struct HX_NOVTABLE IDepthStencilBuffer
 	{
 		virtual ~IDepthStencilBuffer() { }
 

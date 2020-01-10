@@ -9,7 +9,7 @@
 
 namespace Hx { namespace Math {
 
-	template <typename T>
+	template<typename T>
 	struct Vec3
 	{
 		T X, Y, Z;
@@ -301,7 +301,7 @@ namespace Hx { namespace Math {
 		T x2 = v.X * v.X;
 		T y2 = v.Y * v.Y;
 		T z2 = v.Z * v.Z;
-		return (T)std::sqrt(x2 + y2 + z2);
+		return (T)sqrt(x2 + y2 + z2);
 	}
 
 	inline float Length(const Vec3<float>& v)
@@ -348,7 +348,7 @@ namespace Hx { namespace Math {
 	template<typename T>
 	inline T TripleProductScalar(const Vec3<T>& a, const Vec3<T>& b, const Vec3<T>& c)
 	{
-		// Actually, we calculates matrix determinant instead
+		// we calculates matrix determinant instead
 		T c0 = a.X * ((b.Y * c.Z) - (b.Z * c.Y));
 		T c1 = a.Y * ((b.X * c.Z) - (b.Z * c.X));
 		T c2 = a.Z * ((b.X * c.Y) - (b.Y * c.X));
@@ -363,9 +363,9 @@ namespace Hx { namespace Math {
 		return (b * AdotC) - (c * AdotB);
 	}
 
-	typedef Vec3<float>		Vec3F;
-	typedef Vec3<double>	Vec3D;
-	typedef Vec3<int32>		Vec3I;
-	typedef Vec3<uint32>	Vec3U;
+	using Vec3F = typename Vec3<float>;
+	using Vec3D = typename Vec3<double>;
+	using Vec3I = typename Vec3<int32>;
+	using Vec3U = typename Vec3<uint32>;
 
 }}

@@ -1,8 +1,10 @@
 #pragma once
 
+#include "../../Types.h"
+
 namespace Hx { namespace Renderer { namespace Backend {
 
-	struct IBuffer
+	struct HX_NOVTABLE IBuffer
 	{
 		virtual ~IBuffer() { }
 

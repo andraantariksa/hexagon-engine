@@ -9,13 +9,12 @@
 
 namespace Hx { namespace Renderer { namespace Backend {
 
-	struct IContext
+	struct HX_NOVTABLE IRenderContext
 	{
-		virtual ~IContext() { };
+		virtual ~IRenderContext() { };
 
 		virtual void ClearFrameBuffer(IFrameBuffer* frameBuffer, const float colorRGBA[4]) = 0;
-		virtual void ClearDepthStencilBuffer(IDepthStencilBuffer* depthBuffer, ClearFlag clearFlags, float depth, uint8 stencil) = 0;
-		virtual void SetRenderBuffers(uint32 numSlots, IFrameBuffer* const* frameBuffers, IDepthStencilBuffer* depthBuffer) = 0;
+		virtual void SetFrameBuffer(IFrameBuffer* frameBuffer) = 0;
 		virtual void SetViewport(uint32 numViewports, const Viewport* viewports) = 0;
 		virtual void SetShaderProgram(IShaderProgram* shaderProgram) = 0;
 		virtual void SetVertexStream(IVertexStream* vertexStream) = 0;
@@ -24,13 +23,13 @@ namespace Hx { namespace Renderer { namespace Backend {
 		virtual void DrawIndexed(uint32 indexCount, uint32 startIndex, uint32 baseIndex) = 0;
 
 		// Uniform-related function
-		virtual int32 GetUniformBufferIndex(const char* uniformBlockName, size_t strSize) = 0;
+		virtual int32 GetUniformBufferIndex(const char* uniformBlockName, size_t strSize = 0) = 0;
 		virtual void SetUniformBufferData(IBuffer* uniformBuffer, int32 index, const void* data, size_t size) = 0;
 
 		virtual IVertexStream* GetVertexStream() = 0;
 
 	protected:
-		IContext() { }
+		IRenderContext() { }
 	};
 
 }}}

@@ -1,4 +1,6 @@
 #include "DeviceGL.h"
+#include "glad/glad.h"
+#include "DeviceGL.h"
 #include <cstring>
 #include <cstdio>
 
@@ -33,7 +35,9 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 
 		GLInit(window, initDesc, &ctx);
 		if (ctx == nullptr)
+		{
 			return false;
+		}
 
 		if (gladLoadGL() == 0)
 		{
@@ -42,7 +46,7 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 		}
 
 		GLMakeCurrent(window, ctx);
-		this->Context = new ContextGL(ctx);
+		this->Context = new RenderContextGL(ctx);
 
 #ifndef NDEBUG
 		glEnable(GL_DEBUG_OUTPUT);
@@ -55,7 +59,7 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 		return true;
 	}
 
-	IDeferredContext* DeviceGL::CreateDeferredContext()
+	IDeferredRenderContext* DeviceGL::CreateDeferredContext()
 	{
 		// TODO: Implement deferred context
 		return nullptr;
@@ -66,7 +70,7 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 		return nullptr;
 	}
 
-	IBuffer* DeviceGL::CreateBuffer(const BufferDesc& createDesc)
+	IBuffer* DeviceGL::CreateBuffer(const BufferDesc& createDesc, const void* bufferData)
 	{
 		return nullptr;
 	}
@@ -77,10 +81,7 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 
 		glGenBuffers(1, &handle);
 		glBindBuffer(GL_ARRAY_BUFFER, handle);
-
-		if (bufferSize > 0 && bufferData != nullptr)
-			glBufferData(GL_ARRAY_BUFFER, bufferSize, bufferData, (GLenum)GLResourceUsageDraw[(uint32)usage]);
-
+		glBufferData(GL_ARRAY_BUFFER, bufferSize, bufferData, (GLenum)GLResourceUsageDraw[(uint32)usage]);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 		return new BufferGL(handle);
@@ -92,26 +93,114 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 
 		glGenBuffers(1, &handle);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, handle);
-
-		if (bufferSize > 0 && bufferData != nullptr)
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, bufferSize, bufferData, (GLenum)GLResourceUsageDraw[(uint32)usage]);
-
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, bufferSize, bufferData, (GLenum)GLResourceUsageDraw[(uint32)usage]);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 		return new BufferGL(handle);
 	}
 
-	ITexture1D* DeviceGL::CreateTexture1D(const Texture1DDesc& createDesc, const Texture1DResourceData& initialData)
+	ITexture1D* DeviceGL::CreateTexture1D(const Texture1DDesc& createDesc, const Texture1DResourceData* initialData)
 	{
-		return nullptr;
+		uint32 handle;
+		const void* inputData = nullptr;
+		uint32 internalFormat = GLResourceInternalFormat[(uint32)createDesc.Format];
+		uint32 format = GLResourceBaseFormat[(uint32)createDesc.Format];
+		uint32 type = GLResourceTypeFormat[(uint32)createDesc.Format];
+
+		if (internalFormat == GL_NONE || format == GL_NONE || type == GL_NONE)
+		{
+			return nullptr;
+		}
+
+		if (initialData != nullptr)
+		{
+			inputData = initialData->DataPtr;
+		}
+
+		glGenTextures(1, &handle);
+		glBindTexture(GL_TEXTURE_1D, handle);
+		glTexImage1D(GL_TEXTURE_1D, createDesc.MipMapLevels, internalFormat, createDesc.Length, 0, format, type, inputData);
+		glBindTexture(GL_TEXTURE_1D, 0);
+
+		return new Texture1DGL(handle);
 	}
 
-	ITexture2D* DeviceGL::CreateTexture2D(const Texture2DDesc& createDesc, const Texture2DResourceData& initialData)
+	ITexture2D* DeviceGL::CreateTexture2D(const Texture2DDesc& createDesc, const Texture2DResourceData* initialData)
 	{
-		return nullptr;
+		uint32 handle;
+		const void* inputData = nullptr;
+		uint32 internalFormat = GLResourceInternalFormat[(uint32)createDesc.Format];
+		uint32 format = GLResourceBaseFormat[(uint32)createDesc.Format];
+		uint32 type = GLResourceTypeFormat[(uint32)createDesc.Format];
+
+		if (internalFormat == GL_NONE || format == GL_NONE || type == GL_NONE)
+		{
+			return nullptr;
+		}
+
+		if (initialData != nullptr)
+		{
+			inputData = initialData->DataPtr;
+		}
+
+		glGenTextures(1, &handle);
+		glBindTexture(GL_TEXTURE_2D, handle);
+		
+		glTexImage2D(
+			GL_TEXTURE_2D,
+			createDesc.MipMapLevels,
+			internalFormat,
+			createDesc.Width,
+			createDesc.Height,
+			0,
+			format,
+			type,
+			inputData);
+
+		glBindTexture(GL_TEXTURE_2D, 0);
+
+		return new Texture2DGL(handle);
 	}
 
-	ITexture3D* DeviceGL::CreateTexture3D(const Texture3DDesc& createDesc, const Texture3DResourceData& initialData)
+	ITexture3D* DeviceGL::CreateTexture3D(const Texture3DDesc& createDesc, const Texture3DResourceData* initialData)
+	{
+		uint32 handle;
+		const void* inputData = nullptr;
+		uint32 internalFormat = GLResourceInternalFormat[(uint32)createDesc.Format];
+		uint32 format = GLResourceBaseFormat[(uint32)createDesc.Format];
+		uint32 type = GLResourceTypeFormat[(uint32)createDesc.Format];
+
+		if (internalFormat == GL_NONE || format == GL_NONE || type == GL_NONE)
+		{
+			return nullptr;
+		}
+
+		if (initialData != nullptr)
+		{
+			inputData = initialData->DataPtr;
+		}
+
+		glGenTextures(1, &handle);
+		glBindTexture(GL_TEXTURE_3D, handle);
+		
+		glTexImage3D(
+			GL_TEXTURE_3D,
+			createDesc.MipMapLevels,
+			internalFormat,
+			createDesc.Width,
+			createDesc.Height,
+			createDesc.Depth,
+			0,
+			format,
+			type,
+			inputData);
+
+		glBindTexture(GL_TEXTURE_3D, 0);
+
+		return new Texture3DGL(handle);
+	}
+
+	ISamplerState* DeviceGL::CreateSampleState(const SamplerStateDesc& createDesc) const
 	{
 		return nullptr;
 	}
@@ -123,7 +212,9 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 		GLint success = 0;
 
 		if (size < 1 && compiledShader == nullptr)
+		{
 			return nullptr;
+		}
 
 		handle = glCreateShader(GL_VERTEX_SHADER);
 		glShaderSource(handle, 1, (const GLchar**)&compiledShader, &isize);
@@ -202,14 +293,18 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 		uint32 pr = static_cast<ShaderProgramGL*>(program)->GetHandle();
 
 		if (vertexBuffer == nullptr)
+		{
 			return nullptr;
+		}
 
 		glGenVertexArrays(1, &handle);
 		glBindVertexArray(handle); // bind
 
 		glBindBuffer(GL_ARRAY_BUFFER, static_cast<BufferGL*>(vertexBuffer)->GetHandle());
 		if (indexBuffer != nullptr)
+		{
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, static_cast<BufferGL*>(indexBuffer)->GetHandle());
+		}
 		
 		// auto-detect vertex declaration
 		if (vertElems == nullptr || numElems == 0)
@@ -351,7 +446,14 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 
 	IBuffer* DeviceGL::CreateUniformBuffer(size_t bufferSize, const void* bufferData)
 	{
-		return nullptr;
+		uint32 handle;
+
+		glGenBuffers(1, &handle);
+		glBindBuffer(GL_UNIFORM_BUFFER, handle);
+		glBufferData(GL_UNIFORM_BUFFER, bufferSize, bufferData, GL_STATIC_DRAW);
+		glBindBuffer(GL_UNIFORM_BUFFER, 0);
+
+		return new BufferGL(handle);
 	}
 
 	void DeviceGL::SwapBuffers()

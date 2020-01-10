@@ -2,28 +2,29 @@
 
 #include "Common.h"
 
+#include "VertexStreamGL.h"
+#include "ShaderProgramGL.h"
+#include "FrameBufferGL.h"
+
 namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL { 
 
 	struct OpenGLContextState
 	{
-		IFrameBuffer* FrameBuffer;
-		IShaderProgram* ShaderProgram;
-		IVertexStream* VertexStream;
-		IBuffer* VertexBuffer;
-		IBuffer* IndexBuffer;
+		FrameBufferGL* FrameBuffer;
+		ShaderProgramGL* ShaderProgram;
+		VertexStreamGL* VertexStream;
 
 		uint32 PrimTopo;
 	};
 
-	class ContextGL : public IContext
+	class RenderContextGL : public IRenderContext
 	{
 	public:
-		ContextGL(ContextHandle handle);
-		~ContextGL();
+		RenderContextGL(ContextHandle handle);
+		~RenderContextGL();
 
 		void ClearFrameBuffer(IFrameBuffer* frameBuffer, const float colorRGBA[4]) override;
-		void ClearDepthStencilBuffer(IDepthStencilBuffer* depthBuffer, ClearFlag clearFlags, float depth, uint8 stencil) override;
-		void SetRenderBuffers(uint32 numSlots, IFrameBuffer* const* frameBuffers, IDepthStencilBuffer* depthBuffer) override;
+		void SetFrameBuffer(IFrameBuffer* frameBuffer) override;
 		void SetViewport(uint32 numViewports, const Viewport* viewports) override;
 		void SetShaderProgram(IShaderProgram* shaderProgram) override;
 		void SetVertexStream(IVertexStream* vertexStream) override;

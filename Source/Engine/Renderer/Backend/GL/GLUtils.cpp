@@ -1,6 +1,4 @@
 #include "Common.h"
-#include "Common.h"
-#include "Common.h"
 
 #ifdef HX_PLATFORM_SDL2
 #include <SDL.h>

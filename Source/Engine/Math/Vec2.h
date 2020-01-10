@@ -9,7 +9,7 @@
 
 namespace Hx { namespace Math {
 
-	template <typename T>
+	template<typename T>
 	struct Vec2
 	{
 		T X, Y;
@@ -285,7 +285,7 @@ namespace Hx { namespace Math {
 	{
 		T x2 = v.X * v.X;
 		T y2 = v.Y * v.Y;
-		return (T)std::sqrt(x2 + y2);
+		return (T)sqrt(x2 + y2);
 	}
 
 	inline float Length(const Vec2<float>& v)
@@ -318,9 +318,9 @@ namespace Hx { namespace Math {
 		return axbx + ayby;
 	}
 	
-	typedef Vec2<float>		Vec2F;
-	typedef Vec2<double>	Vec2D;
-	typedef Vec2<int32>		Vec2I;
-	typedef Vec2<uint32>	Vec2U;
+	using Vec2F = typename Vec2<float>;
+	using Vec2D = typename Vec2<double>;
+	using Vec2I = typename Vec2<int32>;
+	using Vec2U = typename Vec2<uint32>;
 
 }}

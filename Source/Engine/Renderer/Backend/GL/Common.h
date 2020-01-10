@@ -4,8 +4,7 @@
 #include "../../../../Config.h"
 #include "../../../Window/Window.h"
 #include "../IDevice.h"
-#include "../IContext.h"
-#include "glad/glad.h"
+#include "../IRenderContext.h"
 
 namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL { 
 	
@@ -23,13 +22,6 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 		int32 AlphaBits = 8;
 		int32 DepthBits = 24;
 		int32 StencilBits = 8;
-	};
-
-	static uint32 GLResourceUsageDraw[4] = {
-		GL_STATIC_DRAW,
-		GL_STATIC_DRAW,
-		GL_DYNAMIC_DRAW,
-		GL_STATIC_DRAW
 	};
 
 	void GLInit(

@@ -1,8 +1,10 @@
 #pragma once
 
+#include "../../Types.h"
+
 namespace Hx { namespace Renderer { namespace Backend {
 
-	struct IPixelShader
+	struct HX_NOVTABLE IPixelShader
 	{
 		virtual ~IPixelShader() { }
 	

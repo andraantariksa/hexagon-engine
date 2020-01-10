@@ -1,5 +1,13 @@
 #pragma once
 
+#include "../Config.h"
+
+#ifdef HX_COMPILER_MSVC
+#define HX_NOVTABLE __declspec(novtable)
+#else
+#define HX_NOVTABLE
+#endif
+
 typedef char int8;
 typedef short int16;
 typedef int int32;
