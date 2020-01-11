@@ -1,0 +1,8 @@
+digraph "Hx::Renderer::Backend::OpenGL::DeviceGL"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{Hx::Renderer::Backend\l::OpenGL::DeviceGL\n||+ DeviceGL()\l+ ~DeviceGL()\l+ Create()\l+ CreateDeferredContext()\l+ CreateDepthStencilState()\l+ CreateBuffer()\l+ CreateVertexBuffer()\l+ CreateIndexBuffer()\l+ CreateTexture1D()\l+ CreateTexture2D()\land 11 more...\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node2 [label="{Hx::Renderer::Backend\l::IDevice\n||+ ~IDevice()\l+ Create()\l+ CreateDeferredContext()\l+ CreateDepthStencilState()\l+ CreateBuffer()\l+ CreateVertexBuffer()\l+ CreateIndexBuffer()\l+ CreateTexture1D()\l+ CreateTexture2D()\l+ CreateTexture3D()\land 10 more...\l# IDevice()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structHx_1_1Renderer_1_1Backend_1_1IDevice.html"];
+}

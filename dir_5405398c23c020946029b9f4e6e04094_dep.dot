@@ -1,0 +1,17 @@
+digraph "Source/Engine" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_74389ed8173ad57b461b9d623a1f3867 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="Source" fontname="Helvetica", fontsize="10", URL="dir_74389ed8173ad57b461b9d623a1f3867.html"]
+  subgraph clusterdir_5405398c23c020946029b9f4e6e04094 {
+    graph [ bgcolor="#eeeeff", pencolor="black", label="" URL="dir_5405398c23c020946029b9f4e6e04094.html"];
+    dir_5405398c23c020946029b9f4e6e04094 [shape=plaintext label="Engine"];
+    dir_68fa70eac3ad00fd95ab3873dd264efa [shape=box label="Application" color="black" fillcolor="white" style="filled" URL="dir_68fa70eac3ad00fd95ab3873dd264efa.html"];
+    dir_e063c324d67b7f31747867db3f2eb339 [shape=box label="Math" color="black" fillcolor="white" style="filled" URL="dir_e063c324d67b7f31747867db3f2eb339.html"];
+    dir_737254cceba0681fc4e88d7cc6242542 [shape=box label="Renderer" color="red" fillcolor="white" style="filled" URL="dir_737254cceba0681fc4e88d7cc6242542.html"];
+    dir_6249dbc872e1df93bb88af11b73463dc [shape=box label="Window" color="red" fillcolor="white" style="filled" URL="dir_6249dbc872e1df93bb88af11b73463dc.html"];
+  }
+  }
+  dir_737254cceba0681fc4e88d7cc6242542->dir_6249dbc872e1df93bb88af11b73463dc [headlabel="3", labeldistance=1.5 headhref="dir_000004_000008.html"];
+}

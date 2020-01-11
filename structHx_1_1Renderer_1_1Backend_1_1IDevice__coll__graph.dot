@@ -1,0 +1,6 @@
+digraph "Hx::Renderer::Backend::IDevice"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{Hx::Renderer::Backend\l::IDevice\n||+ ~IDevice()\l+ Create()\l+ CreateDeferredContext()\l+ CreateDepthStencilState()\l+ CreateBuffer()\l+ CreateVertexBuffer()\l+ CreateIndexBuffer()\l+ CreateTexture1D()\l+ CreateTexture2D()\l+ CreateTexture3D()\land 10 more...\l# IDevice()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+}

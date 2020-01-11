@@ -1,0 +1,17 @@
+digraph "Hx::Renderer::Backend::DepthStencilDesc"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{Hx::Renderer::Backend\l::DepthStencilDesc\n||}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node2 -> Node1 [color="grey25",fontsize="10",style="solid",label=" +StencilReadMask\n+StencilWriteMask" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node2 [label="{unsigned char\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node3 -> Node1 [color="grey25",fontsize="10",style="solid",label=" +FrontFace\n+BackFace" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node3 [label="{Hx::Renderer::Backend\l::DepthStencilDesc::Stencil\lState\n||}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structHx_1_1Renderer_1_1Backend_1_1DepthStencilDesc_1_1StencilState.html"];
+  Node4 -> Node3 [color="grey25",fontsize="10",style="solid",label=" +StencilFailOp\n+StencilDepthFailOp\n+StencilPassOp" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node4 [label="{StencilOp\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node5 -> Node3 [color="grey25",fontsize="10",style="solid",label=" +StencilFunc" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node5 [label="{CmpFunction\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node6 -> Node1 [color="grey25",fontsize="10",style="solid",label=" +StencilEnable\n+CanWrite\n+DepthEnable" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node6 [label="{bool\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node5 -> Node1 [color="grey25",fontsize="10",style="solid",label=" +DepthFunction" ,arrowhead="odiamond",fontname="Helvetica"];
+}

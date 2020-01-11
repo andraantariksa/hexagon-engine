@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['backend',['Backend',['../namespaceHx_1_1Renderer_1_1Backend.html',1,'Hx::Renderer']]],
+  ['h',['H',['../namespaceHx_1_1Window.html#a775342e3408d1f546d168cc1bb638e0eac1d9f50f86825a1a2302ec2449c17196',1,'Hx::Window::H()'],['../glad_8h.html#afa0fb1b5e976920c0abeff2dca3ed774',1,'h():&#160;glad.h']]],
+  ['handle',['handle',['../glad_8h.html#a19abe6abc6ac2e10ec1bdf30f68a2527',1,'glad.h']]],
+  ['handlemissingglyphs',['handleMissingGlyphs',['../glad_8h.html#ad3504137bbf3915c8c63b32f3719aacb',1,'glad.h']]],
+  ['handletype',['handleType',['../glad_8h.html#aaac6a6dd25739117e7b0782e92ad54e0',1,'glad.h']]],
+  ['height',['Height',['../structHx_1_1Renderer_1_1Backend_1_1Viewport.html#ade54750294b3977b7c0ea170f1eebf2d',1,'Hx::Renderer::Backend::Viewport::Height()'],['../structHx_1_1Renderer_1_1Backend_1_1Texture2DDesc.html#aedde69030430eda8281a34cba6794b2d',1,'Hx::Renderer::Backend::Texture2DDesc::Height()'],['../structHx_1_1Renderer_1_1Backend_1_1Texture3DDesc.html#a552d96715631f8bd13856574a2a00929',1,'Hx::Renderer::Backend::Texture3DDesc::Height()'],['../structHx_1_1Window_1_1WindowSizeEventData.html#a41a5282cda96452ce90aea0749858a5b',1,'Hx::Window::WindowSizeEventData::Height()'],['../glad_8h.html#a2e94a4956fa3fc42600a71518b6e6284',1,'height():&#160;glad.h']]],
+  ['home',['Home',['../namespaceHx_1_1Window.html#a775342e3408d1f546d168cc1bb638e0ea8cf04a9734132302f96da8e113e80ce5',1,'Hx::Window']]],
+  ['hx',['Hx',['../namespaceHx.html',1,'']]],
+  ['hx_2ehpp',['Hx.hpp',['../Hx_8hpp.html',1,'']]],
+  ['hx_5fcheck_5fgl_5ferror',['HX_CHECK_GL_ERROR',['../RenderContextGL_8cpp.html#a1a1da51ac6320a47eab885e54e1bc35b',1,'RenderContextGL.cpp']]],
+  ['hx_5fdefined_5fmath_5fh',['HX_DEFINED_MATH_H',['../Math_8hpp.html#a6432b7cbe299fa9927f6349520fa88bc',1,'Math.hpp']]],
+  ['hx_5fnovtable',['HX_NOVTABLE',['../Types_8hpp.html#a3ed09e3dc3f629514916ebc8a70ee3c8',1,'Types.hpp']]],
+  ['hx_5fplatform_5fsdl2',['HX_PLATFORM_SDL2',['../Config_8hpp.html#aa9d6ac4fa80e1bf09965d839bc64f6ca',1,'Config.hpp']]],
+  ['hx_5fstdmath_5fmake_5ffloat_5ffunction1',['HX_STDMATH_MAKE_FLOAT_FUNCTION1',['../StdMath_8hpp.html#a44878b3f79c74115d9e86a12cc7e5008',1,'StdMath.hpp']]],
+  ['hx_5fstdmath_5fmake_5ffloat_5ffunction2',['HX_STDMATH_MAKE_FLOAT_FUNCTION2',['../StdMath_8hpp.html#a926e39d8a60d7887572de483ce644251',1,'StdMath.hpp']]],
+  ['hx_5fstdmath_5fmake_5ftemplate_5ffunction1',['HX_STDMATH_MAKE_TEMPLATE_FUNCTION1',['../StdMath_8hpp.html#af44f750e8e22b4948564270ae202243e',1,'StdMath.hpp']]],
+  ['hx_5fstdmath_5fmake_5ftemplate_5ffunction2',['HX_STDMATH_MAKE_TEMPLATE_FUNCTION2',['../StdMath_8hpp.html#a1b482bf37fd801d0f6cf0aaf376e065a',1,'StdMath.hpp']]],
+  ['math',['Math',['../namespaceHx_1_1Math.html',1,'Hx']]],
+  ['native',['Native',['../namespaceHx_1_1Window_1_1Native.html',1,'Hx::Window']]],
+  ['null',['Null',['../namespaceHx_1_1Window_1_1Native_1_1Null.html',1,'Hx::Window::Native']]],
+  ['opengl',['OpenGL',['../namespaceHx_1_1Renderer_1_1Backend_1_1OpenGL.html',1,'Hx::Renderer::Backend']]],
+  ['renderer',['Renderer',['../namespaceHx_1_1Renderer.html',1,'Hx']]],
+  ['sdl2',['SDL2',['../namespaceHx_1_1Window_1_1Native_1_1SDL2.html',1,'Hx::Window::Native']]],
+  ['window',['Window',['../namespaceHx_1_1Window.html',1,'Hx']]]
+];

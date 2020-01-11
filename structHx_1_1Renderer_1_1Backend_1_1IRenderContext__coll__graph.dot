@@ -1,0 +1,6 @@
+digraph "Hx::Renderer::Backend::IRenderContext"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{Hx::Renderer::Backend\l::IRenderContext\n||+ ~IRenderContext()\l+ ClearFrameBuffer()\l+ SetFrameBuffer()\l+ SetViewport()\l+ SetShaderProgram()\l+ SetVertexStream()\l+ SetPrimitiveTopology()\l+ Draw()\l+ DrawIndexed()\l+ GetUniformBufferIndex()\l+ SetUniformBufferData()\l+ GetVertexStream()\l# IRenderContext()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+}

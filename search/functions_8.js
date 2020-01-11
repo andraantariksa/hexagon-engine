@@ -1,0 +1,6 @@
+var searchData=
+[
+  ['matrix',['Matrix',['../classHx_1_1Math_1_1Matrix.html#a8c7a7a98ad952940f6d36ecb24ec127e',1,'Hx::Math::Matrix::Matrix()'],['../classHx_1_1Math_1_1Matrix.html#af8cca7ca566c84465c3ca06733646b1e',1,'Hx::Math::Matrix::Matrix(T s)'],['../classHx_1_1Math_1_1Matrix.html#a58e5c795d87dffa7d2c70538fcab633c',1,'Hx::Math::Matrix::Matrix(const T **fromArray, size_t rowCount, size_t colCount)']]],
+  ['max',['Max',['../namespaceHx_1_1Math.html#a792d6b58ddfe67163b3c4715dffa8d95',1,'Hx::Math::Max(T a, T b)'],['../namespaceHx_1_1Math.html#a9ccea98e1f87a069671f8a881f7cdb96',1,'Hx::Math::Max(const Vec2&lt; T &gt; &amp;a, const Vec2&lt; T &gt; &amp;b)'],['../namespaceHx_1_1Math.html#ae8f5d414d70ba3d19a9075261803a041',1,'Hx::Math::Max(const Vec3&lt; T &gt; &amp;a, const Vec3&lt; T &gt; &amp;b)']]],
+  ['min',['Min',['../namespaceHx_1_1Math.html#a01deee6cfa7aafe34ee64d52fdaf441c',1,'Hx::Math::Min(T a, T b)'],['../namespaceHx_1_1Math.html#afa47b9582eafd60408772324639fce5e',1,'Hx::Math::Min(const Vec2&lt; T &gt; &amp;a, const Vec2&lt; T &gt; &amp;b)'],['../namespaceHx_1_1Math.html#ae497624c81aa0f51dd43b06da64bd947',1,'Hx::Math::Min(const Vec3&lt; T &gt; &amp;a, const Vec3&lt; T &gt; &amp;b)']]]
+];
