@@ -154,6 +154,12 @@ namespace Hx { namespace Renderer { namespace Backend {
 		Count // Keep at last
 	};
 
+	enum class ResourceType : uint32
+	{
+		Buffer,
+
+	};
+
 	enum class ClearFlag : uint32
 	{
 		Depth,
@@ -267,6 +273,15 @@ namespace Hx { namespace Renderer { namespace Backend {
 		Count
 	};
 
+	enum class ShaderType : uint32
+	{
+		VertexShader,
+		PixelShader,
+		// TODO: Add more shader types..
+
+		Count
+	};
+
 	struct Viewport
 	{
 		float			TopLeftX;
@@ -373,6 +388,7 @@ namespace Hx { namespace Renderer { namespace Backend {
 	struct VertexElement
 	{
 		const char*			Name;
+		const char*			SemanticName;
 		uint32				Index;
 		ResourceFormat		Format;
 		uint32				InputSlot;

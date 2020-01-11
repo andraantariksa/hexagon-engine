@@ -450,6 +450,29 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 
 			delete[] attribs;
 		}
+		else
+		{
+			for(int i = 0; i < numElems; i++)
+			{
+				uint32 attrId = 0;
+				const VertexElement* elem = &vertElems[i];
+
+				if (elem->Name != nullptr)
+				{
+					attrId = glGetAttribLocation(pr, elem->Name);
+				}
+				else if (elem->SemanticName != nullptr)
+				{
+					attrId = glGetAttribLocation(pr, elem->SemanticName);
+				}
+				else if (elem->Index != -1)
+				{
+					// TODO: implement this
+				}
+
+				glVertexAttribPointer(attrId, )
+			}
+		}
 		
 		// unbind
 		glBindVertexArray(0);

@@ -74,6 +74,56 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 		HX_CHECK_GL_ERROR();
 	}
 
+	void RenderContextGL::SetShaderResource(ShaderType type, uint32 slot, ITexture1D* texture)
+	{
+		glActiveTexture(slot + GL_TEXTURE0);
+
+		if (texture != nullptr)
+		{
+			glBindTexture(GL_TEXTURE_1D, static_cast<Texture1DGL*>(texture)->GetHandle());
+		}
+		else
+		{
+			glBindTexture(GL_TEXTURE_1D, 0);
+		}
+	}
+
+	void RenderContextGL::SetShaderResource(ShaderType type, uint32 slot, ITexture2D* texture)
+	{
+		glActiveTexture(slot + GL_TEXTURE0);
+
+		if (texture != nullptr)
+		{
+			glBindTexture(GL_TEXTURE_2D, static_cast<Texture2DGL*>(texture)->GetHandle());
+		}
+		else
+		{
+			glBindTexture(GL_TEXTURE_2D, 0);
+		}
+	}
+
+	void RenderContextGL::SetShaderResource(ShaderType type, uint32 slot, ITexture3D* texture)
+	{
+		glActiveTexture(slot + GL_TEXTURE0);
+		if (texture != nullptr)
+		{
+			glBindTexture(GL_TEXTURE_3D, static_cast<Texture3DGL*>(texture)->GetHandle());
+		}
+		else
+		{
+			glBindTexture(GL_TEXTURE_3D, 0);
+		}
+	}
+
+	void RenderContextGL::SetShaderResource(ShaderType type, uint32 slot, IBuffer* buffer)
+	{
+	}
+
+	void RenderContextGL::SetSamplerState(ShaderType shader, uint32 slot, ISamplerState* samplerState)
+	{
+		glBindSampler(slot, static_cast<SamplerStateGL*>(samplerState)->GetHandle());
+	}
+
 	void RenderContextGL::SetVertexStream(IVertexStream* vertexStream)
 	{
 		VertexStreamGL* vstr = nullptr;

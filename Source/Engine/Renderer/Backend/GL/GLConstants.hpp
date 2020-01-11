@@ -5,6 +5,13 @@
 
 namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 	
+	struct VertexAttribPointerFormat
+	{
+		uint32 Size;
+		uint32 BaseType;
+		bool Normalized;
+	};
+
 	static uint32 GLResourceUsageDraw[] = {
 		GL_STATIC_DRAW,
 		GL_STATIC_DRAW,
@@ -298,5 +305,74 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 		GL_GEQUAL,
 		GL_ALWAYS
 	};
+
+	static VertexAttribPointerFormat GLVertAttribFormat[] = {
+		{ 4, GL_UNSIGNED_INT, false },					//R32G32B32A32_Typeless,
+		{ 4, GL_FLOAT, false },							//R32G32B32A32_Float,
+		{ 4, GL_UNSIGNED_INT, false },					//R32G32B32A32_Uint,
+		{ 4, GL_INT, false },							//R32G32B32A32_Sint,
+		{ 3, GL_UNSIGNED_INT, false },					//R32G32B32_Typeless,
+		{ 3, GL_FLOAT, false },							//R32G32B32_Float,
+		{ 3, GL_UNSIGNED_INT, false },					//R32G32B32_Uint,
+		{ 3, GL_INT, false },							//R32G32B32_Sint,
+		{ 4, GL_UNSIGNED_SHORT, false },				//R16G16B16A16_Typeless,
+		{ 4, GL_HALF_FLOAT, false },					//R16G16B16A16_Float,
+		{ 4, GL_UNSIGNED_SHORT, true },					//R16G16B16A16_Unorm,
+		{ 4, GL_UNSIGNED_SHORT, false },				//R16G16B16A16_Uint,
+		{ 4, GL_SHORT, true },							//R16G16B16A16_Snorm,
+		{ 4, GL_SHORT, false },							//R16G16B16A16_Sint,
+		{ 2, GL_UNSIGNED_INT, false },					//R32G32_Typeless,
+		{ 2, GL_FLOAT, false },							//R32G32_Float,
+		{ 2, GL_UNSIGNED_INT, false },					//R32G32_Uint,
+		{ 2, GL_INT, false },							//R32G32_Sint,
+		{ 0, GL_NONE, false },							//R32G8X24_Typeless,
+		{ 0, GL_NONE, false },							//D32_Float_S8X24_Uint,
+		{ 0, GL_NONE, false },							//R32_Float_X8X24_Typeless,
+		{ 0, GL_NONE, false },							//X32_Typeless_G8X24_Uint,
+		{ 4, GL_UNSIGNED_INT_2_10_10_10_REV, false },	//R10G10B10A2_Typeless,
+		{ 4, GL_UNSIGNED_INT_2_10_10_10_REV, true },	//R10G10B10A2_Unorm,
+		{ 4, GL_INT_2_10_10_10_REV, false },			//R10G10B10A2_Uint,
+		{ 4, GL_UNSIGNED_INT_10F_11F_11F_REV, false },	//R11G11B10_Float,
+
+		//R8G8B8A8_Typeless,
+		//R8G8B8A8_Unorm,
+		//R8G8B8A8_Unorm_Srgb,
+		//R8G8B8A8_Uint,
+		//R8G8B8A8_Snorm,
+		//R8G8B8A8_Sint,
+		//R16G16_Typeless,
+		//R16G16_Float,
+		//R16G16_Unorm,
+		//R16G16_Uint,
+		//R16G16_Snorm,
+		//R16G16_Sint,
+		//R32_Typeless,
+		//D32_Float,
+		//R32_Float,
+		//R32_Uint,
+		//R32_Sint,
+		//R24G8_Typeless,
+		//D24_Unorm_S8_Uint,
+		//R24_Unorm_X8_Typeless,
+		//X24_Typeless_G8_Uint,
+		//R8G8_Typeless,
+		//R8G8_Unorm,
+		//R8G8_Uint,
+		//R8G8_Snorm,
+		//R8G8_Sint,
+		//R16_Typeless,
+		//R16_Float,
+		//D16_Unorm,
+		//R16_Unorm,
+		//R16_Uint,
+		//R16_Snorm,
+		//R16_Sint,
+		//R8_Typeless,
+		//R8_Unorm,
+		//R8_Uint,
+		//R8_Snorm,
+		//R8_Sint,
+		//A8_Unorm,
+	}
 
 }}}}

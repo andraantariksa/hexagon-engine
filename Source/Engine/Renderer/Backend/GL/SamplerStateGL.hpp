@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../ISamplerState.hpp"
+#include "glad/glad.h"
 
 namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 
@@ -14,6 +15,7 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 
 		~SamplerStateGL()
 		{
+			glDeleteSamplers(1, &this->Handle);
 		}
 
 		uint32 GetHandle() { return this->Handle; }

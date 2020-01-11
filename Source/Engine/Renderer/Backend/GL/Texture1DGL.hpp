@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../ITexture1D.hpp"
+#include "glad/glad.h"
 
 namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 
@@ -14,6 +15,7 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 
 		~Texture1DGL()
 		{
+			glDeleteTextures(1, &this->Handle);
 		}
 
 		uint32 GetHandle() { return this->Handle; }

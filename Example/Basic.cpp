@@ -14,11 +14,13 @@
 
 using namespace Hx::Renderer::Backend;
 
-static const char c[] =
+static const char cvs[] =
 "#version 330 core\n"
 "in vec3 pos;"
 "in vec3 color;"
+"in vec2 texcoord;"
 "out vec3 outColor;"
+"out vec2 outTexcoord;"
 "layout(std140) uniform MyUniformBuffer"
 "{"
 "mat4 wvp;"
@@ -27,21 +29,24 @@ static const char c[] =
 "{"
 "gl_Position = wvp * vec4(pos, 1.0);"
 "outColor = color;"
+"outTexcoord = texcoord;"
 "}";
 
 static const char cps[] =
-"#version 330 core\n"
+"#version 420 core\n"
 "in vec3 outColor;"
+"in vec2 outTexcoord;"
 "out vec4 color;"
+"layout(binding = 0) uniform sampler2D tex;"
 "void main()"
 "{"
-"color = vec4(outColor, 1.0);"
+"color = vec4(texture(tex, outTexcoord).rgb, 1.0);"
 "}";
 
 static float vertexdata[] = {
-	-0.5,-0.5, 0.0, 1.0, 0.0, 0.0,
-	0.5,-0.5, 0.0, 0.0, 1.0, 0.0,
-	0.0, 0.5, 0.0,0.0, 0.0, 1.0
+	-0.5,-0.5, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0,
+	 0.5,-0.5, 0.0, 0.0, 1.0, 0.0, 0.5, 0.0,
+	 0.0, 0.5, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0
 };
 
 struct MyUniformBuffer
@@ -51,9 +56,12 @@ struct MyUniformBuffer
 
 MyUniformBuffer g_Buffer, g_Buffer2;
 
+uint32 textureData[32 * 32];
+
 typedef std::chrono::time_point<std::chrono::high_resolution_clock> HighResolutionClock;
 
-int main(int argc, char* argv[]) {
+int main(int argc, char* argv[])
+{
 	Hx::Window::Window* window = new Hx::Window::Window();
 	IDevice* device = new OpenGL::DeviceGL();
 	IRenderContext* ctx;
@@ -65,6 +73,7 @@ int main(int argc, char* argv[]) {
 	IBuffer* vb;
 	IBuffer* ub, *ub2;
 	ITexture2D* tex;
+	ISamplerState* smp;
 	Hx::Math::Vec4F v = Hx::Math::Vec4F(1.0, 1.0, 1.0, 1.0);
 	static const float f[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
 
@@ -74,7 +83,7 @@ int main(int argc, char* argv[]) {
 	ctx = device->GetImmediateContext();
 	swap = device->GetSwapBuffer();
 
-	vs = device->CreateVertexShader(sizeof(c), c);
+	vs = device->CreateVertexShader(sizeof(cvs), cvs);
 	ps = device->CreatePixelShader(sizeof(cps), cps);
 	program = device->CreateShaderProgram(vs, ps);
 	vb = device->CreateVertexBuffer(ResourceUsage::Default, sizeof(vertexdata), (void*)vertexdata);
@@ -84,8 +93,8 @@ int main(int argc, char* argv[]) {
 	ub2 = device->CreateUniformBuffer(sizeof(MyUniformBuffer), nullptr);
 
 	Texture2DDesc texdesc;
-	texdesc.Width = 256;
-	texdesc.Height = 256;
+	texdesc.Width = 32;
+	texdesc.Height = 32;
 	texdesc.MipMapLevels = 1;
 	texdesc.ArrayLength = 1;
 	texdesc.Format = ResourceFormat::R8G8B8A8_Unorm;
@@ -96,7 +105,38 @@ int main(int argc, char* argv[]) {
 	texdesc.AccessFlags = ResourceAccess::NoAccess;
 	texdesc.MiscFlags = ResourceMisc::None;
 
-	tex = device->CreateTexture2D(texdesc, nullptr);
+	for(int i = 0; i < 32; i++)
+	{
+		for(int j = 0; j < 32; j++)
+		{
+			uint32 val = rand();
+			textureData[i * 32 + j] = val;
+			srand(val);
+		}
+	}
+
+	Texture2DResourceData texResData;
+	texResData.DataPtr = textureData;
+	texResData.Width = 32 * 4;
+
+	tex = device->CreateTexture2D(texdesc, &texResData);
+
+	SamplerStateDesc samplerdesc;
+	samplerdesc.Filter = TextureFilter::MinMagMipLinear;
+	samplerdesc.AddressU = TextureAddressing::Wrap;
+	samplerdesc.AddressV = TextureAddressing::Wrap;
+	samplerdesc.AddressW = TextureAddressing::Wrap;
+	samplerdesc.MipLodBias = 0.0f;
+	samplerdesc.MaxAnisotropy = 1;
+	samplerdesc.CompFunction = CmpFunction::Always;
+	samplerdesc.BorderColor[0] = 0.0f;
+	samplerdesc.BorderColor[1] = 0.0f;
+	samplerdesc.BorderColor[2] = 0.0f;
+	samplerdesc.BorderColor[3] = 0.0f;
+	samplerdesc.MinLod = 0;
+	samplerdesc.MaxLod = std::numeric_limits<float>::max();
+
+	smp = device->CreateSamplerState(samplerdesc);
 
 	ctx->SetShaderProgram(program);
 	uint32 uloc = ctx->GetUniformBufferIndex("MyUniformBuffer");
@@ -135,6 +175,8 @@ int main(int argc, char* argv[]) {
 		//g_Buffer2.wvp = DirectX::XMMatrixMultiply(scale, DirectX::XMMatrixTranslation(0.3f, 0.0f, 0.0f));
 
 		ctx->SetShaderProgram(program);
+		ctx->SetShaderResource(ShaderType::PixelShader, 0, tex);
+		ctx->SetSamplerState(ShaderType::PixelShader, 0, smp);
 		ctx->SetUniformBufferData(ub, uloc, (void*)&g_Buffer, sizeof(MyUniformBuffer));
 		ctx->SetVertexStream(vstream);
 		ctx->SetPrimitiveTopology(PrimitiveTopology::TriList);
