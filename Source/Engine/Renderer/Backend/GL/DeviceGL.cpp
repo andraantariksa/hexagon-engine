@@ -196,13 +196,28 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 			inputData);
 
 		glBindTexture(GL_TEXTURE_3D, 0);
-
+		 
 		return new Texture3DGL(handle);
 	}
 
 	ISamplerState* DeviceGL::CreateSamplerState(const SamplerStateDesc& createDesc)
 	{
-		return nullptr;
+		uint32 handle;
+
+		glGenSamplers(1, &handle);
+		glSamplerParameteri(handle, GL_TEXTURE_MIN_FILTER, GLTextureFilterMin[(uint32)createDesc.Filter]);
+		glSamplerParameteri(handle, GL_TEXTURE_MAG_FILTER, GLTextureFilterMag[(uint32)createDesc.Filter]);
+		glSamplerParameteri(handle, GL_TEXTURE_WRAP_S, GLTextureAddressing[(uint32)createDesc.AddressU]);
+		glSamplerParameteri(handle, GL_TEXTURE_WRAP_T, GLTextureAddressing[(uint32)createDesc.AddressV]);
+		glSamplerParameteri(handle, GL_TEXTURE_WRAP_R, GLTextureAddressing[(uint32)createDesc.AddressW]);
+		glSamplerParameterf(handle, GL_TEXTURE_LOD_BIAS, (float)createDesc.MipLodBias); 
+		glSamplerParameteri(handle, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE);
+		glSamplerParameteri(handle, GL_TEXTURE_COMPARE_FUNC, GLCmpFunction[(uint32)createDesc.CompFunction]);
+		glSamplerParameterfv(handle, GL_TEXTURE_BORDER_COLOR, createDesc.BorderColor);
+		glSamplerParameterf(handle, GL_TEXTURE_MIN_LOD, createDesc.MinLod);
+		glSamplerParameterf(handle, GL_TEXTURE_MIN_LOD, createDesc.MaxLod);
+
+		return new SamplerStateGL(handle);
 	}
 
 	IVertexShader* DeviceGL::CreateVertexShader(uint32 size, const void* compiledShader)
