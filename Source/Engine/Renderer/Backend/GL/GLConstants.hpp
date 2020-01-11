@@ -373,6 +373,6 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 		//R8_Snorm,
 		//R8_Sint,
 		//A8_Unorm,
-	}
+	};
 
 }}}}
