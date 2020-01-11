@@ -203,9 +203,12 @@ int main(int argc, char* argv[])
 }
 #endif
 
+#include <spdlog/spdlog.h>
+
 #if !ENABLE_THIS
 int main()
 {
+	spdlog::info("test!");
 	return 0;
 }
 #endif
