@@ -1,7 +1,9 @@
-#if 0
-#include "Source/Engine/Window/Window.h"
-#include "Source/Engine/Renderer/Backend/GL/DeviceGL.h"
-#include "Source/Hx.h"
+#define ENABLE_THIS 0
+
+#if ENABLE_THIS == 1
+#include "Source/Engine/Window/Window.hpp"
+#include "Source/Engine/Renderer/Backend/GL/DeviceGL.hpp"
+#include "Source/Hx.hpp"
 #include "Dependencies/SDL2/include/SDL.h"
 #include <cstdio>
 #include <iostream>
@@ -141,7 +143,7 @@ int main(int argc, char* argv[]) {
 }
 #endif
 
-#if 1
+#if !ENABLE_THIS
 int main()
 {
 	return 0;

@@ -4,7 +4,7 @@
 
 namespace Hx { namespace Renderer { namespace Backend {
 
-	enum class ResourceUsage : int8
+	enum class ResourceUsage : uint32
 	{
 		Default = 0,
 		Constant,
@@ -14,7 +14,7 @@ namespace Hx { namespace Renderer { namespace Backend {
 		Count
 	};
 
-	enum class ResourceFormat : int16
+	enum class ResourceFormat : uint32
 	{
 		Unknown = 0,
 		R32G32B32A32_Typeless,
@@ -120,7 +120,7 @@ namespace Hx { namespace Renderer { namespace Backend {
 		Count // Keep at last
 	};
 
-	enum class ResourceBindFlag : int8
+	enum class ResourceBindFlag : uint32
 	{
 		VertexBuffer,
 		IndexBuffer,
@@ -135,16 +135,18 @@ namespace Hx { namespace Renderer { namespace Backend {
 		Count // Keep at last
 	};
 
-	enum class ResourceAccess : int8
+	enum class ResourceAccess : uint32
 	{
+		NoAccess,
 		Write,
 		Read,
 
 		Count // Keep at last
 	};
 
-	enum class ResourceMisc : int8
+	enum class ResourceMisc : uint32
 	{
+		None,
 		GenerateMipMaps,
 		TextureCube,
 		SharedResource,
@@ -152,7 +154,7 @@ namespace Hx { namespace Renderer { namespace Backend {
 		Count // Keep at last
 	};
 
-	enum class ClearFlag : int8
+	enum class ClearFlag : uint32
 	{
 		Depth,
 		Stencil,
@@ -160,7 +162,7 @@ namespace Hx { namespace Renderer { namespace Backend {
 		Count // Keep at last
 	};
 
-	enum class CmpFunction : int8
+	enum class CmpFunction : uint32
 	{
 		Never,
 		Less,
@@ -174,7 +176,7 @@ namespace Hx { namespace Renderer { namespace Backend {
 		Count
 	};
 
-	enum class StencilOp : int8
+	enum class StencilOp : uint32
 	{
 		Keep,
 		Zero,
@@ -188,7 +190,7 @@ namespace Hx { namespace Renderer { namespace Backend {
 		Count
 	};
 
-	enum class PrimitiveTopology
+	enum class PrimitiveTopology : uint32
 	{
 		Undefined = 0,
 		Points,
@@ -204,10 +206,63 @@ namespace Hx { namespace Renderer { namespace Backend {
 		Count
 	};
 
-	enum class ElementClass
+	enum class ElementClass : uint32
 	{
 		PerVertexData,
 		PerInstanceData,
+
+		Count
+	};
+
+	enum class TextureFilter : uint32
+	{
+		MinMagMipNearest = 0,
+		MinMagNearestMipLinear,
+		MinNearestMagLinearMipNearest,
+		MinNearestMagMipLinear,
+		MinLinearMagMipNearest,
+		MinLinearMagNearestMipLinear,
+		MinMagLinearMipNearest,
+		MinMagMipLinear,
+		Anisotropic,
+		ComparisonMinMagMipNearest,
+		ComparisonMinMagNearestMipLinear,
+		ComparisonMinNearestMagLinearMipNearest,
+		ComparisonMinNearestMagMipLinear,
+		ComparisonMinLinearMagMipNearest,
+		ComparisonMinLinearMagNearestMipLinear,
+		ComparisonMinMagLinearMipNearest,
+		ComparisonMinMagMipLinear,
+		ComparisonAnisotropic,
+		MinimumMinMagMipNearest,
+		MinimumMinMagNearestMipLinear,
+		MinimumMinNearestMagLinearMipNearest,
+		MinimumMinNearestMagMipLinear,
+		MinimumMinLinearMagMipNearest,
+		MinimumMinLinearMagNearestMipLinear,
+		MinimumMinMagLinearMipNearest,
+		MinimumMinMagMipLinear,
+		MinimumAnisotropic,
+		MaximumMinMagMipNearest,
+		MaximumMinMagNearestMipLinear,
+		MaximumMinNearestMagLinearMipNearest,
+		MaximumMinNearestMagMipLinear,
+		MaximumMinLinearMagMipNearest,
+		MaximumMinLinearMagNearestMipLinear,
+		MaximumMinMagLinearMipNearest,
+		MaximumMinMagMipLinear,
+		MaximumAnisotropic,
+
+		Count
+	};
+
+	enum class TextureAddressing : uint32
+	{
+		Wrap,
+		Mirror,
+		Clamp,
+		Border,
+		MirrorOnce,
 
 		Count
 	};
@@ -328,6 +383,16 @@ namespace Hx { namespace Renderer { namespace Backend {
 
 	struct SamplerStateDesc
 	{
+		TextureFilter		Filter;
+		TextureAddressing	AddressU;
+		TextureAddressing	AddressV;
+		TextureAddressing	AddressW;
+		float				MipLodBias;
+		uint32				MaxAnisotropy;
+		CmpFunction			CompFunction;
+		float				BorderColor[4];
+		float				MinLod;
+		float				MaxLod;
 	};
 
 }}}

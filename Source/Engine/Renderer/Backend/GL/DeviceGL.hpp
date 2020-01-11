@@ -11,6 +11,7 @@
 #include "Texture1DGL.hpp"
 #include "Texture2DGL.hpp"
 #include "Texture3DGL.hpp"
+#include "SamplerStateGL.hpp"
 #include "GLConstants.hpp"
 
 namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL { 

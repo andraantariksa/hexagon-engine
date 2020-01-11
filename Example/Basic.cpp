@@ -1,7 +1,9 @@
-#if 0
-#include "../Source/Engine/Window/Window.h"
-#include "../Source/Engine/Renderer/Backend/GL/DeviceGL.h"
-#include "../Source/Hx.h"
+#define ENABLE_THIS 0
+
+#if ENABLE_THIS == 1
+#include "../Source/Engine/Window/Window.hpp"
+#include "../Source/Engine/Renderer/Backend/GL/DeviceGL.hpp"
+#include "../Source/Hx.hpp"
 #include "../Dependencies/SDL2/include/SDL.h"
 #include <cstdio>
 #include <iostream>
@@ -62,6 +64,7 @@ int main(int argc, char* argv[]) {
 	IVertexStream* vstream;
 	IBuffer* vb;
 	IBuffer* ub, *ub2;
+	ITexture2D* tex;
 	Hx::Math::Vec4F v = Hx::Math::Vec4F(1.0, 1.0, 1.0, 1.0);
 	static const float f[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
 
@@ -79,6 +82,21 @@ int main(int argc, char* argv[]) {
 	vstream = device->CreateVertexStream(program, nullptr, 0, vb, nullptr);
 	ub = device->CreateUniformBuffer(sizeof(MyUniformBuffer), nullptr);
 	ub2 = device->CreateUniformBuffer(sizeof(MyUniformBuffer), nullptr);
+
+	Texture2DDesc texdesc;
+	texdesc.Width = 256;
+	texdesc.Height = 256;
+	texdesc.MipMapLevels = 1;
+	texdesc.ArrayLength = 1;
+	texdesc.Format = ResourceFormat::R8G8B8A8_Unorm;
+	texdesc.Multisample.Count = 1;
+	texdesc.Multisample.Quality = 0;
+	texdesc.Usage = ResourceUsage::Default;
+	texdesc.BindFlags = ResourceBindFlag::ShaderResource;
+	texdesc.AccessFlags = ResourceAccess::NoAccess;
+	texdesc.MiscFlags = ResourceMisc::None;
+
+	tex = device->CreateTexture2D(texdesc, nullptr);
 
 	ctx->SetShaderProgram(program);
 	uint32 uloc = ctx->GetUniformBufferIndex("MyUniformBuffer");
@@ -130,6 +148,8 @@ int main(int argc, char* argv[]) {
 		std::cout << "FPS: " << 1.f / deltaTime << std::endl;
 	}
 
+	delete ub;
+	delete ub2;
 	delete vstream;
 	delete vb;
 	delete program;
@@ -141,7 +161,7 @@ int main(int argc, char* argv[]) {
 }
 #endif
 
-#if 1
+#if !ENABLE_THIS
 int main()
 {
 	return 0;
