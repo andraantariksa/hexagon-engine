@@ -9,22 +9,21 @@ jobs:
         MacOS:
           vmImage: macOS-10.14
         Windows:
-          vmImage: windows-2019
+          vmImage: vs2017-win2016
     pool:
       vmImage: $(vmImage)
     steps:
       - script: |
-          echo "Bruh MSBuild C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\15.0\Bin"
-          dir "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\15.0\Bin"
-          set PATH=%PATH%;"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\15.0\Bin"
+          set PATH=%PATH%;C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\
           mkdir build
           cd build
           cmake ..
-          msbuild HexagonEngineApp.sln
-          .\Test\HexagonEngineTest
+          msbuild HexagonEngine.sln
+          .\build\Test\HexagonEngineTest
         condition: eq( variables['Agent.OS'], 'Windows_NT' )
         displayName: Test using Windows
       - script: |
+          brew install sdl2
           mkdir build
           cd build
           cmake ..
@@ -33,6 +32,24 @@ jobs:
         condition: eq( variables['Agent.OS'], 'Darwin' )
         displayName: Test using MacOS
       - script: |
+          sudo apt update
+          sudo apt install libsdl2-dev
+          sudo apt install mesa-utils
+          sudo apt install linux-generic
+          sudo apt install xserver-xorg-core
+          sudo apt install xserver-xorg
+          sudo apt install xserver-xorg-video-all
+          sudo apt install xserver-xorg-input-all
+          sudo apt install libwayland-egl1-mesa
+          sudo apt install pulseaudio
+      
+          dbus-launch pulseaudio --start
+          export SDL_AUDIODRIVER=pulseaudio
+
+          /sbin/start-stop-daemon --start --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 800x600x24 -ac +extension GL
+          export SDL_VIDEODRIVER=x11;
+          export DISPLAY=:99.0;
+
           mkdir build
           cd build
           cmake ..
