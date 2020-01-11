@@ -8,6 +8,15 @@
 
 Hexagon Engine is an experimental game engine
 
+## Goals
+
+Creating a convenience game engine and embracing fearless C++
+
+- [ ] Renderer
+- [ ] Window
+- [ ] Math library
+and so on...
+
 ## Getting Started
 
 You need to install SDL2 library and CMake to build the project
@@ -40,9 +49,11 @@ sudo pacman -S sdl2
 brew install sdl2
 ```
 
-## Contributing
+## Dependencies
 
-[Hexagon Engine development spreadsheet](https://docs.google.com/spreadsheets/d/1WMGvrobR7Ager_eN6XkKIVlJqdemyFAZAxzZmSg1G-s/edit?usp=sharing)
+- [spdlog](https://github.com/gabime/spdlog/tree/v1.4.2)
+
+## Contributing
 
 ### Coding Style
 
@@ -50,4 +61,4 @@ Make sure you're following our [coding style](Docs/CodingStyle.md)
 
 ## License
 
-[MIT](LICENSE)
+[MIT Licensed](LICENSE)
