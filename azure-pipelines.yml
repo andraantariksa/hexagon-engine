@@ -1,0 +1,42 @@
+jobs:
+  - job: Test
+    displayName: Testing on multiple OS
+    condition: true
+    strategy:
+      matrix:
+        Linux:
+          vmImage: ubuntu-18.04
+        MacOS:
+          vmImage: macOS-10.14
+        Windows:
+          vmImage: windows-2019
+    pool:
+      vmImage: $(vmImage)
+    steps:
+      - script: |
+          echo "Bruh MSBuild C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\15.0\Bin"
+          dir "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\15.0\Bin"
+          set PATH=%PATH%;"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\15.0\Bin"
+          mkdir build
+          cd build
+          cmake ..
+          msbuild HexagonEngineApp.sln
+          .\Test\HexagonEngineTest
+        condition: eq( variables['Agent.OS'], 'Windows_NT' )
+        displayName: Test using Windows
+      - script: |
+          mkdir build
+          cd build
+          cmake ..
+          make
+          ./Test/HexagonEngineTest
+        condition: eq( variables['Agent.OS'], 'Darwin' )
+        displayName: Test using MacOS
+      - script: |
+          mkdir build
+          cd build
+          cmake ..
+          make
+          ./Test/HexagonEngineTest
+        condition: eq( variables['Agent.OS'], 'Linux' )
+        displayName: Test using Linux
