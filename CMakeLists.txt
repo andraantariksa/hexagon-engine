@@ -1,8 +1,13 @@
 cmake_minimum_required(VERSION 3.10)
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_FLAGS "-Wall")
 include(FetchContent)
 project(HexagonEngine)
+
+if(MSVC)
+	set(CMAKE_CXX_FLAGS "/W4")
+else()
+	set(CMAKE_CXX_FLAGS "-Wall")
+endif()
 
 # SDL 2
 set(SDL2_DIR Dependencies/SDL2)
