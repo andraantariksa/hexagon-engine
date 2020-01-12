@@ -13,15 +13,15 @@ jobs:
     pool:
       vmImage: $(vmImage)
     steps:
-      # TODO
-      # Please see issue #5
       - script: |
           set PATH=%PATH%;C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\
           mkdir build
           cd build
           cmake ..
           msbuild HexagonEngine.sln
-        condition: eq( variables['Agent.OS'], 'Windows_NT' )
+          ./Test/HexagonEngineTest
+          dir Test
+          condition: eq( variables['Agent.OS'], 'Windows_NT' )
         displayName: Test using Windows
       - script: |
           brew install sdl2
@@ -34,15 +34,7 @@ jobs:
         displayName: Test using MacOS
       - script: |
           sudo apt update
-          sudo apt install libsdl2-dev
-          sudo apt install mesa-utils
-          sudo apt install linux-generic
-          sudo apt install xserver-xorg-core
-          sudo apt install xserver-xorg
-          sudo apt install xserver-xorg-video-all
-          sudo apt install xserver-xorg-input-all
-          sudo apt install libwayland-egl1-mesa
-          sudo apt install pulseaudio
+          sudo apt install libsdl2-dev mesa-utils linux-generic xserver-xorg-core xserver-xorg xserver-xorg-video-all xserver-xorg-input-all libwayland-egl1-mesa pulseaudio
       
           dbus-launch pulseaudio --start
           export SDL_AUDIODRIVER=pulseaudio

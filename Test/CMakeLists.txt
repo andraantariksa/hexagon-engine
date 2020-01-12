@@ -14,6 +14,8 @@ if(NOT googletest_POPULATED)
   add_subdirectory(${googletest_SOURCE_DIR} ${googletest_BINARY_DIR})
 endif()
 
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+
 file(GLOB TEST_SOURCE *.cpp)
 
 add_executable(HexagonEngineTest ${TEST_SOURCE})
