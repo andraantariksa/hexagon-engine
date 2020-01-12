@@ -6,10 +6,13 @@
 #if defined(_MSC_VER)
 #	define HX_COMPILER_MSVC 1
 #	define HX_COMPILER_VER _MSC_VER
+#	define HX_STDCALL __stdcall
 #elif defined(__clang__)
 #	define HX_COMPILER_CLANG 1
 #	define HX_COMPILER_VER __clang_version__
+#	define HX_STDCALL __attribute__((stdcall))
 #elif defined(__GNUC__)
 #	define HX_COMPILER_GNUC 1
 #	define HX_COMPILER_VER __GNUC__
+#	define HX_STDCALL __attribute__((stdcall))
 #endif
