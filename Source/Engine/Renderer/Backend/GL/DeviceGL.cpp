@@ -6,7 +6,7 @@
 
 namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL { 
 
-	void GLErrorMsgCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)
+	void __stdcall GLErrorMsgCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)
 	{
 		std::printf("GL Error: %s\n", message);
 	}
@@ -48,13 +48,10 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 		GLMakeCurrent(window, ctx);
 		this->Context = new RenderContextGL(ctx);
 
-// Somewhat triggering error in msbuild
-// error C2664: 'void (GLDEBUGPROC,const void *)': cannot convert argument 1 from 'overloaded-function' to 'GLDEBUGPROC'
-// See https://docs.microsoft.com/en-us/cpp/error-messages/compiler-errors-2/compiler-error-c2664?view=vs-2019
-// #ifndef NDEBUG
-// 		glEnable(GL_DEBUG_OUTPUT);
-// 		glDebugMessageCallback(GLErrorMsgCallback, nullptr);
-// #endif
+#ifndef NDEBUG
+		glEnable(GL_DEBUG_OUTPUT);
+		glDebugMessageCallback(GLErrorMsgCallback, nullptr);
+#endif
 
 		// Default framebuffer
 		this->DefaultFrameBuffer = new FrameBufferGL(0);

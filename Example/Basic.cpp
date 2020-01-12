@@ -1,4 +1,4 @@
-#define ENABLE_THIS 0
+#define ENABLE_THIS 1
 
 #if ENABLE_THIS == 1
 #include "../Source/Engine/Window/Window.hpp"
