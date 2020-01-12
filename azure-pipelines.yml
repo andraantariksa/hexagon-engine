@@ -20,8 +20,7 @@ jobs:
           cmake ..
           msbuild HexagonEngine.sln
           ./Test/HexagonEngineTest
-          dir Test
-          condition: eq( variables['Agent.OS'], 'Windows_NT' )
+        condition: eq( variables['Agent.OS'], 'Windows_NT' )
         displayName: Test using Windows
       - script: |
           brew install sdl2

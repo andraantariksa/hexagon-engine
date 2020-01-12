@@ -4,12 +4,14 @@
 #include <cstring>
 #include <cstdio>
 
-namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL { 
+void __GLErrorMsgCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam);
 
-	void __stdcall GLErrorMsgCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)
-	{
-		std::printf("GL Error: %s\n", message);
-	}
+void __GLErrorMsgCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)
+{
+	std::printf("GL Error: %s\n", message);
+}
+
+namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL { 
 
 	DeviceGL::DeviceGL()
 		: Context(nullptr),
@@ -50,7 +52,7 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 
 #ifndef NDEBUG
 		glEnable(GL_DEBUG_OUTPUT);
-		glDebugMessageCallback(GLErrorMsgCallback, nullptr);
+		glDebugMessageCallback(::__GLErrorMsgCallback, nullptr);
 #endif
 
 		// Default framebuffer
@@ -452,7 +454,7 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 		}
 		else
 		{
-			for(uint32 i = 0; i < numElems; i++)
+			for(int i = 0; i < numElems; i++)
 			{
 				uint32 attrId = 0;
 				const VertexElement* elem = &vertElems[i];
