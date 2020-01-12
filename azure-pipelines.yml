@@ -13,13 +13,14 @@ jobs:
     pool:
       vmImage: $(vmImage)
     steps:
+      # TODO
+      # Please see issue #5
       - script: |
           set PATH=%PATH%;C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\
           mkdir build
           cd build
           cmake ..
           msbuild HexagonEngine.sln
-          .\build\Test\HexagonEngineTest
         condition: eq( variables['Agent.OS'], 'Windows_NT' )
         displayName: Test using Windows
       - script: |

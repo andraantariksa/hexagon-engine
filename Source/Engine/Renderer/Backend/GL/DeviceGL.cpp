@@ -48,10 +48,13 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 		GLMakeCurrent(window, ctx);
 		this->Context = new RenderContextGL(ctx);
 
-#ifndef NDEBUG
-		glEnable(GL_DEBUG_OUTPUT);
-		glDebugMessageCallback(GLErrorMsgCallback, nullptr);
-#endif
+// Somewhat triggering error in msbuild
+// error C2664: 'void (GLDEBUGPROC,const void *)': cannot convert argument 1 from 'overloaded-function' to 'GLDEBUGPROC'
+// See https://docs.microsoft.com/en-us/cpp/error-messages/compiler-errors-2/compiler-error-c2664?view=vs-2019
+// #ifndef NDEBUG
+// 		glEnable(GL_DEBUG_OUTPUT);
+// 		glDebugMessageCallback(GLErrorMsgCallback, nullptr);
+// #endif
 
 		// Default framebuffer
 		this->DefaultFrameBuffer = new FrameBufferGL(0);
@@ -452,7 +455,7 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 		}
 		else
 		{
-			for(int i = 0; i < numElems; i++)
+			for(uint32 i = 0; i < numElems; i++)
 			{
 				uint32 attrId = 0;
 				const VertexElement* elem = &vertElems[i];

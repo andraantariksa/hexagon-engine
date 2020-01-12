@@ -1,8 +1,6 @@
 .vs/
 out/
-*.dll
 *.exe
-*.lib
 build/
 .vscode/
 Docs/html

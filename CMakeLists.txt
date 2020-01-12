@@ -47,6 +47,8 @@ target_link_libraries(
 	spdlog::spdlog
 )
 
+# TODO
+# Please see issue #5
 if(NOT WIN32)
-add_subdirectory("Test")
+	add_subdirectory("Test")
 endif()
