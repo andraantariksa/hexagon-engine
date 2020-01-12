@@ -3,9 +3,9 @@ set(CMAKE_CXX_STANDARD 17)
 include(FetchContent)
 project(HexagonEngine)
 
-if(MSVC)
-	set(CMAKE_CXX_FLAGS "/W4")
-else()
+if(NOT MSVC)
+	# Dumbass Microsoft for /W4. Why are they treating warning as error?
+	# https://docs.microsoft.com/en-us/cpp/error-messages/compiler-errors-1/compiler-error-c2220?view=vs-2019
 	set(CMAKE_CXX_FLAGS "-Wall")
 endif()
 
