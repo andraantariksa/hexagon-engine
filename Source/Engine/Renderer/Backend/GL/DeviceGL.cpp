@@ -454,7 +454,7 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 		}
 		else
 		{
-			for(int i = 0; i < numElems; i++)
+			for(uint32 i = 0; i < numElems; i++)
 			{
 				uint32 attrId = 0;
 				const VertexElement* elem = &vertElems[i];
