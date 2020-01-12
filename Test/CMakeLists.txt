@@ -1,5 +1,7 @@
 include(FetchContent)
 
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+
 # Google Test
 set(GTEST_VERSION 1.10.0 CACHE STRING "Google test version")
 FetchContent_Declare(
@@ -13,8 +15,6 @@ if(NOT googletest_POPULATED)
   FetchContent_Populate(googletest)
   add_subdirectory(${googletest_SOURCE_DIR} ${googletest_BINARY_DIR})
 endif()
-
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 
 file(GLOB TEST_SOURCE *.cpp)
 
