@@ -19,7 +19,7 @@ jobs:
           cd build
           cmake ..
           msbuild HexagonEngine.sln
-          ./Test/HexagonEngineTest
+#          ./Test/HexagonEngineTest
         condition: eq( variables['Agent.OS'], 'Windows_NT' )
         displayName: Test using Windows
       - script: |

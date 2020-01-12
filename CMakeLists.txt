@@ -47,4 +47,6 @@ target_link_libraries(
 	spdlog::spdlog
 )
 
-add_subdirectory("Test")
+if(NOT MSVC)
+	add_subdirectory("Test")
+endif()
