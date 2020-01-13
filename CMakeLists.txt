@@ -45,6 +45,7 @@ target_link_libraries(
 	${SDL2_LIBRARIES}
 	${CMAKE_DL_LIBS}
 	spdlog::spdlog
+#	SDL2_mixer
 )
 
 add_subdirectory("Test")
