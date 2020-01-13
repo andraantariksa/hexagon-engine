@@ -481,7 +481,7 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 		{
 			uint32 strideSize = 0;
 
-			for (int i = 0; i < numElems; i++)
+			for (uint32 i = 0; i < numElems; i++)
 			{
 				VertexAttribPointerFormat& fmt = GLVertAttribFormat[(uint32)vertElems[i].Format];
 				strideSize += fmt.BaseTypeSize * fmt.Size;
