@@ -3,6 +3,7 @@
 #include "DeviceGL.hpp"
 #include <cstring>
 #include <cstdio>
+#include <cassert>
 
 void HX_STDCALL __GLErrorMsgCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)
 {
@@ -146,6 +147,8 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 		glGenTextures(1, &handle);
 		glBindTexture(GL_TEXTURE_2D, handle);
 		
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_BASE_LEVEL, 1);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, createDesc.MipMapLevels);
 		glTexImage2D(
 			GL_TEXTURE_2D,
 			createDesc.MipMapLevels,
@@ -156,6 +159,8 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 			format,
 			type,
 			inputData);
+
+		HX_CHECK_GL_ERROR();
 
 		glBindTexture(GL_TEXTURE_2D, 0);
 
@@ -276,6 +281,7 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 		GLint status;
 		GLint vertex = static_cast<VertexShaderGL*>(vs)->GetHandle();
 		GLint pixel = static_cast<PixelShaderGL*>(ps)->GetHandle();
+		GLint numUniforms;
 		
 		handle = glCreateProgram();
 		glAttachShader(handle, vertex);
@@ -288,6 +294,27 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 			glDeleteProgram(handle);
 			return nullptr;
 		}
+
+		glGetProgramiv(handle, GL_ACTIVE_UNIFORMS, &numUniforms);
+		glUseProgram(handle);
+
+		int samplerCounter = 0;
+
+		for (uint32 i = 0; i < (uint32)numUniforms; i++)
+		{
+			GLint param;
+			glGetActiveUniformsiv(handle, 1, &i, GL_UNIFORM_TYPE, &param);
+			if ((param >= GL_SAMPLER_1D && param <= GL_SAMPLER_2D_SHADOW)
+				|| (param >= GL_SAMPLER_1D_ARRAY && param <= GL_SAMPLER_CUBE_SHADOW)
+				|| (param >= GL_SAMPLER_2D_MULTISAMPLE && param <= GL_UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE_ARRAY)
+				|| (param >= GL_SAMPLER_2D_RECT && param <= GL_SAMPLER_BUFFER)
+				|| (param >= GL_INT_SAMPLER_1D && param <= GL_UNSIGNED_INT_SAMPLER_2D_ARRAY))
+			{
+				glUniform1i(i, samplerCounter++);
+			}
+		}
+
+		glUseProgram(0);
 
 		return new ShaderProgramGL(handle, vs, ps);
 	}
@@ -452,23 +479,35 @@ namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL {
 		}
 		else
 		{
-			for(uint32 i = 0; i < numElems; i++)
+			uint32 strideSize = 0;
+
+			for (int i = 0; i < numElems; i++)
+			{
+				VertexAttribPointerFormat& fmt = GLVertAttribFormat[(uint32)vertElems[i].Format];
+				strideSize += fmt.BaseTypeSize * fmt.Size;
+			}
+
+			for(int i = 0; i < numElems; i++)
 			{
 				uint32 attrId = 0;
-				const VertexElement* elem = &vertElems[i];
+				const VertexElement& elem = vertElems[i];
+				VertexAttribPointerFormat& fmt = GLVertAttribFormat[(uint32)elem.Format];
 
-				if (elem->Name != nullptr)
+				if (elem.Name != nullptr)
 				{
-					attrId = glGetAttribLocation(pr, elem->Name);
+					attrId = glGetAttribLocation(pr, elem.Name);
 				}
-				else if (elem->SemanticName != nullptr)
+				else if (elem.SemanticName != nullptr)
 				{
-					attrId = glGetAttribLocation(pr, elem->SemanticName);
+					attrId = glGetAttribLocation(pr, elem.SemanticName);
 				}
-				else if (elem->Index != -1)
+				else if (elem.Index != -1)
 				{
 					// TODO: implement this
 				}
+
+				glVertexAttribPointer(attrId, fmt.Size, fmt.BaseType, fmt.Normalized, strideSize, (void*)elem.AlignedByteOffset);
+				glEnableVertexAttribArray(attrId);
 			}
 		}
 		

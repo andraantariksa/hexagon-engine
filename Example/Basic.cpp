@@ -1,4 +1,4 @@
-#define ENABLE_THIS 0
+#define ENABLE_THIS 1
 
 #if ENABLE_THIS == 1
 #include "../Source/Engine/Window/Window.hpp"
@@ -16,9 +16,9 @@ using namespace Hx::Renderer::Backend;
 
 static const char cvs[] =
 "#version 330 core\n"
-"in vec3 pos;"
-"in vec3 color;"
-"in vec2 texcoord;"
+"layout(location = 0) in vec3 pos;"
+"layout(location = 1) in vec3 color;"
+"layout(location = 2) in vec2 texcoord;"
 "out vec3 outColor;"
 "out vec2 outTexcoord;"
 "layout(std140) uniform MyUniformBuffer"
@@ -33,11 +33,13 @@ static const char cvs[] =
 "}";
 
 static const char cps[] =
-"#version 420 core\n"
+"#version 330 core\n"
 "in vec3 outColor;"
 "in vec2 outTexcoord;"
 "out vec4 color;"
-"layout(binding = 0) uniform sampler2D tex;"
+"uniform sampler2D tex;"
+"uniform sampler2D tex1;"
+"uniform sampler2D tex2;"
 "void main()"
 "{"
 "color = vec4(texture(tex, outTexcoord).rgb, 1.0);"
@@ -58,6 +60,12 @@ MyUniformBuffer g_Buffer, g_Buffer2;
 
 uint32 textureData[32 * 32];
 
+VertexElement elem[3] = {
+	{ "pos", nullptr, 0, ResourceFormat::R32G32B32_Float, 0 },
+	{ "color", nullptr, 0, ResourceFormat::R32G32B32_Float, 12 },
+	{ "texcoord", nullptr, 0, ResourceFormat::R32G32_Float, 24 }
+};
+
 typedef std::chrono::time_point<std::chrono::high_resolution_clock> HighResolutionClock;
 
 int main(int argc, char* argv[])
@@ -75,7 +83,7 @@ int main(int argc, char* argv[])
 	ITexture2D* tex;
 	ISamplerState* smp;
 	Hx::Math::Vec4F v = Hx::Math::Vec4F(1.0, 1.0, 1.0, 1.0);
-	static const float f[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
+	static const float f[4] = { 1.0f, 0.0f, 0.0f, 1.0f };
 
 	if (device->Create(*window))
 		std::cout << "OpenGL initialized\n";
@@ -88,7 +96,7 @@ int main(int argc, char* argv[])
 	program = device->CreateShaderProgram(vs, ps);
 	vb = device->CreateVertexBuffer(ResourceUsage::Default, sizeof(vertexdata), (void*)vertexdata);
 	// we use auto-detect shader attribute for now, since we don't have manual configuration method, it'll comes later
-	vstream = device->CreateVertexStream(program, nullptr, 0, vb, nullptr);
+	vstream = device->CreateVertexStream(program, elem, 3, vb, nullptr);
 	ub = device->CreateUniformBuffer(sizeof(MyUniformBuffer), nullptr);
 	ub2 = device->CreateUniformBuffer(sizeof(MyUniformBuffer), nullptr);
 
@@ -122,7 +130,7 @@ int main(int argc, char* argv[])
 	tex = device->CreateTexture2D(texdesc, &texResData);
 
 	SamplerStateDesc samplerdesc;
-	samplerdesc.Filter = TextureFilter::MinMagMipLinear;
+	samplerdesc.Filter = TextureFilter::MinMagMipNearest;
 	samplerdesc.AddressU = TextureAddressing::Wrap;
 	samplerdesc.AddressV = TextureAddressing::Wrap;
 	samplerdesc.AddressW = TextureAddressing::Wrap;

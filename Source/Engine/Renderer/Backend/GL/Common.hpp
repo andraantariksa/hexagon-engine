@@ -6,6 +6,14 @@
 #include "../IDevice.hpp"
 #include "../IRenderContext.hpp"
 
+#ifndef NDEBUG
+#define HX_CHECK_GL_ERROR() \
+	int __glError = glGetError();					\
+	assert(__glError == 0)
+#else
+#define HX_CHECK_GL_ERROR()
+#endif
+
 namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL { 
 	
 	typedef void* ContextHandle;

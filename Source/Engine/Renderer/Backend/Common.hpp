@@ -391,10 +391,7 @@ namespace Hx { namespace Renderer { namespace Backend {
 		const char*			SemanticName;
 		uint32				Index;
 		ResourceFormat		Format;
-		uint32				InputSlot;
 		uint32				AlignedByteOffset;
-		ElementClass		InputSlotClass;
-		uint32				NumberOfInstance;
 	};
 
 	struct SamplerStateDesc

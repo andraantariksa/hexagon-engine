@@ -4,14 +4,6 @@
 #include <cassert>
 #include <cstdio>
 
-#ifndef NDEBUG
-#define HX_CHECK_GL_ERROR() \
-	int __glError = glGetError();					\
-	assert(__glError == 0)
-#else
-#define HX_CHECK_GL_ERROR()
-#endif
-
 namespace Hx { namespace Renderer { namespace Backend { namespace OpenGL { 
 
 	RenderContextGL::RenderContextGL(ContextHandle handle)
