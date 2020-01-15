@@ -82,8 +82,11 @@ int main(int argc, char* argv[])
 	IBuffer* ub, *ub2;
 	ITexture2D* tex;
 	ISamplerState* smp;
-	Hx::Math::Vec4F v = Hx::Math::Vec4F(1.0, 1.0, 1.0, 1.0);
+	Hx::Math::BoundingBox2F bbox(Hx::Math::Vec2F(2.0f), Hx::Math::Vec2F(1.0f), 1.0f);
+	Hx::Math::BoundingBox2D bbox2;
 	static const float f[4] = { 1.0f, 0.0f, 0.0f, 1.0f };
+
+	bbox2 = bbox;
 
 	if (device->Create(*window))
 		std::cout << "OpenGL initialized\n";

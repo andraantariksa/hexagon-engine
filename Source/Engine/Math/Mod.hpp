@@ -6,5 +6,6 @@
 #include "Vec2.hpp"
 #include "Vec3.hpp"
 #include "Vec4.hpp"
+#include "BBox2.hpp"
 #include "StdMath.hpp"
 #include "Matrix.hpp"
