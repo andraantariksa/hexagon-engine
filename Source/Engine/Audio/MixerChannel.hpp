@@ -12,13 +12,14 @@ namespace Hx { namespace Audio {
 
 		virtual ~MixerChannel();
 
-		virtual void AddAudioStream() { };
+		void AddAudioStream();
+		void ProcessAudio(uint8 numChannels, uint32 numSamples, float** audioBlock, float sampleRate);
 
-		virtual void SetVolume(float newVolume);
+		void SetVolume(float newVolume);
 
-		virtual float GetVolume();
+		float GetVolume();
 
-	protected:
+	private:
 		float Volume;
 	};
 

@@ -1,4 +1,4 @@
-#include "AudioEngineSDL2.hpp"
+#include "AudioDeviceSDL2.hpp"
 #include <memory>
 
 namespace Hx { namespace Audio { namespace Native {
@@ -26,27 +26,6 @@ namespace Hx { namespace Audio { namespace Native {
 		desired.freq = (int)sampleRate;
 
 		Device = SDL_OpenAudioDevice(nullptr, 0, &desired, &obtained, 0);
-	}
-
-	MixerChannel* AudioDeviceSDL2::CreateAudioMixerChannel(float initialVolume)
-	{
-		return nullptr;
-	}
-
-	void AudioDeviceSDL2::AddMixerChannel(MixerChannel* mixerChannel)
-	{
-	}
-
-	void AudioDeviceSDL2::AttachMixerChannel(uint32 slot, MixerChannel* mixerChannel)
-	{
-	}
-
-	void AudioDeviceSDL2::DetachMixerChannel(uint32 slot)
-	{
-	}
-
-	void AudioDeviceSDL2::ReserveMixerChannel(uint32 numSlots)
-	{
 	}
 
 	// ---------------------------------------------------------------------------------------

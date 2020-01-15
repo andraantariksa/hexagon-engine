@@ -13,6 +13,10 @@ namespace Hx { namespace Audio {
 	{
 	}
 
+	void MixerChannel::ProcessAudio(uint8 numChannels, uint32 numSamples, float** audioBlock, float sampleRate)
+	{
+	}
+
 	void MixerChannel::SetVolume(float newVolume)
 	{
 		this->Volume = (newVolume < 0.0f) ? 0.0f : newVolume;
