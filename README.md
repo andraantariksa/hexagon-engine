@@ -1,5 +1,7 @@
 # Hexagon Engine
 
+## This repository has been moved to https://github.com/shaderboi/hexagon-engine
+
 [![Build Status](https://dev.azure.com/andraantariksa/Hexagon%20Engine/_apis/build/status/andraantariksa.hexagon-engine?branchName=master)](https://dev.azure.com/andraantariksa/Hexagon%20Engine/_build/latest?definitionId=5&branchName=master)
 
 [Documentation](http://andraaa.github.io/hexagon-engine/)
